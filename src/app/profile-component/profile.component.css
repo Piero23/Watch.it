@@ -1,5 +1,5 @@
 .selectionButtonRow1{
-  border: none;
+  border: transparent solid 1px;
   border-radius: 5px;
   margin: 0.1%;
   background: #282828;
@@ -11,8 +11,12 @@
   color: black;
 }
 
+.selectionButtonRow1:hover{
+  border: solid 1px #1BD75F;
+}
+
 .selectionButtonRow2{
-  border: none;
+  border: transparent solid 1px;
   border-radius: 5px;
   margin: 0.1%;
   background: #282828;
@@ -22,4 +26,8 @@
 .selectionButtonRow2:focus{
   background: #4CB2FD;
   color: black;
+}
+
+.selectionButtonRow2:hover{
+  border: solid 1px #4CB2FD;
 }

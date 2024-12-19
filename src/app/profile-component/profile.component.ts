@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
-import {TabellaFilmComponent} from '../tabella-film/tabella-film.component';
+import {TabellaFilmComponent} from '../tabella-film-component/tabella-film.component';
 
 @Component({
   selector: 'app-profile',
