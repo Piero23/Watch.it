@@ -1,0 +1,25 @@
+.selectionButtonRow1{
+  border: none;
+  border-radius: 5px;
+  margin: 0.1%;
+  background: #282828;
+  color: lightgray;
+}
+
+.selectionButtonRow1:focus{
+  background: #1BD75F;
+  color: black;
+}
+
+.selectionButtonRow2{
+  border: none;
+  border-radius: 5px;
+  margin: 0.1%;
+  background: #282828;
+  color: lightgray;
+}
+
+.selectionButtonRow2:focus{
+  background: #4CB2FD;
+  color: black;
+}
