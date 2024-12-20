@@ -4,6 +4,8 @@
   margin: 0.1%;
   background: #282828;
   color: lightgray;
+  font-size: 1.2vw;
+  width: 12%;
 }
 
 .selectionButtonRow1:focus{
@@ -21,6 +23,8 @@
   margin: 0.1%;
   background: #282828;
   color: lightgray;
+  font-size: 1.2vw;
+  width: 12%;
 }
 
 .selectionButtonRow2:focus{
