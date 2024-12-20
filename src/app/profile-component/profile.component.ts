@@ -15,3 +15,4 @@ import {TabellaFilmComponent} from '../tabella-film-component/tabella-film.compo
 export class ProfileComponent {
 
 }
+
