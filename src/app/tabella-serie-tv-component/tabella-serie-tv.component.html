@@ -1,0 +1,45 @@
+<table class="table table-striped text-center" style="color: lightgray;">
+  <thead class="align-middle">
+  <th class="col-2">Preview</th>
+  <th class="col-auto">
+    <button class="btn" style="background-color: transparent; color: lightgrey;"><b>Titolo</b></button>
+  </th>
+  <th class="col-auto">
+    <button class="btn" style="background-color: transparent; color: lightgrey;"><b>Anno</b></button>
+  </th>
+  <th class="col-2"></th>
+  <th class="col-auto">
+    <button class="btn" style="background-color: transparent; color: lightgrey;"><b>Voto</b></button>
+  </th>
+  <th class="col-2"></th>
+  </thead>
+
+  <tbody class="align-middle">
+  <tr  *ngFor="let riga of righe">
+    <th>
+      <img [src]="riga.immagine" style="width: 40%; background: none;">
+    </th>
+    <th>
+      {{riga.nome}}
+    </th>
+    <th>
+    {{riga.anno}}
+    </th>
+    <th>
+      <button type="button" class="btn btn-primary" >{{riga.status}} <i class="fa-solid fa-pen-to-square"></i></button>
+    </th>
+    <th>
+      <div class="rating" [innerHTML]="sanitizer.bypassSecurityTrustHtml(riga.rating)"></div>
+    </th>
+    <th>
+      <button type="button" class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" aria-expanded="false">Da Vedere</button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item">In Visione</a></li>
+        <li><a class="dropdown-item">Visto</a></li>
+      </ul>
+    </th>
+  </tr>
+  </tbody>
+
+  <button class="btn" (click)="addrow()" style="color: yellow; background-color: blue">Addrow</button>
+</table>

@@ -1,7 +1,7 @@
 <body style="background-color: #131514">
-  <div class="position-relative" style="background-color: green">
+  <div class="position-relative">
     <img class="container-fluid" src="assets/images/Immagine.png" alt="banner">
-    <div class="position-absolute" style="left: 3%; top:17%; background: red; width: 40%">
+    <div class="position-absolute" style="left: 3%; top:17%; width: 40%">
       <img src="assets/images/Avatar.png" alt="proPic" style="width: 27%; border-radius: 25%">
       <span class="align-bottom" style="font-size: 2.5vw; color: white; padding-left: 2%">Username</span>
     </div>
@@ -11,8 +11,8 @@
   </div>
 
   <div class="contentSelection text-center" style="padding-top: 1%">
-    <button class="col-1 selectionButtonRow1">Film</button>
-    <button class="col-1 selectionButtonRow1">Serie TV</button>
+    <button class="col-1 selectionButtonRow1" (click)="showFilm=true">Film</button>
+    <button class="col-1 selectionButtonRow1" (click)="showFilm=false">Serie TV</button>
   </div>
 
   <div class="status text-center" style="padding-top: 1%; padding-bottom: 2%">
@@ -22,6 +22,7 @@
   </div>
 
   <div style="margin-right: 7vw; margin-left: 7vw">
-    <app-tabella-film></app-tabella-film>
+    <app-tabella-film *ngIf="showFilm"></app-tabella-film>
+    <app-tabella-serie-tv *ngIf="!showFilm"></app-tabella-serie-tv>
   </div>
 </body>

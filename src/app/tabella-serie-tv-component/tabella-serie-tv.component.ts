@@ -1,19 +1,23 @@
-import {Component, input, ViewEncapsulation} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {NgForOf} from '@angular/common';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-tabella-film',
+  selector: 'app-tabella-serie-tv',
   standalone: true,
-  imports: [NgForOf],
-  templateUrl: './tabella-film.component.html',
-  styleUrls: ['./tabella-film.component.css'],
+  imports: [
+    NgForOf
+  ],
+  templateUrl: './tabella-serie-tv.component.html',
+  styleUrl: './tabella-serie-tv.component.css',
   encapsulation: ViewEncapsulation.None
 })
-export class TabellaFilmComponent {
+
+export class TabellaSerieTvComponent {
+
   count=0;
 
-  righe :{anno: number, rating: string, nome: string, immagine: string}[] = [];
+  righe :{anno: number, rating: string, nome: string, immagine: string, status: string}[] = [];
 
   constructor(protected sanitizer: DomSanitizer){}
 
@@ -41,13 +45,13 @@ export class TabellaFilmComponent {
       anno: 2025,
       rating: doc.body.innerHTML,
       nome: "godzilla",
-      immagine: "assets/images/img.png"
+      immagine: "assets/images/img.png",
+      status: "S3, E5"
     }
 
     this.righe.push(riga);
 
     this.count++;
   }
-
 
 }

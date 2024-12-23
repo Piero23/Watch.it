@@ -1,18 +1,22 @@
 import { Component } from '@angular/core';
-import {NgOptimizedImage} from '@angular/common';
+import {NgIf, NgOptimizedImage} from '@angular/common';
 import {TabellaFilmComponent} from '../tabella-film-component/tabella-film.component';
+import {TabellaSerieTvComponent} from '../tabella-serie-tv-component/tabella-serie-tv.component';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [
     NgOptimizedImage,
-    TabellaFilmComponent
+    TabellaFilmComponent,
+    TabellaSerieTvComponent,
+    NgIf
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
+  showFilm: boolean = true;
 
 }
 
