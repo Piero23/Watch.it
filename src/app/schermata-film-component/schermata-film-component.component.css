@@ -1,0 +1,102 @@
+.scurito{
+  position:relative;
+}
+
+.scurito:after {
+  position: absolute;
+  background: rgba(0,0,0,0.70);
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bannerFilm {
+  width: 20% !important;
+  height: auto !important;
+  top: 5%;
+  right:  10%;
+}
+
+.titolo{
+  font-size: 3vw;
+  position: absolute;
+  top: 10px;
+  left: 20%;
+  color: white;
+  z-index: 10;
+}
+
+.generi{
+  font-size: 1vw;
+  position: absolute;
+  top: calc(0.5vw + 5vw);
+  left: 20%;
+  color: white;
+  z-index: 10;
+}
+
+
+.trama{
+  font-size: 1vw;
+  position: absolute;
+  top: calc(2.5vw + 5vw);
+  left: 20%;
+  color: white;
+  width: 40%;
+  word-wrap: break-word;
+}
+.banner-container {
+  position: relative;
+}
+
+.banner-container img {
+  width: 100%;
+}
+
+.button-banner {
+  font-size: 1vw;
+  position: absolute;
+  top: calc(15.5vw + 5vw);
+  left: 20%;
+  color: black;
+  background-color: #1BD75F;
+}
+
+.button-comment {
+  outline: none;
+  color: white;
+  font-size: 1vw;
+  position: absolute;
+  height: 25%;
+  width: 30%;
+  top: calc(10vw + 15vw);
+  left: 20%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.button-banner:hover {
+  background-color: #008d00;
+  color: white;
+}
+
+.comment-icon{
+  position: absolute;
+  top: 25%;
+  left: 5%;
+}
+
+.name-comment{
+  font-size: 1vw;
+  position: absolute;
+  top:26%;
+  left: 22%;
+}
+
+.comment{
+  position: absolute;
+  top: 50%;
+  left: 22%;
+}
+

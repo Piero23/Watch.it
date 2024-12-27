@@ -8,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './schermata-film-component.component.css'
 })
 export class SchermataFilmComponentComponent {
+  selectedItem: string = "Da Vedere";
 
+  topComment:string = "Top Comment";
+
+  selectItem(item: string) {
+    this.selectedItem = item;
+  }
 }
