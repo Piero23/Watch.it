@@ -1,102 +1,34 @@
-.scurito{
-  position:relative;
+:host{
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100dvw;
+  background-color: black;
+  position: relative;
+  z-index: 1;
+  min-height: 70dvh;
+  height: fit-content;
 }
-
-.scurito:after {
-  position: absolute;
-  background: rgba(0,0,0,0.70);
+:host::before{
   content: "";
+  position: absolute;
+  background-color: rgba(0,0,0,.7);
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: -1;
 }
 
-.bannerFilm {
-  width: 20% !important;
-  height: auto !important;
-  top: 5%;
-  right:  10%;
+.stupido>*{
+  width: 80%;
 }
 
-.titolo{
-  font-size: 3vw;
-  position: absolute;
-  top: 10px;
-  left: 20%;
-  color: white;
-  z-index: 10;
-}
-
-.generi{
-  font-size: 1vw;
-  position: absolute;
-  top: calc(0.5vw + 5vw);
-  left: 20%;
-  color: white;
-  z-index: 10;
-}
-
-
-.trama{
-  font-size: 1vw;
-  position: absolute;
-  top: calc(2.5vw + 5vw);
-  left: 20%;
-  color: white;
-  width: 40%;
+.max-lines {
+  display: block;/* or inline-block */
+  text-overflow: ellipsis;
   word-wrap: break-word;
+  overflow: hidden;
+  max-height: 10.8em;
+  line-height: 1.2em;
 }
-.banner-container {
-  position: relative;
-}
-
-.banner-container img {
-  width: 100%;
-}
-
-.button-banner {
-  font-size: 1vw;
-  position: absolute;
-  top: calc(15.5vw + 5vw);
-  left: 20%;
-  color: black;
-  background-color: #1BD75F;
-}
-
-.button-comment {
-  outline: none;
-  color: white;
-  font-size: 1vw;
-  position: absolute;
-  height: 25%;
-  width: 30%;
-  top: calc(10vw + 15vw);
-  left: 20%;
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-.button-banner:hover {
-  background-color: #008d00;
-  color: white;
-}
-
-.comment-icon{
-  position: absolute;
-  top: 25%;
-  left: 5%;
-}
-
-.name-comment{
-  font-size: 1vw;
-  position: absolute;
-  top:26%;
-  left: 22%;
-}
-
-.comment{
-  position: absolute;
-  top: 50%;
-  left: 22%;
-}
-

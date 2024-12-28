@@ -1,0 +1,15 @@
+:host{
+  background-color: rgba(0,0,0,.6);
+  display: flex;
+  width: clamp(200px,50%,500px)!important;
+  min-height: 100px;
+}
+
+.text-truncated {
+  margin-left: 10px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+}
