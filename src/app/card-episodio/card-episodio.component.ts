@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './card-episodio.component.html',
   styleUrl: './card-episodio.component.css',
-  host: {class: "rounded-4"}
+  host: {class: "rounded-4  justify-content-between"}
 })
 export class CardEpisodioComponent {
   titolo: string = "Grazia Anatomia"

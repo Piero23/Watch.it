@@ -1,11 +1,11 @@
 :host{
   display: flex;
-  width: 60dvw;
+  width: clamp(650px,60dvw,9999px);
+  outline: none;
+  border: none;
+  overflow-x: hidden;
 }
 
-:host::selection{
-  outline: none;
-}
 
 :host:hover{
   background-color: #454242;
@@ -15,4 +15,20 @@
 .copertina{
   width: clamp(220px,20dvw,300px);
   height: auto;
+}
+
+
+.text-truncated {
+  font-size: 15px;
+  line-height: 1.5;
+  max-height: 4.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  white-space: normal;
+}
+
+.check{
+  width: 30px;
+  height: 30px;
 }

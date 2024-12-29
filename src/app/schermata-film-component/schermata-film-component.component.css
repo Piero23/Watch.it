@@ -2,12 +2,13 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  width: 100dvw;
+  width: 100%;
   background-color: black;
   position: relative;
   z-index: 1;
   min-height: 70dvh;
   height: fit-content;
+  overflow-x: hidden;
 }
 :host::before{
   content: "";
@@ -25,7 +26,7 @@
 }
 
 .max-lines {
-  display: block;/* or inline-block */
+  display: block;
   text-overflow: ellipsis;
   word-wrap: break-word;
   overflow: hidden;
