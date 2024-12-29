@@ -1,0 +1,18 @@
+:host{
+  display: flex;
+  width: 60dvw;
+}
+
+:host::selection{
+  outline: none;
+}
+
+:host:hover{
+  background-color: #454242;
+  transition: 0.2s;
+}
+
+.copertina{
+  width: clamp(220px,20dvw,300px);
+  height: auto;
+}
