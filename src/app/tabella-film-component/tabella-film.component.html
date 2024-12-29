@@ -1,14 +1,20 @@
+<div class="status text-center" style="padding-top: 1%; padding-bottom: 2%">
+  <button class="col-1 selectionButtonRow2">Da Vedere</button>
+  <button class="col-1 selectionButtonRow2">In Visione</button>
+  <button class="col-1 selectionButtonRow2">Visti</button>
+</div>
+
 <table class="table table-striped text-center" style="color: lightgray;">
   <thead class="align-middle">
     <th class="col-2">Preview</th>
     <th class="col-auto">
-      <button class="btn" style="background-color: transparent; color: lightgrey;"><b>Titolo</b></button>
+      <button class="btn" style="background-color: transparent; color: lightgrey;" (click)="sortByName()"><b>Titolo</b></button>
     </th>
     <th class="col-auto">
-      <button class="btn" style="background-color: transparent; color: lightgrey;"><b>Anno</b></button>
+      <button class="btn" style="background-color: transparent; color: lightgrey;" (click)="sortByYear()"><b>Anno</b></button>
     </th>
     <th class="col-auto">
-      <button class="btn" style="background-color: transparent; color: lightgrey;"><b>Voto</b></button>
+      <button class="btn" style="background-color: transparent; color: lightgrey;" (click)="sortByRating()"><b>Voto</b></button>
     </th>
     <th class="col-2"></th>
   </thead>

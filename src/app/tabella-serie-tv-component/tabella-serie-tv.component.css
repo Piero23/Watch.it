@@ -42,3 +42,21 @@
   transition: color 0.3s;
 }
 
+.selectionButtonRow2{
+  border: transparent solid 1px;
+  border-radius: 5px;
+  margin: 0.1%;
+  background: #282828;
+  color: lightgray;
+  font-size: 1.2vw;
+  width: 12%;
+}
+
+.selectionButtonRow2:focus{
+  background: #4CB2FD;
+  color: black;
+}
+
+.selectionButtonRow2:hover{
+  border: solid 1px #4CB2FD;
+}

@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {booleanAttribute, Component, ViewEncapsulation} from '@angular/core';
 import {NgForOf} from '@angular/common';
 import {DomSanitizer} from '@angular/platform-browser';
 
@@ -16,17 +16,20 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class TabellaSerieTvComponent {
 
   count=0;
+  nameOrder=true;
+  yearOrder=true;
+  ratingOrder=true;
 
-  righe :{anno: number, rating: string, nome: string, immagine: string, status: string}[] = [];
+  righe :{anno: number, rating: string, numericalRating: number, nome: string, immagine: string, status: string}[] = [];
 
   constructor(protected sanitizer: DomSanitizer){}
 
   addrow() {
     const groupName = `rating${this.count}`;
 
-    const score=window.prompt("voto"); //dummy per testare l'aggiunzione di un voto custom
+    const score = window.prompt("voto"); //dummy per testare l'aggiunzione di un voto custom
 
-    const starLayout=`<input value="5" id="\`star${5}-${groupName}" name="\`${groupName}" type="radio">
+    const starLayout = `<input value="5" id="\`star${5}-${groupName}" name="\`${groupName}" type="radio">
                <label for="\`star${5}-${groupName}"></label>
                <input value="4" id="\`star${4}-${groupName}" name="\`${groupName}" type="radio">
                <label for="\`star${4}-${groupName}"></label>
@@ -39,11 +42,12 @@ export class TabellaSerieTvComponent {
 
     let doc = new DOMParser().parseFromString(starLayout, "text/html");
 
-    doc.getElementsByTagName("input")[5-Number(score)].setAttribute("checked", "checked");
+    doc.getElementsByTagName("input")[5 - Number(3)].setAttribute("checked", "checked");
 
-    const riga={
+    const riga = {
       anno: 2025,
       rating: doc.body.innerHTML,
+      numericalRating: Number(score),
       nome: "godzilla",
       immagine: "assets/images/img.png",
       status: "S3, E5"
@@ -54,4 +58,60 @@ export class TabellaSerieTvComponent {
     this.count++;
   }
 
+  sortByName(){
+    if (this.nameOrder){
+      this.righe.sort(function cmp(a,b){
+        if (a.nome>b.nome) return 1;
+        else return -1;
+      })
+      this.nameOrder=!this.nameOrder;
+    }
+    else{
+      this.righe.sort(function cmp(a,b){
+        if (a.nome<b.nome) return 1;
+        else return -1;
+      })
+      this.nameOrder=!this.nameOrder;
+    }
+  }
+
+  sortByYear() {
+    this.nameOrder=true;
+    this.ratingOrder=true;
+
+    if (this.yearOrder){
+      this.righe.sort(function cmp(a,b){
+        if (a.anno<b.anno) return 1;
+        else return -1;
+      })
+      this.yearOrder=!this.yearOrder;
+    }
+    else{
+      this.righe.sort(function cmp(a,b){
+        if (a.anno>b.anno) return 1;
+        else return -1;
+      })
+      this.yearOrder=!this.yearOrder;
+    }
+  }
+
+  sortByRating() {
+    this.nameOrder=true;
+    this.yearOrder=true;
+
+    if (this.ratingOrder){
+      this.righe.sort(function cmp(a,b){
+        if (a.numericalRating<b.numericalRating) return 1;
+        else return -1;
+      })
+      this.ratingOrder=!this.ratingOrder;
+    }
+    else{
+      this.righe.sort(function cmp(a,b){
+        if (a.numericalRating>b.numericalRating) return 1;
+        else return -1;
+      })
+      this.ratingOrder=!this.ratingOrder;
+    }
+  }
 }

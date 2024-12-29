@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {NgIf, NgOptimizedImage} from '@angular/common';
 import {TabellaFilmComponent} from '../tabella-film-component/tabella-film.component';
 import {TabellaSerieTvComponent} from '../tabella-serie-tv-component/tabella-serie-tv.component';
+import {style} from '@angular/animations';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +19,29 @@ import {TabellaSerieTvComponent} from '../tabella-serie-tv-component/tabella-ser
 })
 export class ProfileComponent {
   showFilm: boolean = true;
+
+  activateButton(index: number){
+    switch (index){
+      case 0: {
+        //Film
+        this.showFilm = true;
+
+        document.getElementsByName("film").item(0).setAttribute("style", "background: #1BD75F; color: black;");
+        document.getElementsByName("serie").item(0).setAttribute("style", "background: #282828; color: lightgray;");
+
+        break;
+      }
+      case 1: {
+        //Serie TV
+        this.showFilm = false;
+
+        document.getElementsByName("serie").item(0).setAttribute("style", "background: #1BD75F; color: black;");
+        document.getElementsByName("film").item(0).setAttribute("style", "background: #282828; color: lightgray;");
+
+        break;
+      }
+    }
+  }
 
 }
 

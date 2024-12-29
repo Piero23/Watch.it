@@ -11,9 +11,13 @@ import {NgForOf} from '@angular/common';
   encapsulation: ViewEncapsulation.None
 })
 export class TabellaFilmComponent {
-  count=0;
 
-  righe :{anno: number, rating: string, nome: string, immagine: string}[] = [];
+  count=0;
+  nameOrder=true;
+  yearOrder=true;
+  ratingOrder=true;
+
+  righe :{anno: number, rating: string, numericalRating: number, nome: string, immagine: string}[] = [];
 
   constructor(protected sanitizer: DomSanitizer){}
 
@@ -40,6 +44,7 @@ export class TabellaFilmComponent {
     const riga={
       anno: 2025,
       rating: doc.body.innerHTML,
+      numericalRating: Number(score),
       nome: "godzilla",
       immagine: "assets/images/img.png"
     }
@@ -49,5 +54,63 @@ export class TabellaFilmComponent {
     this.count++;
   }
 
+  sortByName(){
+    this.yearOrder=true;
+    this.ratingOrder=true;
 
+    if (this.nameOrder){
+      this.righe.sort(function cmp(a,b){
+        if (a.nome>b.nome) return 1;
+        else return -1;
+      })
+      this.nameOrder=!this.nameOrder;
+    }
+    else{
+      this.righe.sort(function cmp(a,b){
+        if (a.nome<b.nome) return 1;
+        else return -1;
+      })
+      this.nameOrder=!this.nameOrder;
+    }
+  }
+
+  sortByYear() {
+    this.nameOrder=true;
+    this.ratingOrder=true;
+
+    if (this.yearOrder){
+      this.righe.sort(function cmp(a,b){
+        if (a.anno<b.anno) return 1;
+        else return -1;
+      })
+      this.yearOrder=!this.yearOrder;
+    }
+    else{
+      this.righe.sort(function cmp(a,b){
+        if (a.anno>b.anno) return 1;
+        else return -1;
+      })
+      this.yearOrder=!this.yearOrder;
+    }
+  }
+
+  sortByRating() {
+    this.nameOrder=true;
+    this.yearOrder=true;
+
+    if (this.ratingOrder){
+      this.righe.sort(function cmp(a,b){
+        if (a.numericalRating<b.numericalRating) return 1;
+        else return -1;
+      })
+      this.ratingOrder=!this.ratingOrder;
+    }
+    else{
+      this.righe.sort(function cmp(a,b){
+        if (a.numericalRating>b.numericalRating) return 1;
+        else return -1;
+      })
+      this.ratingOrder=!this.ratingOrder;
+    }
+  }
 }

@@ -8,31 +8,7 @@
   width: 12%;
 }
 
-.selectionButtonRow1:focus{
-  background: #1BD75F;
-  color: black;
-}
-
 .selectionButtonRow1:hover{
   border: solid 1px #1BD75F;
-}
-
-.selectionButtonRow2{
-  border: transparent solid 1px;
-  border-radius: 5px;
-  margin: 0.1%;
-  background: #282828;
-  color: lightgray;
-  font-size: 1.2vw;
-  width: 12%;
-}
-
-.selectionButtonRow2:focus{
-  background: #4CB2FD;
-  color: black;
-}
-
-.selectionButtonRow2:hover{
-  border: solid 1px #4CB2FD;
 }
 
