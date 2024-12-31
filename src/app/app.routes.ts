@@ -1,3 +1,5 @@
 import { Routes } from '@angular/router';
-
-export const routes: Routes = [];
+import { HomepageComponent } from './homepage/homepage.component'; // Importa il componente
+export const routes: Routes = [
+  { path: '', component: HomepageComponent, pathMatch: 'full' },
+];

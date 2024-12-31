@@ -1,0 +1,23 @@
+.d-flex {
+  justify-content: center;
+  padding-top: 4rem !important;
+  padding-bottom: 2rem !important;
+}
+
+.btn-primary {
+  background: #1BD75F;
+  color: #282828;
+}
+
+.btn-secondary {
+  background: #282828;
+  color: lightgrey;
+}
+
+.btn-primary, .btn-secondary {
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-size: 22px;
+  width: 200px;
+  height: auto;
+}
