@@ -20,18 +20,17 @@ export class TabellaFilmComponent {
   constructor(private cdr: ChangeDetectorRef) {}
 
   addrow() {
-    const score=window.prompt("voto"); //dummy per testare l'aggiunzione di un voto custom
+    //const score=window.prompt("voto"); //dummy per testare l'aggiunzione di un voto custom
 
     const riga={
       anno: 2025,
-      rating: Number(score),
+      rating: 3,
       nome: "godzilla",
       immagine: "assets/images/img.png"
     }
 
     console.log(riga.rating);
-
-    this.righe.push(riga);
+    for (let i=0;i<5; i++) this.righe.push(riga);
   }
 
   sortByName(){

@@ -1,0 +1,8 @@
+.base{
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  width: 50vw;
+  height: 30vw;
+  background-color: green;
+}

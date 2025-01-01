@@ -4,6 +4,7 @@ import {TabellaFilmComponent} from '../tabella-film-component/tabella-film.compo
 import {TabellaSerieTvComponent} from '../tabella-serie-tv-component/tabella-serie-tv.component';
 import {style} from '@angular/animations';
 import {DomSanitizer} from '@angular/platform-browser';
+import {BannerEditorComponent} from '../banner-editor-component/banner-editor.component';
 
 @Component({
   selector: 'app-profile',
@@ -12,13 +13,15 @@ import {DomSanitizer} from '@angular/platform-browser';
     NgOptimizedImage,
     TabellaFilmComponent,
     TabellaSerieTvComponent,
-    NgIf
+    NgIf,
+    BannerEditorComponent
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
   showFilm: boolean = true;
+  editor: boolean=false;
 
   activateButton(index: number){
     switch (index){
