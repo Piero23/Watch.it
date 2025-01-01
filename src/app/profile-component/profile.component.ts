@@ -5,6 +5,7 @@ import {TabellaSerieTvComponent} from '../tabella-serie-tv-component/tabella-ser
 import {style} from '@angular/animations';
 import {DomSanitizer} from '@angular/platform-browser';
 import {BannerEditorComponent} from '../banner-editor-component/banner-editor.component';
+import {ProfilePictureEditorComponent} from '../profile-picture-editor/profile-picture-editor.component';
 
 @Component({
   selector: 'app-profile',
@@ -14,14 +15,15 @@ import {BannerEditorComponent} from '../banner-editor-component/banner-editor.co
     TabellaFilmComponent,
     TabellaSerieTvComponent,
     NgIf,
-    BannerEditorComponent
+    BannerEditorComponent,
+    ProfilePictureEditorComponent
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
   showFilm: boolean = true;
-  editor: boolean=false;
+  bannerEditor: boolean=true;
 
   activateButton(index: number){
     switch (index){
@@ -46,5 +48,16 @@ export class ProfileComponent {
     }
   }
 
+  editProPic(){
+    this.bannerEditor=true;
+  }
+
+  editBanner(){
+    this.bannerEditor=true;
+  }
+
+  closeBanner(){
+    this.bannerEditor=false;
+  }
 }
 

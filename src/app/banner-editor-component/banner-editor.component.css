@@ -1,8 +1,10 @@
 .base{
+  width: 70%;
+  aspect-ratio: 2/1;
+  background-color: #131514;
   position: fixed;
-  top: 10%;
-  left: 10%;
-  width: 50vw;
-  height: 30vw;
-  background-color: green;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
 }
