@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { ImageCropperComponent, ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+
+import {ProfileComponent} from '../profile-component/profile.component';
+
 
 @Component({
   selector: 'app-banner-editor',
@@ -11,12 +13,16 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
   templateUrl: './banner-editor.component.html',
   styleUrl: './banner-editor.component.css'
 })
+
 export class BannerEditorComponent {
   imageChangedEvent: Event | null = null;
-  croppedImage: SafeUrl  = '';
+  croppedImage: string  = '';
+  @Input() aspectRatio!: number;
+  @Input() oggetto!: string;
+  maxHeight: number = 500;
 
   constructor(
-    private sanitizer: DomSanitizer
+    private profile: ProfileComponent
   ) {
   }
 
@@ -25,17 +31,50 @@ export class BannerEditorComponent {
   }
   imageCropped(event: ImageCroppedEvent) {
     if (event.objectUrl != null) {
-      this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl);
+      this.croppedImage = event.objectUrl;
     }
     // event.blob can be used to upload the cropped image
   }
   imageLoaded(image: LoadedImage) {
-    // show cropper
+    const originalHeight = image.original.size.height;
+    const originalWidth = image.original.size.width;
+
+    if (originalHeight > this.maxHeight) {
+      const scale = this.maxHeight / originalHeight;
+
+      // Calcola le nuove dimensioni
+      const newWidth = originalWidth * scale;
+
+      // Applica lo stile dinamico al cropper (se necessario)
+      const cropperElement = document.querySelector('image-cropper') as HTMLElement;
+      if (cropperElement) {
+        cropperElement.style.height = `${this.maxHeight}px`;
+        cropperElement.style.width = `${newWidth}px`;
+      }
+    }
   }
   cropperReady() {
     // cropper ready
   }
   loadImageFailed() {
     // show message
+  }
+
+  closePopup() {
+    this.profile.closeBanner();
+  }
+
+  confirmSelection(){
+    switch(this.oggetto){
+      case "Banner": {
+        this.profile.setBanner(this.croppedImage);
+        break;
+      }
+      case "Foto Profilo": {
+        this.profile.setProPic(this.croppedImage);
+        break;
+      }
+    }
+    this.profile.closeBanner();
   }
 }

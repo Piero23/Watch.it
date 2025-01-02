@@ -1,18 +1,25 @@
-<div class="base" >
+<div class="base justify-content-center" >
   <div class="text-center" style="margin-top: 1%">
-    <h1 style="color: white;">Modifica Banner</h1>
+    <h1 style="color: white; font-size: 2vw">Modifica {{oggetto}}</h1>
   </div>
-  <!--
-  <input type="file" id="file" class="form-control" (change)="fileChangeEvent($event)">
-  <image-cropper
-    [imageChangedEvent]="imageChangedEvent"
-    [maintainAspectRatio]="true"
-    [aspectRatio]="4 / 3"
-    format="png"
-    (imageCropped)="imageCropped($event)"
-    (imageLoaded)="imageLoaded($event)"
-    (cropperReady)="cropperReady()"
-    (loadImageFailed)="loadImageFailed()"
-  ></image-cropper>
- -->
+
+  <div class="d-flex justify-content-center" style="margin:2%; ">
+    <image-cropper
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="aspectRatio"
+      format="png"
+      (imageCropped)="imageCropped($event)"
+      (imageLoaded)="imageLoaded($event)"
+      (cropperReady)="cropperReady()"
+      (loadImageFailed)="loadImageFailed()"
+     style="border-radius: 10px;"></image-cropper>
+  </div>
+  <input type="file" id="file" class="form-control" (change)="fileChangeEvent($event)" style="width: 25%; display: block; margin: auto">
+
+  <div class="d-flex justify-content-center" style="margin-top: 1%">
+    <button class="confirm col-2" (click)="confirmSelection()">Conferma</button>
+    <button class="deny col-2" (click)="closePopup()">Annulla</button>
+  </div>
+
 </div>

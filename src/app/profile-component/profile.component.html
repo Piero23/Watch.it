@@ -1,9 +1,8 @@
 <body style="background-color: #131514" class="position-relative">
-  <app-banner-editor class="position-absolute top-0 start-0" style="background-color: rgba(0,0,0,0.7); width:100%; height: 100%; z-index: 1" *ngIf="bannerEditor"></app-banner-editor>
-  <div class="position-relative" style="background-color: yellow">
-    <img class="container-fluid" src="assets/images/Immagine.png" alt="banner" >
+  <app-banner-editor class="position-absolute top-0 start-0" [aspectRatio]="aspectRatio" [oggetto]="oggettoDaModificare" style="background-color: rgba(0,0,0,0.7); width:100%; height: 100%; z-index: 1" *ngIf="bannerEditor"></app-banner-editor>
+  <div class="position-relative bannerDiv" style="background-color: yellow; aspect-ratio: 1/0.16; background-size: cover;" [ngStyle]="{'background-image': 'url(' + banner + ')'}">
     <div class="position-absolute" style="left: 3%; top:17%; width: 40%">
-      <img src="assets/images/Avatar.png" alt="proPic" style="width: 27%; border-radius: 25%">
+      <img [src]="propic" alt="proPic" style="width: 27%; border-radius: 25%">
       <span class="align-bottom" style="font-size: 2.5vw; color: white; padding-left: 2%">Username</span>
     </div>
     <div class="dropdown-centered">
@@ -11,8 +10,8 @@
         Modifica <i class="fa-solid fa-pen-to-square"></i>
       </button>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" (click)="editBanner()">Foto Profilo</a></li>
-        <li><a class="dropdown-item" (click)="editProPic()">Banner</a></li>
+        <li><a class="dropdown-item" (click)="editProPic()">Foto Profilo</a></li>
+        <li><a class="dropdown-item" (click)="editBanner()">Banner</a></li>
       </ul>
     </div>
   </div>

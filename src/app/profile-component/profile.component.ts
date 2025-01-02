@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import {NgIf, NgOptimizedImage} from '@angular/common';
+import {NgIf, NgOptimizedImage, NgStyle} from '@angular/common';
 import {TabellaFilmComponent} from '../tabella-film-component/tabella-film.component';
 import {TabellaSerieTvComponent} from '../tabella-serie-tv-component/tabella-serie-tv.component';
-import {style} from '@angular/animations';
-import {DomSanitizer} from '@angular/platform-browser';
 import {BannerEditorComponent} from '../banner-editor-component/banner-editor.component';
-import {ProfilePictureEditorComponent} from '../profile-picture-editor/profile-picture-editor.component';
 
 @Component({
   selector: 'app-profile',
@@ -16,14 +13,21 @@ import {ProfilePictureEditorComponent} from '../profile-picture-editor/profile-p
     TabellaSerieTvComponent,
     NgIf,
     BannerEditorComponent,
-    ProfilePictureEditorComponent
+    NgStyle
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
+
 export class ProfileComponent {
   showFilm: boolean = true;
-  bannerEditor: boolean=true;
+  bannerEditor: boolean=false;
+
+  aspectRatio: number=0;
+  oggettoDaModificare: string = "";
+
+  propic: string="assets/images/Avatar.png";
+  banner: string="assets/images/Immagine.png";
 
   activateButton(index: number){
     switch (index){
@@ -50,14 +54,26 @@ export class ProfileComponent {
 
   editProPic(){
     this.bannerEditor=true;
+    this.aspectRatio=1;
+    this.oggettoDaModificare="Foto Profilo";
   }
 
   editBanner(){
     this.bannerEditor=true;
+    this.aspectRatio=1/0.16;
+    this.oggettoDaModificare="Banner";
   }
 
   closeBanner(){
     this.bannerEditor=false;
+  }
+
+  setProPic(propic: string){
+    this.propic=propic;
+  }
+
+  setBanner(banner: string){
+    this.banner=banner;
   }
 }
 
