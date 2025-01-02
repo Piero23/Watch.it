@@ -14,5 +14,5 @@ import {EpisodiSerieComponent} from '../episodi-serie/episodi-serie.component';
 })
 export class SchermataContenutiComponent {
   isSerie:boolean = true;
-
+  constructor() { }
 }
