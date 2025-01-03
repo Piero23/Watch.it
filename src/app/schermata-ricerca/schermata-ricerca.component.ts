@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import {ListaRicercaComponent} from '../lista-ricerca/lista-ricerca.component';
 
 @Component({
-  selector: 'app-schermata-contenuti',
+  selector: 'app-schermata-ricerca',
   standalone: true,
   imports: [
     ListaRicercaComponent
   ],
-  templateUrl: './schermata-contenuti.component.html',
-  styleUrl: './schermata-contenuti.component.css'
+  templateUrl: './schermata-ricerca.component.html',
+  styleUrl: './schermata-ricerca.component.css'
 })
-export class SchermataContenutiComponent {
+export class SchermataRicercaComponent {
   isSerie:boolean = true;
   constructor() { }
 }

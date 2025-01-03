@@ -1,9 +1,10 @@
 :host{
   display: flex;
-  width: clamp(650px,60dvw,9999px);
+  width: clamp(250px,50dvw,9999px);
   outline: none;
   border: none;
   overflow-x: hidden;
+  gap: 30px;
 }
 
 
@@ -13,7 +14,7 @@
 }
 
 .copertina{
-  width: clamp(220px,20dvw,300px);
+  width: clamp(120px,20dvw,130px);
   height: auto;
 }
 

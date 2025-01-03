@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {SchermataContenutiComponent} from './schermata-contenuti/schermata-contenuti.component';
 import {ListaRicercaComponent} from './lista-ricerca/lista-ricerca.component';
+import {SchermataRicercaComponent} from './schermata-ricerca/schermata-ricerca.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SchermataContenutiComponent, ListaRicercaComponent],
+  imports: [RouterOutlet, ListaRicercaComponent, SchermataRicercaComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

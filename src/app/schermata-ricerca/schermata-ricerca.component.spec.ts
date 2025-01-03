@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SchermataContenutiComponent } from './schermata-contenuti.component';
+import { SchermataRicercaComponent } from './schermata-ricerca.component';
 
 describe('SchermataContenutiComponent', () => {
-  let component: SchermataContenutiComponent;
-  let fixture: ComponentFixture<SchermataContenutiComponent>;
+  let component: SchermataRicercaComponent;
+  let fixture: ComponentFixture<SchermataRicercaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SchermataContenutiComponent]
+      imports: [SchermataRicercaComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SchermataContenutiComponent);
+    fixture = TestBed.createComponent(SchermataRicercaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
