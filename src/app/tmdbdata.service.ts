@@ -47,13 +47,13 @@ export class TMDBDataService {
   }
 
 
-  getMovieByID(){
+  getMovieByID(id : number){
     const headers = new HttpHeaders({
       'accept': 'application/json',
       'Authorization': this.API_KEY,
     });
 
-    return this.http.get(this.API_URL+"/movie/1156593?language=en-US",{headers})
+    return this.http.get(this.API_URL+"/movie/+"+id+"?language=en-US",{headers})
   }
 
   public searchMovies(search:string){

@@ -26,7 +26,7 @@ export class ListaRicercaComponent{
   vero : any[] = []
 
   constructor(private tMDBDataService: TMDBDataService) {
-    this.tMDBDataService.searchMovies("Gladiator").subscribe(
+    this.tMDBDataService.searchMovies("Batman").subscribe(
       (data: any) => {
         if (Array.isArray(data)) {
           this.movies = data;

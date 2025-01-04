@@ -22,32 +22,32 @@ export class CardRicercaComponent implements OnInit {
   dataRilascio: string = '';
   voto: number = 0;
   image: string = '';
+  colorVoto : string = '';
+  id: number = 0;
 
   ngOnInit(): void {
-
-      this.titolo = this.movieInfo?.title || 'Titolo non disponibile';
-      this.descrizione = this.movieInfo?.overview || 'Descrizione non disponibile';
-      this.dataRilascio = this.movieInfo?.release_date || 'Data non disponibile';
-      this.voto = this.movieInfo?.vote_average || 0;
-      this.image = this.movieInfo?.poster_path
-        ? `https://image.tmdb.org/t/p/w500${this.movieInfo.poster_path}`
-        : 'URL immagine non disponibile';
-    }
+    this.id = this.movieInfo?.id;
+    this.titolo = this.movieInfo?.title || 'Titolo non disponibile';
+    this.descrizione = this.movieInfo?.overview || 'Descrizione non disponibile';
+    this.dataRilascio = this.movieInfo?.release_date || 'Data non disponibile';
+    this.voto =  Number((this.movieInfo?.vote_average).toFixed(1)*10) || 0;
+    this.colorVoto = this.colorOnVote(this.voto)
+    this.image = this.movieInfo?.poster_path
+      ? `https://image.tmdb.org/t/p/w500${this.movieInfo.poster_path}`
+      : 'URL immagine non disponibile';
+  }
 
 
   constructor(private router: Router) {
   }
   @HostListener('click')
   onClick() {
-    this.router.navigate(["film/", this.titolo]);
+    this.router.navigate(["film/", this.id]);
   }
 
-  tranformVoto(voto: number):number {
-    return Number(Number(voto).toFixed(1))*10;
-  }
+
 
   colorOnVote(voto : number) {
-    console.log(this.movieInfo)
 
     if (voto < 5)
      return "red";
