@@ -3,7 +3,5 @@
 </div>
 
 <div class=" my-4 justify-content-center align-items-center d-flex flex-column text-white " style="gap: 20px">
-  <app-card-ricerca [titolo]="'Grazia Anatomia'" [serie]="1" [episodio]="1"></app-card-ricerca>
-  <app-card-ricerca [titolo]="'Grazia Anatomia 2'" [serie]="1" [episodio]="2"></app-card-ricerca>
-  <app-card-ricerca [titolo]="'Grazia Anatomia 3'" [serie]="1" [episodio]="3"></app-card-ricerca>
+    <app-card-ricerca *ngFor="let movie of movies" [titolo]= movie.title [serie]="1" [episodio]="1" [voto] = movie.vote_average [descrizione]= movie.overview [image]= "'https://image.tmdb.org/t/p/w500'+movie.poster_path" ></app-card-ricerca>
 </div>

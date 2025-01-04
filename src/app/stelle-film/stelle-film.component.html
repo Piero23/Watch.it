@@ -1,5 +1,5 @@
 <span class="star-rating d-flex align-items-center justify-content-around " style="width: 100px;">
-    @for(star of stars; track star; let i = $index){
+    @for(star of stars; track i; let i = $index){
     <i
       class="icon-outline fa-star d-flex"
       [ngClass]="{
