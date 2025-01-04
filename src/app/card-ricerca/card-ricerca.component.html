@@ -9,7 +9,7 @@
   </div>
   <div class="d-flex justify-content-between" style="width: 100px">
     <p style="margin: 0; opacity: 0.5">{{dataRilascio}}</p>
-    <b title="Voto"><p  class="rounded-3 justify-content-center d-flex " style="width: 40px; background-color: #1BD75F; color: #131514">{{voto}}%</p></b>
+    <b title="Voto"><p  class="rounded-3 justify-content-center d-flex " [ngStyle]="{'background-color': colorOnVote(voto)} "  style="width: 40px; color: #131514">{{tranformVoto(voto)}}%</p></b>
   </div>
 
   <p class="text-truncated">

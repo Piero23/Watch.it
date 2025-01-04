@@ -1,7 +1,7 @@
 <div class="container-fluid">
-  <h5 class=" my-4  align-items-center d-flex text-white">Sono satati trovati {{risultati.length}} risultati con : "{{ricerca}}"</h5>
+  <h5 class=" my-4  align-items-center d-flex text-white">S risultati con : "{{ricerca}}"</h5>
 </div>
 
 <div class=" my-4 justify-content-center align-items-center d-flex flex-column text-white " style="gap: 20px">
-    <app-card-ricerca *ngFor="let movie of movies" [titolo]= movie.title [serie]="1" [episodio]="1" [voto] = movie.vote_average [descrizione]= movie.overview [image]= "'https://image.tmdb.org/t/p/w500'+movie.poster_path" ></app-card-ricerca>
+    <app-card-ricerca *ngFor="let movie of movies" [movieInfo]="movie"></app-card-ricerca>
 </div>

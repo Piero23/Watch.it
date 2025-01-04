@@ -20,26 +20,25 @@ import {NgForOf} from '@angular/common';
   host: {class: "flex-column"}
 })
 export class ListaRicercaComponent{
-  risultati : string[][] = [
-    ["Grazia Anatomia","1998","76"],
-    ["Grazia Anatomia 2","2000","56"],
-    ["Grazia Anatomia 3","1995","16"]
-  ]
 
   ricerca : string = "grazia anatomia"
-
-  movies : any = "fa"
+  movies : any[] = []
   vero : any[] = []
 
   constructor(private tMDBDataService: TMDBDataService) {
-    this.tMDBDataService.getMovies().subscribe(
-      (data:any) =>{
-        this.movies = data.results
-        console.log(this.movies)
+    this.tMDBDataService.searchMovies("Gladiator").subscribe(
+      (data: any) => {
+        if (Array.isArray(data)) {
+          this.movies = data;
+        } else if (data.results && Array.isArray(data.results)) {
+          this.movies = data.results;
+        } else {
+          this.movies = [data];
+        }
+      },
+      (error) => {
+        console.error('Errore nella chiamata API:', error);
       }
-    )
-    console.log(this.movies)
+    );
   }
-
-  protected readonly Number = Number;
 }

@@ -1,29 +1,59 @@
-import {Component, HostListener, Input, input} from '@angular/core';
+import {Component, HostListener, Input, input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
+import {NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-card-ricerca',
   standalone: true,
   imports: [
-    RouterLink
+    RouterLink,
+    NgStyle
   ],
   templateUrl: './card-ricerca.component.html',
   styleUrl: './card-ricerca.component.css',
   host: {class: "rounded-4"}
 })
-export class CardRicercaComponent {
+export class CardRicercaComponent implements OnInit {
 
-  @Input()titolo: string = "Grazia Anatomia"
-  @Input() descrizione: string = "This is a recap episode, otherwise known as a clip show. If you want to get caught up on everything from the interns first day to the mischief of the last episode, then this is the episode to watch. Prepare for May sweeps by getting caught up with this episode."
-  @Input() dataRilascio: string = "2000"
-  @Input() voto: number = 85
-  @Input() episodio: number = 1
-  @Input() serie:number = 1
-  @Input() image : string = ""
+  @Input() movieInfo: any;
 
-  constructor(private router: Router) { }
+  titolo: string = '';
+  descrizione: string = '';
+  dataRilascio: string = '';
+  voto: number = 0;
+  image: string = '';
+
+  ngOnInit(): void {
+
+      this.titolo = this.movieInfo?.title || 'Titolo non disponibile';
+      this.descrizione = this.movieInfo?.overview || 'Descrizione non disponibile';
+      this.dataRilascio = this.movieInfo?.release_date || 'Data non disponibile';
+      this.voto = this.movieInfo?.vote_average || 0;
+      this.image = this.movieInfo?.poster_path
+        ? `https://image.tmdb.org/t/p/w500${this.movieInfo.poster_path}`
+        : 'URL immagine non disponibile';
+    }
+
+
+  constructor(private router: Router) {
+  }
   @HostListener('click')
   onClick() {
-    this.router.navigate(["film/as"]);
+    this.router.navigate(["film/", this.titolo]);
+  }
+
+  tranformVoto(voto: number):number {
+    return Number(Number(voto).toFixed(1))*10;
+  }
+
+  colorOnVote(voto : number) {
+    console.log(this.movieInfo)
+
+    if (voto < 5)
+     return "red";
+    else if(voto > 6.9)
+      return "#1BD75F";
+    else
+      return "yellow";
   }
 }

@@ -10,7 +10,7 @@ export const routes: Routes = [
   },
 
   {
-    path:"film/:nome",
+    path:"film/:titolo",
     component: SchermataContenutiComponent,
     title: "Film",
   }
