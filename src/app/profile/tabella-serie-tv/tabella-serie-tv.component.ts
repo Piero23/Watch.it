@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {NgForOf, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {SerieTvStatusSelectorComponent} from './serie-tv-status-selector/serie-tv-status-selector.component';
+import {BannerEditorComponent} from '../banner-editor/banner-editor.component';
 
 @Component({
   selector: 'app-tabella-serie-tv',
@@ -8,7 +10,9 @@ import {FormsModule} from '@angular/forms';
   imports: [
     NgForOf,
     NgIf,
-    FormsModule
+    FormsModule,
+    SerieTvStatusSelectorComponent,
+    BannerEditorComponent
   ],
   templateUrl: './tabella-serie-tv.component.html',
   styleUrl: './tabella-serie-tv.component.css'
@@ -20,20 +24,22 @@ export class TabellaSerieTvComponent {
   yearOrder=true;
   ratingOrder=true;
 
-  righe :{anno: number, rating: number, nome: string, immagine: string, status: string}[] = [];
+  righe :{anno: number, rating: number, nome: string, immagine: string, status: {stagione: number, episodio: number}}[] = [];
+  seriesEditor: boolean=false;
+  currentImage: string="";
+  selectedRow: number=0;
 
   addrow() {
-    const score = window.prompt("voto"); //dummy per testare l'aggiunzione di un voto custom
 
     const riga = {
       anno: 2025,
-      rating: Number(score),
+      rating: 3,
       nome: "godzilla",
       immagine: "assets/images/img.png",
-      status: "S3, E5"
+      status: {stagione: 3, episodio: 5}
     }
 
-    this.righe.push(riga);
+    for (let i=0;i<5; i++) this.righe.push(riga);
   }
 
   sortByName(){
@@ -80,4 +86,20 @@ export class TabellaSerieTvComponent {
       this.ratingOrder=!this.ratingOrder;
     }
   }
+
+  openPopup(image:string, index: number): void {
+    this.seriesEditor = true;
+    this.selectedRow=index;
+  }
+
+  confirmPopup(status: {stagione: number, episodio: number}){
+    this.seriesEditor = false;
+    // @ts-ignore
+    this.righe.at(this.selectedRow).status=status;
+  }
+
+  closePopup(){
+    this.seriesEditor = false;
+  }
+
 }

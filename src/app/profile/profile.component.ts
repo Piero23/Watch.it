@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {NgIf, NgOptimizedImage, NgStyle} from '@angular/common';
-import {TabellaFilmComponent} from '../tabella-film-component/tabella-film.component';
-import {TabellaSerieTvComponent} from '../tabella-serie-tv-component/tabella-serie-tv.component';
-import {BannerEditorComponent} from '../banner-editor-component/banner-editor.component';
+import {TabellaFilmComponent} from './tabella-film/tabella-film.component';
+import {TabellaSerieTvComponent} from './tabella-serie-tv/tabella-serie-tv.component';
+import {BannerEditorComponent} from './banner-editor/banner-editor.component';
 
 @Component({
   selector: 'app-profile',

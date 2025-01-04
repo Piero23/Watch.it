@@ -20,7 +20,8 @@ export class TabellaFilmComponent {
   constructor(private cdr: ChangeDetectorRef) {}
 
   addrow() {
-    //const score=window.prompt("voto"); //dummy per testare l'aggiunzione di un voto custom
+
+    //dao getFilm(Utente)
 
     const riga={
       anno: 2025,
@@ -29,7 +30,6 @@ export class TabellaFilmComponent {
       immagine: "assets/images/img.png"
     }
 
-    console.log(riga.rating);
     for (let i=0;i<5; i++) this.righe.push(riga);
   }
 

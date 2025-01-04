@@ -4,6 +4,8 @@
   <button class="col-1 selectionButtonRow2">Visti</button>
 </div>
 
+<app-serie-tv-status-selector class="position-absolute popup" [rowIndex]="selectedRow" *ngIf="seriesEditor"></app-serie-tv-status-selector>
+
 <table class="table table-striped text-center" style="color: lightgray;">
   <thead class="align-middle">
   <th class="col-2">Preview</th>
@@ -32,19 +34,21 @@
     {{riga.anno}}
     </th>
     <th>
-      <button type="button" class="btn btn-primary" >{{riga.status}} <i class="fa-solid fa-pen-to-square"></i></button>
+      <button type="button" class="btn btn-primary" (click)="openPopup(riga.immagine, i)">S{{riga.status.stagione}} E{{riga.status.episodio}} <i class="fa-solid fa-pen-to-square"></i></button>
     </th>
     <th>
-      <input value="5" name="rating+{{i}}" id="star5+{{i}}" type="radio" [value]="5" [(ngModel)]="riga.rating">
-      <label for="star5+{{i}}"></label>
-      <input value="4" name="rating+{{i}}" id="star4+{{i}}" type="radio" [value]="4" [(ngModel)]="riga.rating">
-      <label for="star4+{{i}}"></label>
-      <input value="3" name="rating+{{i}}" id="star3+{{i}}" type="radio" [value]="3" [(ngModel)]="riga.rating">
-      <label for="star3+{{i}}"></label>
-      <input value="2" name="rating+{{i}}" id="star2+{{i}}" type="radio" [value]="2" [(ngModel)]="riga.rating">
-      <label for="star2+{{i}}"></label>
-      <input value="1" name="rating+{{i}}" id="star1+{{i}}" type="radio" [value]="1" [(ngModel)]="riga.rating">
-      <label for="star1+{{i}}"></label>
+      <div class="rating">
+        <input value="5" name="rating+{{i}}" id="star5+{{i}}" type="radio" [value]="5" [(ngModel)]="riga.rating">
+        <label for="star5+{{i}}"></label>
+        <input value="4" name="rating+{{i}}" id="star4+{{i}}" type="radio" [value]="4" [(ngModel)]="riga.rating">
+        <label for="star4+{{i}}"></label>
+        <input value="3" name="rating+{{i}}" id="star3+{{i}}" type="radio" [value]="3" [(ngModel)]="riga.rating">
+        <label for="star3+{{i}}"></label>
+        <input value="2" name="rating+{{i}}" id="star2+{{i}}" type="radio" [value]="2" [(ngModel)]="riga.rating">
+        <label for="star2+{{i}}"></label>
+        <input value="1" name="rating+{{i}}" id="star1+{{i}}" type="radio" [value]="1" [(ngModel)]="riga.rating">
+        <label for="star1+{{i}}"></label>
+      </div>
     </th>
     <th>
       <button type="button" class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" aria-expanded="false">Da Vedere</button>

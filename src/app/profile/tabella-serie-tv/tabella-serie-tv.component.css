@@ -60,3 +60,10 @@
 .selectionButtonRow2:hover{
   border: solid 1px #4CB2FD;
 }
+
+.popup{
+  position: fixed;
+  width:100%;
+  height: 100%;
+  z-index: 10;
+}

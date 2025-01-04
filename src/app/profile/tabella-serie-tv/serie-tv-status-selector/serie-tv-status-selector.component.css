@@ -1,5 +1,5 @@
 .base{
-  width: 70%;
+  width: 30%;
   aspect-ratio: 2/1;
   background-color: #131514;
   position: fixed;
@@ -7,16 +7,18 @@
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
+
+  box-shadow: 0 0 0.3vw 0.3vw rgba(0, 0, 0);
 }
 
 .confirm{
   border: transparent solid 1px;
   border-radius: 5px;
-  margin: 0.1%;
+  margin: 1%;
   background: #1BD75F;
   color: white;
   font-size: 0.8vw;
-  width: 10%
+  width: 70%
 }
 
 .confirm:active{}
@@ -24,12 +26,17 @@
 .deny{
   border: transparent solid 1px;
   border-radius: 5px;
-  margin: 0.1%;
+  margin: 1%;
   background: #282828;
   color: white;
   font-size: 0.8vw;
-  width: 10%;
+  width: 70%;
 }
 
 .deny:active{}
+
+.selector{
+  width: 80%;
+  border-radius: 15px;
+}
 

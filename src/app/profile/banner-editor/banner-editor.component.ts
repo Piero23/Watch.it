@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import { ImageCropperComponent, ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 
-import {ProfileComponent} from '../profile-component/profile.component';
+import {ProfileComponent} from '../profile.component';
 
 
 @Component({
