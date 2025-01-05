@@ -44,19 +44,28 @@ export class TMDBDataService {
 
 
   async getMovieByID(id : number):Promise<any>{
-    const data = await this.fetchMovies(this.API_URL+"/movie/+"+id+"?language=it-IT")
-    console.log("non result",data)
-    // @ts-ignore
-    console.log("resut:",data.result)
-    return data
+    return await this.fetchMovies(this.API_URL + "/movie/+" + id + "?language=it-IT")
   }
 
-  public searchMovies(search:string){
-    const headers = new HttpHeaders({
-      'accept': 'application/json',
-      'Authorization': this.API_KEY,
-    });
-    return this.http.get(this.searchUrl+"&query="+search,{headers})
+  async searchMovies(search:string){
+
+    // @ts-ignore
+    return data.results
+  }
+
+  async searchTvSeries(){
+    const data = await this.fetchMovies('https://api.themoviedb.org/3/trending/tv/day?language=it-IT')
+    // @ts-ignore
+    return data.results
+  }
+
+  async getTvSeriesByID(id:number){
+    return await this.fetchMovies(this.API_URL + "/tv/+" + id + "?language=it-IT")
+  }
+
+  async getTvSeriesSeason(id:string, season:number){
+    const data = await this.fetchMovies(this.API_URL + "/tv/+" + id + "/season/" + 1 + "?language=it-IT")
+    return data
   }
 
 }

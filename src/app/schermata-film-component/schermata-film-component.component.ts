@@ -21,11 +21,12 @@ import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 export class SchermataFilmComponentComponent {
   titolo: string = "";
-  isSerie: boolean = true;
+  isSerie: any
   id : number = 0;
   descrizione: string = ""
   posterImage: string = ""
   _bgImage: string = ""
+  movie : any
 
   route : ActivatedRoute = inject(ActivatedRoute)
 
@@ -37,16 +38,24 @@ export class SchermataFilmComponentComponent {
      this.setMovie()
   }
 
+
   async setMovie() {
     this.id = this.route.snapshot.params['id'];
-    const movie = await this.tmdbDataService.getMovieByID(this.id)
-    this.titolo = movie.title
-    this.descrizione = movie.overview;
-    this.posterImage = movie.poster_path
-      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    this.isSerie = this.route.snapshot.params['contenuto'];
+    if(this.isSerie == "tv"){
+      this.movie = await this.tmdbDataService.getTvSeriesByID(this.id)
+      this.titolo = this.movie.name
+    }else {
+      this.movie = await this.tmdbDataService.getMovieByID(this.id)
+      this.titolo = this.movie.title
+    }
+
+    this.descrizione = this.movie.overview;
+    this.posterImage = this.movie.poster_path
+      ? `https://image.tmdb.org/t/p/w500${this.movie.poster_path}`
       : 'URL immagine non disponibile';
-    this._bgImage = movie.poster_path
-      ? `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
+    this._bgImage = this.movie.poster_path
+      ? `https://image.tmdb.org/t/p/w1280${this.movie.backdrop_path}`
       : 'URL immagine non disponibile';
   }
 

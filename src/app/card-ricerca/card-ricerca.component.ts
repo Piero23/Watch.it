@@ -1,6 +1,7 @@
 import {Component, HostListener, Input, input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {NgStyle} from '@angular/common';
+import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 @Component({
   selector: 'app-card-ricerca',
@@ -24,12 +25,22 @@ export class CardRicercaComponent implements OnInit {
   image: string = '';
   colorVoto : string = '';
   id: number = 0;
+  isSerie = false;
 
   ngOnInit(): void {
+
     this.id = this.movieInfo?.id;
-    this.titolo = this.movieInfo?.title || 'Titolo non disponibile';
+    if(this.movieInfo?.title)
+      this.titolo = this.movieInfo?.title
+    else {
+      this.titolo = this.movieInfo?.name
+      this.isSerie = true;
+    }
     this.descrizione = this.movieInfo?.overview || 'Descrizione non disponibile';
-    this.dataRilascio = this.movieInfo?.release_date.slice(0,4) || 'Data non disponibile';
+    if(this.movieInfo?.first_air_date)
+      this.dataRilascio = this.movieInfo?.first_air_date.slice(0,4);
+    else
+      this.dataRilascio = this.movieInfo?.release_date.slice(0,4);
     this.voto =  Number((this.movieInfo?.vote_average).toFixed(1)*10) || -1;
     this.colorVoto = this.colorOnVote(this.voto)
     this.image = this.movieInfo?.poster_path
@@ -38,11 +49,14 @@ export class CardRicercaComponent implements OnInit {
   }
 
 
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) {}
+
   @HostListener('click')
   onClick() {
-    this.router.navigate(["film/", this.id]);
+    if(this.isSerie)
+      this.router.navigate(["tv/", this.id]);
+    else
+      this.router.navigate(["/film/", this.id]);
   }
 
 

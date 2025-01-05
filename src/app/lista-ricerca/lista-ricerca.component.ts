@@ -4,9 +4,6 @@ import {RouterLink} from '@angular/router';
 import {TMDBDataService} from '../tmdbdata.service';
 import {NgForOf} from '@angular/common';
 
-
-
-
 @Component({
   selector: 'app-lista-ricerca',
   standalone: true,
@@ -28,8 +25,7 @@ export class ListaRicercaComponent{
     this.find()
   }
 
-
   async find(){
-    this.movies= await this.tMDBDataService.getPopularMovies()
+    this.movies= await this.tMDBDataService.searchTvSeries()
   }
 }

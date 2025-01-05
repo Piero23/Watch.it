@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {SchermataFilmComponentComponent} from '../schermata-film-component/schermata-film-component.component';
 import {EpisodiSerieComponent} from '../episodi-serie/episodi-serie.component';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-schermata-contenuti',
@@ -13,6 +14,15 @@ import {EpisodiSerieComponent} from '../episodi-serie/episodi-serie.component';
   styleUrl: './schermata-contenuti.component.css'
 })
 export class SchermataContenutiComponent {
-  isSerie:boolean = true;
-  constructor() { }
+
+  route : ActivatedRoute = inject(ActivatedRoute);
+
+  isSerie:boolean = false;
+
+
+  constructor() {
+    if(this.route.snapshot.params['contenuto'] == "tv"){
+      this.isSerie = true
+    }
+  }
 }
