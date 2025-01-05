@@ -19,7 +19,7 @@ import {FormsModule} from '@angular/forms';
 })
 export class EpisodiSerieComponent {
   seasons: any;
-  selectedSeasonNum: number = 1;
+  selectedSeasonNum: number = 0;
   episodes : any;
   id: any = 0;
   tvSeries: any ;
@@ -34,11 +34,13 @@ export class EpisodiSerieComponent {
     this.id = this.route.snapshot.params['id']
     this.tvSeries = await this.tmdbDataService.getTvSeriesByID(this.id)
     this.seasons = this.tvSeries.seasons;
+    console.log(this.seasons)
   }
 
   onSeasonChange(season: any) {
     this.selectedSeasonNum = season;
     console.log(this.selectedSeasonNum);
+    this.getEpisodesForSelectedSeason(season)
   }
 
   async getEpisodesForSelectedSeason(season: any){

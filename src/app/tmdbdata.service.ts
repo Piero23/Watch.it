@@ -64,7 +64,7 @@ export class TMDBDataService {
   }
 
   async getTvSeriesSeason(id:string, season:number){
-    const data = await this.fetchMovies(this.API_URL + "/tv/+" + id + "/season/" + 1 + "?language=it-IT")
+    const data = await this.fetchMovies(this.API_URL + "/tv/+" + id + "/season/" + season + "?language=it-IT")
     return data
   }
 
