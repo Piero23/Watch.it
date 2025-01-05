@@ -47,7 +47,7 @@ export class TabellaSerieTvComponent {
     }[]
   }[] = []
 
-  addrow() {
+  async addrow() {
 
     let riga: {
       anno: number ,
@@ -74,28 +74,26 @@ export class TabellaSerieTvComponent {
       stagioni: []
     }
 
-    this.tmdb.getSeriesByID(93405).subscribe({
-      next: (data: any)=> {
-        riga.anno=data.first_air_date.slice(0,4);
-        riga.rating=Math.floor(data.vote_average/2);
-        riga.nome=data.name;
-        riga.immagine=data.poster_path
-          ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
-          : 'URL immagine non disponibile';
-        for (let season=0; season<data.number_of_seasons; season++) {
-          let stagione: {
-            numeroStagione: number,
-            numeroEpisodi: number
-          } = {
-            numeroStagione: 0,
-            numeroEpisodi: 0
-          }
-          stagione.numeroStagione=season+1;
-          stagione.numeroEpisodi=data.seasons.at(season).episode_count;
-          riga.stagioni.push(stagione);
-        }
+    let series: any = await this.tmdb.getTvSeriesByID(93405);
+
+    riga.anno=series.first_air_date.slice(0,4);
+    riga.rating=Math.floor(series.vote_average/2);
+    riga.nome=series.name;
+    riga.immagine=series.poster_path
+      ? `https://image.tmdb.org/t/p/w500${series.poster_path}`
+      : 'URL immagine non disponibile';
+    for (let season=0; season<series.number_of_seasons; season++) {
+      let stagione: {
+        numeroStagione: number,
+        numeroEpisodi: number
+      } = {
+        numeroStagione: 0,
+        numeroEpisodi: 0
       }
-    });
+      stagione.numeroStagione=season+1;
+      stagione.numeroEpisodi=series.seasons.at(season).episode_count;
+      riga.stagioni.push(stagione);
+    }
 
     for (let i=0; i<10; i++) this.righe.push(riga);
   }

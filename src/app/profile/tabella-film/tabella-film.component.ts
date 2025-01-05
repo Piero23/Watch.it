@@ -22,7 +22,7 @@ export class TabellaFilmComponent {
 
   constructor(private tmdb: TMDBDataService) {}
 
-  addrow() {
+  async addrow() {
 
     //dao getFilm(Utente)
     const riga: {anno: number, rating: number, nome: string, immagine: string}= {
@@ -32,16 +32,15 @@ export class TabellaFilmComponent {
       immagine: ''
     };
 
-    this.tmdb.getMovieByID(929204).subscribe({
-      next: (data: any)=> {
-        riga.anno=data.release_date.slice(0,4);
-        riga.rating=Math.floor(data.vote_average/2);
-        riga.nome=data.title;
-        riga.immagine=data.poster_path
-          ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
-          : 'URL immagine non disponibile';
-      }
-    });
+    let movie: any = await this.tmdb.getMovieByID(929204);
+
+    riga.anno=movie.release_date.slice(0,4);
+    riga.rating=Math.floor(movie.vote_average/2);
+    riga.nome=movie.title;
+    riga.immagine=movie.poster_path
+      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+      : 'URL immagine non disponibile';
+
 
     for (let i=0; i<10; i++) this.righe.push(riga);
   }

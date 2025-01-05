@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {firstValueFrom} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,59 +18,54 @@ export class TMDBDataService {
   data: any = []
 
 
-  public confermation() {
+  //OGNUNA DI QUESTE FUNZIONI DEVE ESSERE CHIAMATA IN UN METODO ASYNC CON UN await di fronte per riceverne il valore
+
+  async confermation() {
+
+    const data = await this.fetchMovies(this.API_URL+"/authentication")
+    // @ts-ignore
+    return data.results
+  }
+
+  async getPopularMovies(){
+    const data = await this.fetchMovies(this.API_URL+"/discover/movie?sort_by=popularity.desc&")
+    // @ts-ignore
+    return data.results
+  }
+
+
+  private async fetchMovies(url:string){
     const headers = new HttpHeaders({
       'accept': 'application/json',
       'Authorization': this.API_KEY,
     });
-
-    this.http
-      .get(this.API_URL+"/authentication",{headers}).subscribe(
-      (data:any) =>{
-        this.data = data;
-      }
-    )
-  }
-
-  public getMovies(){
-    return this.fetchMovies("/discover/movie?sort_by=popularity.desc&")
+    return await firstValueFrom(this.http.get(url, {headers}));
   }
 
 
-  fetchMovies(url:string){
-    const headers = new HttpHeaders({
-      'accept': 'application/json',
-      'Authorization': this.API_KEY,
-    });
-
-    return this.http.get(this.API_URL+url,{headers})
+  async getMovieByID(id : number):Promise<any>{
+    return await this.fetchMovies(this.API_URL + "/movie/+" + id + "?language=it-IT")
   }
 
+  async searchMovies(search:string){
 
-  getMovieByID(id : number){
-    const headers = new HttpHeaders({
-      'accept': 'application/json',
-      'Authorization': this.API_KEY,
-    });
-
-    return this.http.get(this.API_URL+"/movie/+"+id+"?language=en-US",{headers})
+    // @ts-ignore
+    return data.results
   }
 
-  public searchMovies(search:string){
-    const headers = new HttpHeaders({
-      'accept': 'application/json',
-      'Authorization': this.API_KEY,
-    });
-    return this.http.get(this.searchUrl+"&query="+search,{headers})
+  async searchTvSeries(){
+    const data = await this.fetchMovies('https://api.themoviedb.org/3/trending/tv/day?language=it-IT')
+    // @ts-ignore
+    return data.results
   }
 
-  getSeriesByID(id : number){
-    const headers = new HttpHeaders({
-      'accept': 'application/json',
-      'Authorization': this.API_KEY,
-    });
+  async getTvSeriesByID(id:number){
+    return await this.fetchMovies(this.API_URL + "/tv/+" + id + "?language=it-IT")
+  }
 
-    return this.http.get(this.API_URL+"/tv/+"+id+"?language=en-US",{headers})
+  async getTvSeriesSeason(id:string, season:number){
+    const data = await this.fetchMovies(this.API_URL + "/tv/+" + id + "/season/" + season + "?language=it-IT")
+    return data
   }
 
 }
