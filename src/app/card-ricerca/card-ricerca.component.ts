@@ -20,7 +20,7 @@ export class CardRicercaComponent implements OnInit {
   titolo: string = '';
   descrizione: string = '';
   dataRilascio: string = '';
-  voto: number = 0;
+  voto: any = 0;
   image: string = '';
   colorVoto : string = '';
   id: number = 0;
@@ -29,8 +29,8 @@ export class CardRicercaComponent implements OnInit {
     this.id = this.movieInfo?.id;
     this.titolo = this.movieInfo?.title || 'Titolo non disponibile';
     this.descrizione = this.movieInfo?.overview || 'Descrizione non disponibile';
-    this.dataRilascio = this.movieInfo?.release_date || 'Data non disponibile';
-    this.voto =  Number((this.movieInfo?.vote_average).toFixed(1)*10) || 0;
+    this.dataRilascio = this.movieInfo?.release_date.slice(0,4) || 'Data non disponibile';
+    this.voto =  Number((this.movieInfo?.vote_average).toFixed(1)*10) || -1;
     this.colorVoto = this.colorOnVote(this.voto)
     this.image = this.movieInfo?.poster_path
       ? `https://image.tmdb.org/t/p/w500${this.movieInfo.poster_path}`
@@ -49,9 +49,14 @@ export class CardRicercaComponent implements OnInit {
 
   colorOnVote(voto : number) {
 
-    if (voto < 5)
+    if(voto == -1){
+      this.voto = "";
+      return "transparent";
+    }
+
+    if (voto < 50)
      return "red";
-    else if(voto > 6.9)
+    else if(voto > 69)
       return "#1BD75F";
     else
       return "yellow";

@@ -5,6 +5,7 @@ import {CommentiFilmComponent} from '../commenti-film/commenti-film.component';
 import {EpisodiSerieComponent} from '../episodi-serie/episodi-serie.component';
 import {ActivatedRoute} from '@angular/router';
 import {TMDBDataService} from '../tmdbdata.service';
+import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 
 @Component({
@@ -24,40 +25,32 @@ export class SchermataFilmComponentComponent {
   id : number = 0;
   descrizione: string = ""
   posterImage: string = ""
-
+  _bgImage: string = ""
 
   route : ActivatedRoute = inject(ActivatedRoute)
 
-  _bgImage: string = "https://picsum.photos/1080/1080";
-
-
-
-
-   getBgImage() {
+  getBgImage() {
     return `url("${this._bgImage}")`;
   }
 
   constructor(private tmdbDataService: TMDBDataService) {
-     this.id = this.route.snapshot.params['id'];
-    this.tmdbDataService.getMovieByID(this.id).subscribe(
-      (data: any) => {
-        this.setMovie(data)
-        }
-    );
+     this.setMovie()
   }
 
-  setMovie(movie:any) {
+  async setMovie() {
+    this.id = this.route.snapshot.params['id'];
+    const movie = await this.tmdbDataService.getMovieByID(this.id)
     this.titolo = movie.title
     this.descrizione = movie.overview;
     this.posterImage = movie.poster_path
       ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
       : 'URL immagine non disponibile';
     this._bgImage = movie.poster_path
-      ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
+      ? `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
       : 'URL immagine non disponibile';
   }
 
-  @Input() set bgImage(value: string) {
+  set bgImage(value: string) {
     this._bgImage = value;
   }
 }

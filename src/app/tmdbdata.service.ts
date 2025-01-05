@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {firstValueFrom} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,42 +18,37 @@ export class TMDBDataService {
   data: any = []
 
 
-  public confermation() {
+  //OGNUNA DI QUESTE FUNZIONI DEVE ESSERE CHIAMATA IN UN METODO ASYNC CON UN await di fronte per riceverne il valore
+
+  async confermation() {
+
+    const data = await this.fetchMovies(this.API_URL+"/authentication")
+    // @ts-ignore
+    return data.results
+  }
+
+  async getPopularMovies(){
+    const data = await this.fetchMovies(this.API_URL+"/discover/movie?sort_by=popularity.desc&")
+    // @ts-ignore
+    return data.results
+  }
+
+
+  private async fetchMovies(url:string){
     const headers = new HttpHeaders({
       'accept': 'application/json',
       'Authorization': this.API_KEY,
     });
-
-    this.http
-      .get(this.API_URL+"/authentication",{headers}).subscribe(
-      (data:any) =>{
-        this.data = data;
-      }
-    )
-  }
-
-  public getMovies(){
-    return this.fetchMovies("/discover/movie?sort_by=popularity.desc&")
+    return await firstValueFrom(this.http.get(url, {headers}));
   }
 
 
-  fetchMovies(url:string){
-    const headers = new HttpHeaders({
-      'accept': 'application/json',
-      'Authorization': this.API_KEY,
-    });
-
-    return this.http.get(this.API_URL+url,{headers})
-  }
-
-
-  getMovieByID(id : number){
-    const headers = new HttpHeaders({
-      'accept': 'application/json',
-      'Authorization': this.API_KEY,
-    });
-
-    return this.http.get(this.API_URL+"/movie/+"+id+"?language=en-US",{headers})
+  async getMovieByID(id : number):Promise<any>{
+    const data = await this.fetchMovies(this.API_URL+"/movie/+"+id+"?language=it-IT")
+    console.log("non result",data)
+    // @ts-ignore
+    console.log("resut:",data.result)
+    return data
   }
 
   public searchMovies(search:string){

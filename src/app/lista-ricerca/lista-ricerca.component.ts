@@ -22,23 +22,14 @@ import {NgForOf} from '@angular/common';
 export class ListaRicercaComponent{
 
   ricerca : string = "grazia anatomia"
-  movies : any[] = []
-  vero : any[] = []
+  movies : any
 
   constructor(private tMDBDataService: TMDBDataService) {
-    this.tMDBDataService.searchMovies("Batman").subscribe(
-      (data: any) => {
-        if (Array.isArray(data)) {
-          this.movies = data;
-        } else if (data.results && Array.isArray(data.results)) {
-          this.movies = data.results;
-        } else {
-          this.movies = [data];
-        }
-      },
-      (error) => {
-        console.error('Errore nella chiamata API:', error);
-      }
-    );
+    this.find()
+  }
+
+
+  async find(){
+    this.movies= await this.tMDBDataService.getPopularMovies()
   }
 }
