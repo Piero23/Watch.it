@@ -43,7 +43,7 @@ export class TabellaFilmComponent {
       }
     });
 
-    this.righe.push(riga);
+    for (let i=0; i<10; i++) this.righe.push(riga);
   }
 
   sortByName(){

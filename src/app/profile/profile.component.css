@@ -8,12 +8,15 @@
   width: 12%;
 }
 
-.selectionButtonRow1:hover{
+.selectionButtonRow1:hover {
   border: solid 1px #1BD75F;
 }
 
 .popup{
   position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0,0,0,0.7);
   width:100%;
   height: 100%;
   z-index: 10;

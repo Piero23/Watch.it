@@ -1,6 +1,7 @@
 .navbar{
   background: #282828;
   height: 60px;
+  z-index: 100;
 }
 
 .searchBar{
