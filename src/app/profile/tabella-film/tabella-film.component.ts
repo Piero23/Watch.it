@@ -2,10 +2,13 @@ import {ChangeDetectorRef, Component} from '@angular/core';
 import {NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
+import {TMDBDataService} from '../../tmdbdata.service';
+
 @Component({
   selector: 'app-tabella-film',
   standalone: true,
   imports: [NgForOf, FormsModule],
+  providers: [TMDBDataService],
   templateUrl: './tabella-film.component.html',
   styleUrls: ['./tabella-film.component.css']
 })
@@ -17,20 +20,30 @@ export class TabellaFilmComponent {
 
   righe :{anno: number, rating: number, nome: string, immagine: string}[] = [];
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private tmdb: TMDBDataService) {}
 
   addrow() {
 
     //dao getFilm(Utente)
+    const riga: {anno: number, rating: number, nome: string, immagine: string}= {
+      anno: 0,
+      rating: 0,
+      nome: '',
+      immagine: ''
+    };
 
-    const riga={
-      anno: 2025,
-      rating: 3,
-      nome: "godzilla",
-      immagine: "assets/images/img.png"
-    }
+    this.tmdb.getMovieByID(929204).subscribe({
+      next: (data: any)=> {
+        riga.anno=data.release_date.slice(0,4);
+        riga.rating=Math.floor(data.vote_average/2);
+        riga.nome=data.title;
+        riga.immagine=data.poster_path
+          ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
+          : 'URL immagine non disponibile';
+      }
+    });
 
-    for (let i=0;i<5; i++) this.righe.push(riga);
+    this.righe.push(riga);
   }
 
   sortByName(){

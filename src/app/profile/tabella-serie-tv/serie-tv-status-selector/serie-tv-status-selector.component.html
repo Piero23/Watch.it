@@ -9,7 +9,7 @@
         <label for="selectSeason" style="color: white; font-size: 0.8vw">Seleziona Stagione:</label>
         <select class="selector" id="selectSeason">
           <option>Stagione {{currentStatus.stagione}}</option>
-          <option *ngFor="let stagione of listaStagioni" value="{{stagione}}" (click)="currentStatus.stagione=stagione">Stagione {{stagione}}</option>
+          <option *ngFor="let stagione of numeroStagioni" value="{{stagione}}" (click)="currentStatus.stagione=stagione">Stagione {{stagione}}</option>
         </select>
       </div>
 
@@ -17,7 +17,7 @@
         <label for="selectEpisode" style="color: white; font-size: 0.8vw">Seleziona Episodio:</label>
         <select class="selector" id="selectEpisode">
           <option>Episodio {{currentStatus.episodio}}</option>
-          <option *ngFor="let episodio of listaEpisodi" value="{{episodio}}" (click)="currentStatus.episodio=episodio">Episodio {{episodio}}</option>
+          <option *ngFor="let episodio of numeroEpisodi" value="{{episodio}}" (click)="currentStatus.episodio=episodio">Episodio {{episodio}}</option>
         </select>
       </div>
     </div>

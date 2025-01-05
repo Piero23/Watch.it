@@ -3,6 +3,7 @@ import {NgForOf, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {SerieTvStatusSelectorComponent} from './serie-tv-status-selector/serie-tv-status-selector.component';
 import {BannerEditorComponent} from '../banner-editor/banner-editor.component';
+import {TMDBDataService} from '../../tmdbdata.service';
 
 @Component({
   selector: 'app-tabella-serie-tv',
@@ -24,22 +25,38 @@ export class TabellaSerieTvComponent {
   yearOrder=true;
   ratingOrder=true;
 
-  righe :{anno: number, rating: number, nome: string, immagine: string, status: {stagione: number, episodio: number}}[] = [];
+  righe :{anno: number, rating: number, nome: string, immagine: string, status: {stagione: number, episodio: number}, total: {stagioni: number, episodi: number}}[] = [];
   seriesEditor: boolean=false;
-  currentImage: string="";
   selectedRow: number=0;
+
+  constructor(private tmdb: TMDBDataService) {
+  }
 
   addrow() {
 
-    const riga = {
-      anno: 2025,
-      rating: 3,
-      nome: "godzilla",
-      immagine: "assets/images/img.png",
-      status: {stagione: 3, episodio: 5}
-    }
+    const riga: {anno: number, rating: number, nome: string, immagine: string, status: {stagione: number, episodio: number}, total: {stagioni: number, episodi: number}}= {
+      anno: 0,
+      rating: 0,
+      nome: '',
+      immagine: '',
+      status: {stagione: 0, episodio: 0},
+      total: {stagioni: 0, episodi: 0}
+    };
 
-    for (let i=0;i<5; i++) this.righe.push(riga);
+    this.tmdb.getSeriesByID(93405).subscribe({
+      next: (data: any)=> {
+        riga.anno=data.first_air_date.slice(0,4);
+        riga.rating=Math.floor(data.vote_average/2);
+        riga.nome=data.name;
+        riga.immagine=data.poster_path
+          ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
+          : 'URL immagine non disponibile';
+        riga.total.stagioni=data.number_of_seasons;
+        riga.total.episodi=data.number_of_episodes;
+      }
+    });
+
+    this.righe.push(riga);
   }
 
   sortByName(){
