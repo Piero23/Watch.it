@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SchermataFilmComponentComponent } from './schermata-film-component.component';
+import { BannerInfoContentComponent } from './banner-info-content.component';
 
 describe('SchermataFilmComponentComponent', () => {
-  let component: SchermataFilmComponentComponent;
-  let fixture: ComponentFixture<SchermataFilmComponentComponent>;
+  let component: BannerInfoContentComponent;
+  let fixture: ComponentFixture<BannerInfoContentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SchermataFilmComponentComponent]
+      imports: [BannerInfoContentComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SchermataFilmComponentComponent);
+    fixture = TestBed.createComponent(BannerInfoContentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

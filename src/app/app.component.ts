@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {SchermataFilmComponentComponent} from './schermata-film-component/schermata-film-component.component';
-import {SchermataContenutiComponent} from './schermata-contenuti/schermata-contenuti.component';
-import {EpisodiSerieComponent} from './episodi-serie/episodi-serie.component';
-import {ListaRicercaComponent} from './lista-ricerca/lista-ricerca.component';
+import {BannerInfoContentComponent} from './visualizzaContenuto/banner-info-content/banner-info-content.component';
+import {SchermataContenutiComponent} from './visualizzaContenuto/schermata-contenuti/schermata-contenuti.component';
+import {ListaEpisodiComponent} from './visualizzaContenuto/SerieTv/lista-episodi/lista-episodi.component';
+import {ListaRicercaComponent} from './ricerca/lista-ricerca/lista-ricerca.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SchermataFilmComponentComponent, SchermataContenutiComponent, EpisodiSerieComponent, ListaRicercaComponent],
+  imports: [RouterOutlet, BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

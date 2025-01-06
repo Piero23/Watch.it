@@ -1,25 +1,24 @@
 import {Component, HostBinding, inject, Input} from '@angular/core';
 import {literal} from '@angular/compiler';
 import {StelleFilmComponent} from '../stelle-film/stelle-film.component';
-import {CommentiFilmComponent} from '../commenti-film/commenti-film.component';
-import {EpisodiSerieComponent} from '../episodi-serie/episodi-serie.component';
+import {PreviewCommenti} from '../preview-commenti/preview-commenti';
+import {ListaEpisodiComponent} from '../SerieTv/lista-episodi/lista-episodi.component';
 import {ActivatedRoute} from '@angular/router';
-import {TMDBDataService} from '../tmdbdata.service';
+import {TMDBDataService} from '../../tmdbdata.service';
 import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 
 @Component({
-  selector: 'app-schermata-film-component',
+  selector: 'app-banner-info-content',
   standalone: true,
-  imports: [StelleFilmComponent, CommentiFilmComponent, EpisodiSerieComponent
-  ],
-  templateUrl: './schermata-film-component.component.html',
-  styleUrl: './schermata-film-component.component.css',
+  imports: [StelleFilmComponent, PreviewCommenti],
+  templateUrl: './banner-info-content.component.html',
+  styleUrl: './banner-info-content.component.css',
   host: {"[style.background-image]": "getBgImage()", class: "d-flex py-4"}
 })
 
 
-export class SchermataFilmComponentComponent {
+export class BannerInfoContentComponent {
   titolo: string = "";
   isSerie: any
   id : number = 0;

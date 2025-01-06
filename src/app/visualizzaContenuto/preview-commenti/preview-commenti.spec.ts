@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CommentiFilmComponent } from './commenti-film.component';
+import { PreviewCommenti } from './preview-commenti';
 
 describe('CommentiFilmComponent', () => {
-  let component: CommentiFilmComponent;
-  let fixture: ComponentFixture<CommentiFilmComponent>;
+  let component: PreviewCommenti;
+  let fixture: ComponentFixture<PreviewCommenti>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CommentiFilmComponent]
+      imports: [PreviewCommenti]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CommentiFilmComponent);
+    fixture = TestBed.createComponent(PreviewCommenti);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

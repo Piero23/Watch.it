@@ -1,14 +1,14 @@
 import {Component, inject} from '@angular/core';
-import {SchermataFilmComponentComponent} from '../schermata-film-component/schermata-film-component.component';
-import {EpisodiSerieComponent} from '../episodi-serie/episodi-serie.component';
+import {BannerInfoContentComponent} from '../banner-info-content/banner-info-content.component';
+import {ListaEpisodiComponent} from '../SerieTv/lista-episodi/lista-episodi.component';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-schermata-contenuti',
   standalone: true,
   imports: [
-    SchermataFilmComponentComponent,
-    EpisodiSerieComponent
+    BannerInfoContentComponent,
+    ListaEpisodiComponent
   ],
   templateUrl: './schermata-contenuti.component.html',
   styleUrl: './schermata-contenuti.component.css'

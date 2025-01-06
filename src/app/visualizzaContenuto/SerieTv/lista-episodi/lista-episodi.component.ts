@@ -1,23 +1,23 @@
 import {Component, inject} from '@angular/core';
 import {CardEpisodioComponent} from '../card-episodio/card-episodio.component';
-import {TMDBDataService} from '../tmdbdata.service';
+import {TMDBDataService} from '../../../tmdbdata.service';
 import {ActivatedRoute} from '@angular/router';
 import {NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 @Component({
-  selector: 'app-episodi-serie',
+  selector: 'app-lista-episodi',
   standalone: true,
   imports: [
     CardEpisodioComponent,
     NgForOf,
     FormsModule
   ],
-  templateUrl: './episodi-serie.component.html',
-  styleUrl: './episodi-serie.component.css',
+  templateUrl: './lista-episodi.component.html',
+  styleUrl: './lista-episodi.component.css',
   host: {class: "flex-column"}
 })
-export class EpisodiSerieComponent {
+export class ListaEpisodiComponent {
   seasons: any;
   selectedSeasonNum: number = 0;
   episodes : any;

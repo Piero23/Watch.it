@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import {SchermataContenutiComponent} from './schermata-contenuti/schermata-contenuti.component';
-import {ListaRicercaComponent} from './lista-ricerca/lista-ricerca.component';
+import {SchermataContenutiComponent} from './visualizzaContenuto/schermata-contenuti/schermata-contenuti.component';
+import {ListaRicercaComponent} from './ricerca/lista-ricerca/lista-ricerca.component';
 
 export const routes: Routes = [
   {

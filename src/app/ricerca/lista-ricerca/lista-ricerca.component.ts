@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {CardRicercaComponent} from '../card-ricerca/card-ricerca.component';
 import {RouterLink} from '@angular/router';
-import {TMDBDataService} from '../tmdbdata.service';
+import {TMDBDataService} from '../../tmdbdata.service';
 import {NgForOf} from '@angular/common';
 
 @Component({
@@ -26,6 +26,6 @@ export class ListaRicercaComponent{
   }
 
   async find(){
-    this.movies= await this.tMDBDataService.searchTvSeries()
+    this.movies= await this.tMDBDataService.getPopularMovies()
   }
 }
