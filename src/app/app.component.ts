@@ -20,7 +20,6 @@ export class AppComponent {
   router : Router = inject(Router)
 
   onSearch() {
-    console.log(this.searchQuery);
     this.router.navigate(['results'], { queryParams: { searchQuery: this.searchQuery } });
   }
 }

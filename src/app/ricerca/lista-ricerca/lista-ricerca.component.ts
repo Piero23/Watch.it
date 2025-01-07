@@ -26,12 +26,12 @@ export class ListaRicercaComponent implements OnInit{
 
   async find(ricerca : any){
     this.movies= await this.tMDBDataService.searchEverything(ricerca)
+    this.movies = this.movies.filter((movie: any) => movie.media_type !== "person");
   }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.ricerca = params['searchQuery'];
-      console.log('QueryParams cambiati:', params);
       this.find(this.ricerca)
     });
   }

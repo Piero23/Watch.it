@@ -3,7 +3,7 @@
 </div>
 <div>
   <select style="margin-left:5dvw; width: clamp(130px,7dvw,200px);font-size: 18px; background-color: #454242; border: none;outline: none" class="text-white form-select form-select-sm"  [(ngModel)]="selectedSeasonNum" (ngModelChange)="onSeasonChange($event)">
-    <option *ngFor="let season of seasons; let i  = index" [value]="i">{{season.name}}</option>
+    <option *ngFor="let season of seasons; let i  = index" [value]="i+hasSpecial">{{season.name}}</option>
   </select>
 </div>
 

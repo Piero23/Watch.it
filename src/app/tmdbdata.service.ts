@@ -78,7 +78,6 @@ export class TMDBDataService {
 
   async searchEverything(search : string){
     this.data = await this.fetchContent('https://api.themoviedb.org/3/search/multi?query='+search+'&include_adult=true&language=it-IT&page=1');
-    console.log(this.data)
     return this.data.results
   }
 
