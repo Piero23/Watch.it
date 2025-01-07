@@ -53,8 +53,8 @@ export class TMDBDataService {
     return data.results
   }
 
-  async searchTvSeries(){
-    const data = await this.fetchMovies('https://api.themoviedb.org/3/trending/tv/day?language=it-IT')
+  async getPopularTvSeries(){
+    const data = await this.fetchMovies(this.API_URL+"/trending/tv/day"+"?language=it-IT")
     // @ts-ignore
     return data.results
   }
@@ -64,8 +64,8 @@ export class TMDBDataService {
   }
 
   async getTvSeriesSeason(id:string, season:number){
-    const data = await this.fetchMovies(this.API_URL + "/tv/+" + id + "/season/" + season + "?language=it-IT")
-    return data
+    return await this.fetchMovies(this.API_URL + "/tv/+" + id + "/season/" + season + "?language=it-IT")
   }
+
 
 }

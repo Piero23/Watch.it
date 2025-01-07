@@ -1,9 +1,12 @@
 import {Component, Input, input, OnInit} from '@angular/core';
+import {NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-card-episodio',
   standalone: true,
-  imports: [],
+  imports: [
+    NgStyle
+  ],
   templateUrl: './card-episodio.component.html',
   styleUrl: './card-episodio.component.css',
   host: {class: "rounded-4  justify-content-between"}
@@ -16,15 +19,17 @@ export class CardEpisodioComponent implements OnInit {
   episodio: number = 1
   serie:number = 1
   image : any
+  votoColor : string = "#ff0000"
   @Input() infoEpisodio : any
 
   ngOnInit(){
     this.titolo = this.infoEpisodio.name
     this.descrizione = this.infoEpisodio.overview
     this.durata = this.infoEpisodio.runtime +" min"
-    this.voto = this.infoEpisodio.vote_average
+    this.voto = this.infoEpisodio.vote_average.toFixed(1)*10
     this.image = this.infoEpisodio?.still_path
       ? `https://image.tmdb.org/t/p/w500${this.infoEpisodio.still_path}`
       : 'URL immagine non disponibile';
+    this.votoColor = this.voto >= 80 ? 'green' : this.voto >= 60 ? 'yellow' : 'red';
   }
 }

@@ -26,6 +26,6 @@ export class ListaRicercaComponent{
   }
 
   async find(){
-    this.movies= await this.tMDBDataService.getPopularMovies()
+    this.movies= await this.tMDBDataService.getPopularTvSeries()
   }
 }
