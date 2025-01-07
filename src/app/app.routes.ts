@@ -4,7 +4,7 @@ import {ListaRicercaComponent} from './ricerca/lista-ricerca/lista-ricerca.compo
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'results',
     component: ListaRicercaComponent,
     title: "ricerca"
   },

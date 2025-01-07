@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {firstValueFrom} from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,19 +23,19 @@ export class TMDBDataService {
 
   async confermation() {
 
-    const data = await this.fetchMovies(this.API_URL+"/authentication")
+    const data = await this.fetchContent(this.API_URL+"/authentication")
     // @ts-ignore
     return data.results
   }
 
   async getPopularMovies(){
-    const data = await this.fetchMovies(this.API_URL+"/discover/movie?sort_by=popularity.desc&")
+    const data = await this.fetchContent(this.API_URL+"/discover/movie?sort_by=popularity.desc&")
     // @ts-ignore
     return data.results
   }
 
 
-  private async fetchMovies(url:string){
+  private async fetchContent(url:string){
     const headers = new HttpHeaders({
       'accept': 'application/json',
       'Authorization': this.API_KEY,
@@ -44,28 +45,41 @@ export class TMDBDataService {
 
 
   async getMovieByID(id : number):Promise<any>{
-    return await this.fetchMovies(this.API_URL + "/movie/+" + id + "?language=it-IT")
+    return await this.fetchContent(this.API_URL + "/movie/+" + id + "?language=it-IT")
   }
 
   async searchMovies(search:string){
-
+    this.data = await this.fetchContent(this.API_URL+"/search/movie?"+this.API_KEY+"&query="+search);
     // @ts-ignore
-    return data.results
+    return this.data.results
+  }
+
+  async searchTvSeries(search:string){
+    this.data = await this.fetchContent(this.API_URL+"/search/tv?"+this.API_KEY+"&query="+search);
+    // @ts-ignore
+    return this.data.results
   }
 
   async getPopularTvSeries(){
-    const data = await this.fetchMovies(this.API_URL+"/trending/tv/day"+"?language=it-IT")
+    const data = await this.fetchContent(this.API_URL+"/trending/tv/day"+"?language=it-IT")
     // @ts-ignore
     return data.results
   }
 
   async getTvSeriesByID(id:number){
-    return await this.fetchMovies(this.API_URL + "/tv/+" + id + "?language=it-IT")
+    return await this.fetchContent(this.API_URL + "/tv/+" + id + "?language=it-IT")
   }
 
   async getTvSeriesSeason(id:string, season:number){
-    return await this.fetchMovies(this.API_URL + "/tv/+" + id + "/season/" + season + "?language=it-IT")
+    return await this.fetchContent(this.API_URL + "/tv/+" + id + "/season/" + season + "?language=it-IT")
   }
 
+
+
+  async searchEverything(search : string){
+    this.data = await this.fetchContent('https://api.themoviedb.org/3/search/multi?query='+search+'&include_adult=true&language=it-IT&page=1');
+    console.log(this.data)
+    return this.data.results
+  }
 
 }

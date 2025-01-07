@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {CardRicercaComponent} from '../card-ricerca/card-ricerca.component';
-import {RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {TMDBDataService} from '../../tmdbdata.service';
 import {NgForOf} from '@angular/common';
 
@@ -16,16 +16,23 @@ import {NgForOf} from '@angular/common';
   styleUrl: './lista-ricerca.component.css',
   host: {class: "flex-column"}
 })
-export class ListaRicercaComponent{
+export class ListaRicercaComponent implements OnInit{
 
-  ricerca : string = "grazia anatomia"
+  ricerca : string = "NUlla"
   movies : any
 
-  constructor(private tMDBDataService: TMDBDataService) {
-    this.find()
+  route : ActivatedRoute = inject(ActivatedRoute)
+  tMDBDataService: TMDBDataService = inject(TMDBDataService)
+
+  async find(ricerca : any){
+    this.movies= await this.tMDBDataService.searchEverything(ricerca)
   }
 
-  async find(){
-    this.movies= await this.tMDBDataService.getPopularTvSeries()
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.ricerca = params['searchQuery'];
+      console.log('QueryParams cambiati:', params);
+      this.find(this.ricerca)
+    });
   }
 }
