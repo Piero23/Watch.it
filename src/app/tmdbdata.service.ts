@@ -2,7 +2,6 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {firstValueFrom} from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -45,7 +44,7 @@ export class TMDBDataService {
   }
 
   async searchMovies(search:string){
-    this.data = await this.fetchContent(this.API_URL+"/search/movie?"+this.API_KEY+"&query="+search);
+
     // @ts-ignore
     return this.data.results
   }
@@ -63,7 +62,6 @@ export class TMDBDataService {
   }
 
   async getTvSeriesByID(id:number){
-    return await this.fetchContent(this.API_URL + "/tv/+" + id + "?language=it-IT")
   }
 
   async getTvSeriesSeason(id:string, season:number){

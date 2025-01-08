@@ -1,5 +1,7 @@
+
+import {ProfileComponent} from './profile/profile.component';
 import {Component, inject} from '@angular/core';
-import {Router, RouterOutlet} from '@angular/router';
+import {Router, RouterOutlet,RouterLink} from '@angular/router';
 import {BannerInfoContentComponent} from './visualizzaContenuto/banner-info-content/banner-info-content.component';
 import {SchermataContenutiComponent} from './visualizzaContenuto/schermata-contenuti/schermata-contenuti.component';
 import {ListaEpisodiComponent} from './visualizzaContenuto/SerieTv/lista-episodi/lista-episodi.component';
@@ -9,7 +11,7 @@ import {FormsModule} from '@angular/forms';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule],
+  imports: [RouterOutlet, BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule, ProfileComponent, RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
