@@ -1,23 +1,22 @@
-.navbar{
-  background: #282828;
-  height: 60px;
-}
-
-.searchBar{
-  border-radius: 25px 0 0 25px;
+.comment-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  height: 100vh;
+  padding: 16px;
+  margin: 0;
+  background-color: #131514;
   border: none;
+  border-radius: 0;
+  box-shadow: none;
+  overflow-y: auto;
 }
 
-.searchButton{
-  width: 40px;
-  border-radius: 0 25px 25px 0;
-  border: none;
-  background: white;
-}
-
-.logo{
-  margin-left: 15px;
-  color: #F6FF00;
-  font-family: 'Comic Sans MS';
-  font-weight: bold;
+h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  color: #ffffff;
 }
