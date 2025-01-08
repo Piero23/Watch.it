@@ -6,12 +6,13 @@ import {ListaEpisodiComponent} from '../SerieTv/lista-episodi/lista-episodi.comp
 import {ActivatedRoute} from '@angular/router';
 import {TMDBDataService} from '../../tmdbdata.service';
 import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
+import {NgForOf} from '@angular/common';
 
 
 @Component({
   selector: 'app-banner-info-content',
   standalone: true,
-  imports: [StelleFilmComponent, PreviewCommenti],
+  imports: [StelleFilmComponent, PreviewCommenti, NgForOf],
   templateUrl: './banner-info-content.component.html',
   styleUrl: './banner-info-content.component.css',
   host: {"[style.background-image]": "getBgImage()", class: "d-flex py-4"}
@@ -23,9 +24,12 @@ export class BannerInfoContentComponent {
   isSerie: any
   id : number = 0;
   descrizione: string = ""
+  releaseDate: string = ""
+  genres: any
   posterImage: string = ""
   _bgImage: string = ""
   movie : any
+  inLista : boolean = false;
 
   route : ActivatedRoute = inject(ActivatedRoute)
 
@@ -49,6 +53,8 @@ export class BannerInfoContentComponent {
       this.titolo = this.movie.title
     }
 
+    this.genres = this.movie.genres || []
+
     this.descrizione = this.movie.overview;
     this.posterImage = this.movie.poster_path
       ? `https://image.tmdb.org/t/p/w500${this.movie.poster_path}`
@@ -60,5 +66,14 @@ export class BannerInfoContentComponent {
 
   set bgImage(value: string) {
     this._bgImage = value;
+  }
+
+  addToLista() {
+    this.inLista = true;
+  }
+
+  rimuoviLista() {
+    this.inLista = false;
+    console.log("Palle")
   }
 }
