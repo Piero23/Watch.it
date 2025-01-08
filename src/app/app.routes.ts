@@ -5,7 +5,8 @@ import {ProfileComponent} from './profile/profile.component';
 import {LoginRegisterComponent} from './login-register/login-register.component';
 import {CommentSectionComponent} from './commenti-contenuto/comment-section/comment-section.component';
 import {SchermataCommentiComponent} from './commenti-contenuto/schermata-commenti/schermata-commenti.component';
-import { HomepageComponent } from './homepage/homepage.component'; // Importa il componente
+import { HomepageComponent } from './homepage/homepage.component';
+import {HomepageBaseComponent} from './homepage/homepage-base/homepage-base.component'; // Importa il componente
 
 export const routes: Routes = [
   {
@@ -29,13 +30,13 @@ export const routes: Routes = [
     title: "login",
   },
   {
-    path:"commenti",
+    path:":contenuto/:id/comments",
     component: SchermataCommentiComponent,
     title: "commenti",
   },
   {
     path: '',
-    component: HomepageComponent,
+    component: HomepageBaseComponent,
     pathMatch: 'full'
   },
 ];
