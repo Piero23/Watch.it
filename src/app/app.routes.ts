@@ -5,6 +5,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {LoginRegisterComponent} from './login-register/login-register.component';
 import {CommentSectionComponent} from './commenti-contenuto/comment-section/comment-section.component';
 import {SchermataCommentiComponent} from './commenti-contenuto/schermata-commenti/schermata-commenti.component';
+import { HomepageComponent } from './homepage/homepage.component'; // Importa il componente
 
 export const routes: Routes = [
   {
@@ -31,5 +32,11 @@ export const routes: Routes = [
     path:"commenti",
     component: SchermataCommentiComponent,
     title: "commenti",
-  }
+  },
+  {
+    path: '',
+    component: HomepageComponent,
+    pathMatch: 'full'
+  },
 ];
+

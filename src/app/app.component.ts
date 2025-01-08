@@ -10,11 +10,15 @@ import {FormsModule} from '@angular/forms';
 import { LoginRegisterComponent } from './login-register/login-register.component';
 import {CommentItemComponent} from './commenti-contenuto/comment-item/comment-item.component';
 import {CommentSectionComponent} from './commenti-contenuto/comment-section/comment-section.component';
+import { routes } from './app.routes';
+import {HomepageComponent} from './homepage/homepage.component';
+import {HomepageFiltersComponent} from './homepage/homepage-filters/homepage-filters.component';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule, ProfileComponent, RouterLink,LoginRegisterComponent, CommentItemComponent, CommentSectionComponent],
+  imports: [BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule, ProfileComponent, RouterLink,LoginRegisterComponent, CommentItemComponent, CommentSectionComponent, RouterOutlet, HomepageComponent, HomepageFiltersComponent, NgOptimizedImage],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
