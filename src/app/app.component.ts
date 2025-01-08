@@ -7,11 +7,12 @@ import {SchermataContenutiComponent} from './visualizzaContenuto/schermata-conte
 import {ListaEpisodiComponent} from './visualizzaContenuto/SerieTv/lista-episodi/lista-episodi.component';
 import {ListaRicercaComponent} from './ricerca/lista-ricerca/lista-ricerca.component';
 import {FormsModule} from '@angular/forms';
+import { LoginRegisterComponent } from './login-register/login-register.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule, ProfileComponent, RouterLink],
+  imports: [RouterOutlet, BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule, ProfileComponent, RouterLink,LoginRegisterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
