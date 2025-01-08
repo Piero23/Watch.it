@@ -34,9 +34,9 @@ export class ListaEpisodiComponent implements OnInit{
   async getSeasons(){
     this.id = this.route.snapshot.params['id']
     this.tvSeries = await this.tmdbDataService.getTvSeriesByID(this.id)
-    console.log(this.tvSeries);
+
     this.seasons = this.tvSeries.seasons;
-    console.log(this.seasons)
+
   }
 
   onSeasonChange(season: any) {
@@ -50,6 +50,14 @@ export class ListaEpisodiComponent implements OnInit{
       this.episodes = this.episodes.episodes;
       //this.episodes = this.episodes.filter((episode: any) => episode.still_path );
 
+      this.episodes = this.episodes.map((episode: any) => {
+        return {
+          ...episode,
+          visto: false
+        };
+      });
+
+
       return this.episodes;
     }catch(error){
       this.hasSpecial = 1
@@ -58,10 +66,16 @@ export class ListaEpisodiComponent implements OnInit{
     }
   }
 
+  onEpisodeChecked(index: number): void {
+    for (let i = 0; i <= index; i++) {
+      this.episodes[i].visto = true;
+    }
+
+    console.log(this.episodes);
+  }
+
   async ngOnInit()  {
     this.getSeasons()
     this.getEpisodesForSelectedSeason(this.selectedSeasonNum)
-    console.log("caio")
-    console.log(this.episodes)
   }
 }

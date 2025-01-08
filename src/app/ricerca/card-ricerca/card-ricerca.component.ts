@@ -37,10 +37,7 @@ export class CardRicercaComponent implements OnInit {
       this.isSerie = true;
     }
     this.descrizione = this.movieInfo?.overview || 'Descrizione non disponibile';
-    if(this.movieInfo?.first_air_date)
-      this.dataRilascio =  this.movieInfo?.first_air_date.slice(0,4);
-    else
-      this.dataRilascio = this.movieInfo?.release_date.slice(0,4);
+    this.dataRilascio = this.movieInfo?.first_air_date? this.movieInfo?.first_air_date.slice(0,4) :  this.movieInfo?.release_date.slice(0,4);
     this.voto =  Number((this.movieInfo?.vote_average).toFixed(1)*10)|| -1;
     this.colorVoto = this.colorOnVote(this.voto)
     this.image = this.movieInfo?.poster_path

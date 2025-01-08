@@ -19,6 +19,8 @@ import {NgForOf} from '@angular/common';
 export class ListaRicercaComponent implements OnInit{
 
   ricerca : string = ""
+  GenreResearchID: any;
+  isGenreResearch:boolean = false;
   movies : any
 
   route : ActivatedRoute = inject(ActivatedRoute)
@@ -29,10 +31,23 @@ export class ListaRicercaComponent implements OnInit{
     this.movies = this.movies.filter((movie: any) => movie.media_type !== "person");
   }
 
+  async findByGenre(id: any){
+    this.movies= await this.tMDBDataService.getFilmsByGenre(id)
+  }
+
   ngOnInit(): void {
+    this.isGenreResearch=false;
+
     this.route.queryParams.subscribe(params => {
       this.ricerca = params['searchQuery'];
-      this.find(this.ricerca)
+      this.GenreResearchID = params['genreId'];
+
+      if(this.GenreResearchID){
+        this.isGenreResearch=true;
+        this.findByGenre(this.GenreResearchID)
+      }else {
+        this.find(this.ricerca)
+      }
     });
   }
 }

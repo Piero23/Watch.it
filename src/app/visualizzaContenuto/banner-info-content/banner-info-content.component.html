@@ -1,18 +1,23 @@
 
 <div class="stupido justify-content-center align-items-center col-8 d-flex flex-column" style="gap:30px">
   <div style="gap: 20px" class="d-flex flex-column ">
+
     <h2 class="text-white">{{titolo}}</h2>
-    <app-stelle-film [rating]="3" [maxRating]="5" [statico]="true"></app-stelle-film>
+
+    <app-stelle-film [rating]="rating" [maxRating]="5" [statico]="true"></app-stelle-film>
+
     <div class="d-flex" style="gap: 10px">
-    <p class="text-white p-1" style="font-size: 15px">2024</p>
-        <p *ngFor="let genre of genres;let i = index" class="rounded-3 p-1 text-white" style="background-color: rgba(69,66,66,0.92)">{{genre.name}}</p>
+      <p class="text-white p-1" style="font-size: 15px">{{ releaseDate }}</p>
+      <p *ngFor="let genre of genres;let i = index" (click)="searchGenre(genre.id)" class="elemento-genere enlarge-on-hover rounded-3 p-1 text-white"><b>{{genre.name}}</b></p>
     </div>
+
   </div>
-  <div class="text-white" >
-    <p style="margin:0;font-size: 18px">Trama</p>
-    <p class="max-lines" style="font-size: 18px">
-      {{descrizione}}
-    </p>
+
+  <div class="text-white" style="gap: 10px" >
+
+    <h3 style="margin:0;font-size: 18px">Trama</h3>
+    <p class="max-lines mt-3" style="font-size: 18px">{{descrizione}}</p>
+
     @if(inLista){
       <div class="d-flex" style="gap: 20px">
         <b><select class=" form-select form-select-sm rounded-1" style="font-size: 18px; width: 110px; color: black; background-color: #1BD75F">
@@ -25,15 +30,14 @@
     } @else {
       <button class = "btn rounded-4" style="background-color: #1BD75F" (click)="addToLista()"> <b>Aggiungi a Lista </b>  <i class="fa-solid fa-plus"></i></button>
     }
-
-
   </div>
 
   <div>
     <app-preview-commenti></app-preview-commenti>
   </div>
-</div>
-<div class="col-4 justify-content-center d-flex align-items-center" style="min-width: fit-content;">
 
+</div>
+
+<div class="col-4 justify-content-center d-flex align-items-center" style="min-width: fit-content;">
   <img src="{{posterImage}}"  style="max-height: 60dvh; width: auto" alt="">
 </div>
