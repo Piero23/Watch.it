@@ -3,6 +3,8 @@ import {SchermataContenutiComponent} from './visualizzaContenuto/schermata-conte
 import {ListaRicercaComponent} from './ricerca/lista-ricerca/lista-ricerca.component';
 import {ProfileComponent} from './profile/profile.component';
 import {LoginRegisterComponent} from './login-register/login-register.component';
+import {CommentSectionComponent} from './commenti-contenuto/comment-section/comment-section.component';
+import {SchermataCommentiComponent} from './commenti-contenuto/schermata-commenti/schermata-commenti.component';
 
 export const routes: Routes = [
   {
@@ -24,5 +26,10 @@ export const routes: Routes = [
     path:"login",
     component: LoginRegisterComponent,
     title: "login",
+  },
+  {
+    path:"commenti",
+    component: SchermataCommentiComponent,
+    title: "commenti",
   }
 ];

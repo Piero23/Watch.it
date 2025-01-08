@@ -8,8 +8,8 @@ import {ListaEpisodiComponent} from './visualizzaContenuto/SerieTv/lista-episodi
 import {ListaRicercaComponent} from './ricerca/lista-ricerca/lista-ricerca.component';
 import {FormsModule} from '@angular/forms';
 import { LoginRegisterComponent } from './login-register/login-register.component';
-import {CommentItemComponent} from './comment-item/comment-item.component';
-import {CommentSectionComponent} from './comment-section/comment-section.component';
+import {CommentItemComponent} from './commenti-contenuto/comment-item/comment-item.component';
+import {CommentSectionComponent} from './commenti-contenuto/comment-section/comment-section.component';
 
 @Component({
   selector: 'app-root',
