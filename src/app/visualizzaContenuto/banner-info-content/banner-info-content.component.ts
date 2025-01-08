@@ -52,10 +52,10 @@ export class BannerInfoContentComponent {
     this.descrizione = this.movie.overview;
     this.posterImage = this.movie.poster_path
       ? `https://image.tmdb.org/t/p/w500${this.movie.poster_path}`
-      : 'URL immagine non disponibile';
+      : 'assets/images/PosterImageNotFound.png';
     this._bgImage = this.movie.poster_path
       ? `https://image.tmdb.org/t/p/w1280${this.movie.backdrop_path}`
-      : 'URL immagine non disponibile';
+      : 'assets/images/PosterImageNotFound.png';
   }
 
   set bgImage(value: string) {

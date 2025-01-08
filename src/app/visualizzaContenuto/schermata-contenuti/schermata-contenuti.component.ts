@@ -2,6 +2,7 @@ import {Component, inject} from '@angular/core';
 import {BannerInfoContentComponent} from '../banner-info-content/banner-info-content.component';
 import {ListaEpisodiComponent} from '../SerieTv/lista-episodi/lista-episodi.component';
 import {ActivatedRoute} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-schermata-contenuti',
@@ -16,6 +17,7 @@ import {ActivatedRoute} from '@angular/router';
 export class SchermataContenutiComponent {
 
   route : ActivatedRoute = inject(ActivatedRoute);
+  title : Title = inject(Title);
 
   isSerie:boolean = false;
 

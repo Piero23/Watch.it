@@ -12,5 +12,4 @@ import {ListaRicercaComponent} from '../lista-ricerca/lista-ricerca.component';
 })
 export class SchermataRicercaComponent {
   isSerie: boolean = true;
-  constructor() { }
 }

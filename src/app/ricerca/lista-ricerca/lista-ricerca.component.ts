@@ -18,7 +18,7 @@ import {NgForOf} from '@angular/common';
 })
 export class ListaRicercaComponent implements OnInit{
 
-  ricerca : string = "NUlla"
+  ricerca : string = ""
   movies : any
 
   route : ActivatedRoute = inject(ActivatedRoute)

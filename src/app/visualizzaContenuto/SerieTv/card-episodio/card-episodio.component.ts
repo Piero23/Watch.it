@@ -23,13 +23,14 @@ export class CardEpisodioComponent implements OnInit {
   @Input() infoEpisodio : any
 
   ngOnInit(){
+    console.log(this.infoEpisodio)
     this.titolo = this.infoEpisodio.name
-    this.descrizione = this.infoEpisodio.overview
-    this.durata = this.infoEpisodio.runtime +" min"
+    this.descrizione = this.infoEpisodio.overview || "Descrizione non disponibile"
+    this.durata = this.infoEpisodio.runtime ? this.infoEpisodio.runtime + "min" : ""
     this.voto = this.infoEpisodio.vote_average.toFixed(1)*10
     this.image = this.infoEpisodio?.still_path
       ? `https://image.tmdb.org/t/p/w500${this.infoEpisodio.still_path}`
-      : 'URL immagine non disponibile';
-    this.votoColor = this.voto >= 80 ? 'green' : this.voto >= 60 ? 'yellow' : 'red';
+      : 'assets/images/BackdropImageNotFound.png';
+    this.votoColor = this.infoEpisodio.vote_count == 0? "Gray" :this.voto >= 80 ? 'green' : this.voto >= 60 ? 'yellow' : 'red';
   }
 }

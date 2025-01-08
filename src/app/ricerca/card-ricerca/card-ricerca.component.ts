@@ -27,7 +27,7 @@ export class CardRicercaComponent implements OnInit {
   id: number = 0;
   isSerie = false;
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
 
     this.id = this.movieInfo?.id;
     if(this.movieInfo?.title)
@@ -38,14 +38,14 @@ export class CardRicercaComponent implements OnInit {
     }
     this.descrizione = this.movieInfo?.overview || 'Descrizione non disponibile';
     if(this.movieInfo?.first_air_date)
-      this.dataRilascio = await this.movieInfo?.first_air_date.slice(0,4);
+      this.dataRilascio =  this.movieInfo?.first_air_date.slice(0,4);
     else
-      this.dataRilascio =await this.movieInfo?.release_date.slice(0,4);
-    this.voto =  Number((this.movieInfo?.vote_average).toFixed(1)*10) || -1;
+      this.dataRilascio = this.movieInfo?.release_date.slice(0,4);
+    this.voto =  Number((this.movieInfo?.vote_average).toFixed(1)*10)|| -1;
     this.colorVoto = this.colorOnVote(this.voto)
-    this.image =await this.movieInfo?.poster_path
+    this.image = this.movieInfo?.poster_path
       ? `https://image.tmdb.org/t/p/w500${this.movieInfo.poster_path}`
-      : 'assets/images/titleCoverNotFound.png';
+      : 'assets/images/PosterImageNotFound.png';
   }
 
 

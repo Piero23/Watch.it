@@ -47,10 +47,9 @@ export class ListaEpisodiComponent implements OnInit{
   async getEpisodesForSelectedSeason(season: any){
     try {
       this.episodes = await this.tmdbDataService.getTvSeriesSeason(this.id, season)
-      console.log("pappero")
-      console.log(this.episodes)
-
       this.episodes = this.episodes.episodes;
+      //this.episodes = this.episodes.filter((episode: any) => episode.still_path );
+
       return this.episodes;
     }catch(error){
       this.hasSpecial = 1
