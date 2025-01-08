@@ -3,11 +3,12 @@ import {NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 import {TMDBDataService} from '../../tmdbdata.service';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-tabella-film',
   standalone: true,
-  imports: [NgForOf, FormsModule],
+  imports: [NgForOf, FormsModule, RouterLink],
   providers: [TMDBDataService],
   templateUrl: './tabella-film.component.html',
   styleUrls: ['./tabella-film.component.css']

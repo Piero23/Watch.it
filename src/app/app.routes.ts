@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import {SchermataContenutiComponent} from './visualizzaContenuto/schermata-contenuti/schermata-contenuti.component';
 import {ListaRicercaComponent} from './ricerca/lista-ricerca/lista-ricerca.component';
 import {ProfileComponent} from './profile/profile.component';
+import {LoginRegisterComponent} from './login-register/login-register.component';
 
 export const routes: Routes = [
   {
@@ -18,5 +19,10 @@ export const routes: Routes = [
   {
     path: "profile",
     component: ProfileComponent
+  },
+  {
+    path:"login",
+    component: LoginRegisterComponent,
+    title: "login",
   }
 ];

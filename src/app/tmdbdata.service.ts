@@ -16,8 +16,6 @@ export class TMDBDataService {
   constructor() {}
   data: any = []
 
-  //OGNUNA DI QUESTE FUNZIONI DEVE ESSERE CHIAMATA IN UN METODO ASYNC CON UN await di fronte per riceverne il valore
-
   async confermation() {
 
     const data = await this.fetchContent(this.API_URL+"/authentication")
@@ -62,6 +60,7 @@ export class TMDBDataService {
   }
 
   async getTvSeriesByID(id:number){
+    return await this.fetchContent(this.API_URL + "/tv/+" + id + "?language=it-IT")
   }
 
   async getTvSeriesSeason(id:string, season:number){

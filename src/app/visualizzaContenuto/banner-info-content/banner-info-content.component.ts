@@ -47,7 +47,12 @@ export class BannerInfoContentComponent {
     this.id = this.route.snapshot.params['id'];
     this.isSerie = this.route.snapshot.params['contenuto'];
 
+
+
     this.movie = this.isSerie == "tv" ? await this.tmdbDataService.getTvSeriesByID(this.id) : await this.tmdbDataService.getMovieByID(this.id)
+
+    console.log(this.movie)
+
     this.titolo = this.isSerie == "tv" ? this.movie.name : this.movie.title
     this.rating = this.movie.vote_average.toFixed(0)/2;
     this.genres = this.movie.genres || []
