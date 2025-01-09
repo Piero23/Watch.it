@@ -1,10 +1,11 @@
 import { Component,Input,Output,EventEmitter } from '@angular/core';
 import { CommonModule} from '@angular/common';
+import {StarReviewComponent} from '../star-review/star-review.component';
 
 @Component({
   selector: 'app-comment-section',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,StarReviewComponent],
   templateUrl: './comment-section.component.html',
   styleUrl: './comment-section.component.css'
 })

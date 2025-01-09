@@ -1,24 +1,24 @@
-
 .comment-section {
   width: 1000px;
   max-width: 100%;
-  border: 1px solid #ccc;
+  border: 1px solid #444;
   padding: 16px;
   border-radius: 8px;
-  margin-top: 16px;
-  background-color: #f9f9f9;
+  background-color: #1e1e1e;
+  color: #f0f0f0;
   flex: 1;
 }
 
 h3 {
   margin-bottom: 16px;
   font-size: 18px;
+  color: #f0f0f0;
 }
 
 .no-comments {
   text-align: center;
   font-style: italic;
-  color: #666;
+  color: #888;
 }
 
 .comment-item {
@@ -36,7 +36,7 @@ h3 {
 
 .comment-content {
   flex: 1;
-  max-width: 100%; /* Impedisce al contenuto di superare i limiti */
+  max-width: 90%;
 }
 
 .comment-header {
@@ -49,6 +49,7 @@ h3 {
 .username {
   font-weight: bold;
   font-size: 14px;
+  color: #f0f0f0;
 }
 
 .stars {
@@ -57,7 +58,7 @@ h3 {
 
 .star {
   font-size: 16px;
-  color: #ccc;
+  color: #555;
 }
 
 .star.filled {
@@ -66,7 +67,7 @@ h3 {
 
 .comment-text {
   font-size: 14px;
-  color: #333;
+  color: #ccc;
   margin: 0;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -75,16 +76,16 @@ h3 {
 
 .delete-btn {
   border: none;
-  background-color: #ff0000;
-  color: #fff;
-  border-radius: 10px;
+  background-color: #ff4444;
+  color: #f0f0f0;
+  border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
   padding: 4px 8px;
   align-self: center;
+  transition: background-color 0.3s ease;
 }
 
 .delete-btn:hover {
   background-color: #cc0000;
 }
-

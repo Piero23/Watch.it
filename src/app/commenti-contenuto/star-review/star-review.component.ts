@@ -11,8 +11,9 @@ import {NgForOf} from "@angular/common";
   styleUrl: './star-review.component.css'
 })
 export class StarReviewComponent {
+  @Input() fixed = false;
   @Output() ratingChange = new EventEmitter<number>();
-  starRating = 0;
+  @Input() starRating = 0;
   starHover = 0;
 
   onStarHover(stars: number) {

@@ -8,11 +8,7 @@
     <div class="comment-content">
       <div class="comment-header">
         <span class="username">{{ comment.username }}</span>
-        <div class="stars">
-          <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [class.filled]="star <= comment.rating">
-            &#9733;
-          </span>
-        </div>
+        <app-star-review [starRating]="comment.rating" [fixed]="true"></app-star-review>
       </div>
       <p class="comment-text">{{ comment.text }}</p>
     </div>

@@ -1,3 +1,4 @@
-
-<app-comment-item class="d-flex justify-content-center"></app-comment-item>
-<app-comment-section class="d-flex justify-content-center"></app-comment-section>
+<div class="comment-container">
+  <app-comment-item (commentPosted)="addComment($event)"></app-comment-item>
+  <app-comment-section [comments]="comments" [isModerator]="!isModerator" (deleteComment)="deleteComment($event)"></app-comment-section>
+</div>

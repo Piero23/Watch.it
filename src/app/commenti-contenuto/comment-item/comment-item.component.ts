@@ -11,7 +11,9 @@ import { StarReviewComponent } from '../star-review/star-review.component';
   styleUrls: ['./comment-item.component.css'],
 })
 export class CommentItemComponent {
-  @Output() commentPosted = new EventEmitter<{ text: string; rating: number }>();
+  @Output() commentPosted = new EventEmitter<{ text: string; rating: number, username : string; profilePic : string }>();
+  username = 'prova';
+  userProfilePic = "assets/images/banner.png";
   commentText = '';
   starRating = 0;
 
@@ -20,10 +22,9 @@ export class CommentItemComponent {
   }
 
   postComment() {
-    if (this.commentText.trim()) {
-      this.commentPosted.emit({ text: this.commentText, rating: this.starRating });
-      this.commentText = '';
-      this.starRating = 0;
-    }
+    this.commentPosted.emit({ text: this.commentText, rating: this.starRating, username: this.username, profilePic: this.userProfilePic});
+    this.commentText = '';
+    this.starRating = 0;
+    this.updateStarRating(0);
   }
 }
