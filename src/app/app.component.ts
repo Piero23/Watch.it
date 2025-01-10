@@ -1,4 +1,3 @@
-
 import {ProfileComponent} from './profile/profile.component';
 import {Component, inject} from '@angular/core';
 import {Router, RouterOutlet,RouterLink} from '@angular/router';
@@ -7,18 +6,19 @@ import {SchermataContenutiComponent} from './visualizzaContenuto/schermata-conte
 import {ListaEpisodiComponent} from './visualizzaContenuto/SerieTv/lista-episodi/lista-episodi.component';
 import {ListaRicercaComponent} from './ricerca/lista-ricerca/lista-ricerca.component';
 import {FormsModule} from '@angular/forms';
-import { LoginRegisterComponent } from './login-register/login-register.component';
 import {CommentItemComponent} from './commenti-contenuto/comment-item/comment-item.component';
 import {CommentSectionComponent} from './commenti-contenuto/comment-section/comment-section.component';
 import { routes } from './app.routes';
 import {HomepageComponent} from './homepage/homepage.component';
 import {HomepageFiltersComponent} from './homepage/homepage-filters/homepage-filters.component';
 import {NgOptimizedImage} from '@angular/common';
+import {LoginComponent} from './login-register/login/login.component';
+import { RegisterComponent} from './login-register/register/register.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule, ProfileComponent, RouterLink,LoginRegisterComponent, CommentItemComponent, CommentSectionComponent, RouterOutlet, HomepageComponent, HomepageFiltersComponent, NgOptimizedImage],
+  imports: [BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule, ProfileComponent, RouterLink,RegisterComponent, CommentItemComponent, CommentSectionComponent, RouterOutlet, HomepageComponent, HomepageFiltersComponent, NgOptimizedImage, LoginComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
