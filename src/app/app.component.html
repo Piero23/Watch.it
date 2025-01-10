@@ -1,37 +1,23 @@
 
-
-
-
-
 <header>
     <nav class="navbar container-fluid">
-        <div class="col-auto justify-content-left logo">W</div>
+        <div class="col-auto justify-content-left logo" routerLink="" >W</div>
 
-        <form class="col-3 justify-content-center">
+      <form class="col-3 justify-content-center" (submit)="onSearch()">
         <div class="d-flex">
-          <input type="text" class="searchBar form-control" placeholder="Cerca" >
-          <button class="text-center searchButton" style="color: grey"><i class="fa fa-search"></i></button>
+          <input type="text" class="searchBar form-control"  placeholder="Cerca" [(ngModel)]="searchQuery"  name="searchQuery" >
+          <button class="text-center searchButton" style="color: grey" type="submit"><i class="fa fa-search"></i></button>
         </div>
       </form>
 
-      <div class="col-auto" style="margin-right: 15px">
+      <form class="col-auto" style="margin-right: 15px">
         <button class="button text-center" style="background: transparent; border-color: transparent">
-          <!--<span class="align-middle" style="margin-right: 8px; color: white">Login</span> -->
-          <span class="align-middle"><i class="fa-solid fa-circle-user" style="color: white; font-size: xx-large"></i></span>
+          <span class="align-middle" style="margin-right: 8px; color: white">Login</span>
+          <span class="align-middle" routerLink="profile"><i class="fa-solid fa-circle-user" style="color: white; font-size: xx-large"></i></span>
         </button>
-      </div>
+      </form>
     </nav>
 
-  <!-- "container" contiene e centra il contenuto rispetto al viewport -->
-    <!--@if (user){
-      <div   class="text-end mt-3">
-        <span> {{ user.username }}</span>
-        <button class="btn btn-outline-light btn-sm ms-2" (click)="logout()">Logout</button>
-      </div>
-    } @else {
-      <a routerLink="/login">login</a>
-    } !-->
-
 </header>
-<app-homepage-filters></app-homepage-filters>
-<app-homepage></app-homepage>
+
+<router-outlet></router-outlet>
