@@ -1,0 +1,52 @@
+.content-suggestion-title {
+  font-size: 22px;
+  color: white;
+  padding-top: 16px;
+}
+
+.trending-row {
+  margin-bottom: 80px;
+  background: #282828;
+}
+
+.piu-amati-row {
+  background: #282828;
+}
+
+.btn-left-right {
+  justify-content: center;
+  align-content: center;
+}
+
+.btn-arrow {
+  width: auto;
+  height: auto;
+}
+
+.fa-solid {
+  color: grey;
+  transform: scale(1.5);
+}
+.fa-solid:hover {
+  transition: 0.2s;
+  transform: scale(2);
+}
+
+.fa-solid:active {
+  color: white;
+}
+
+.content-suggestion-col {
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-suggestion-col:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+.content-art {
+  border-radius: 5px;
+}

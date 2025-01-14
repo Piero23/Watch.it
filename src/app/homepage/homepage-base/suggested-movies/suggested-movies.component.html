@@ -1,0 +1,42 @@
+<h1 class="content-suggestion-title">I titoli del momento</h1>
+<div class="row trending-row">
+  <div class="col d-flex btn-left-right">
+      <button class="btn btn-arrow" type="button">
+        <i class="fa-solid fa-chevron-left fa-2x"></i>
+      </button>
+  </div>
+
+  <div *ngFor="let movie of trendingMoviesList" class=" col d-flex content-suggestion-col">
+    <a [routerLink]="'/film/'+movie.id">
+      <img [src]="'https://image.tmdb.org/t/p/w500/'+movie.poster_path"
+           alt="{{ movie.title }}"
+           class="img-fluid content-art">
+    </a>
+  </div>
+  <div class="col d-flex btn-left-right">
+    <button class="btn btn-arrow" type="button">
+      <i class="fa-solid fa-chevron-right fa-2x"></i>
+    </button>
+  </div>
+</div>
+
+<h1 class="content-suggestion-title">I titoli più amati di sempre</h1>
+<div class="row piu-amati-row">
+  <div class="col d-flex btn-left-right">
+    <button class="btn btn-arrow" type="button">
+      <i class="fa-solid fa-chevron-left fa-2x"></i>
+    </button>
+  </div>
+
+  <div *ngFor="let movie of mostLovedMoviesList" class="col d-flex content-suggestion-col">
+    <a [routerLink]="'/film/'+movie.id">
+      <img [src]="'https://image.tmdb.org/t/p/w500/'+movie.poster_path" class="img-fluid content-art">
+    </a>
+  </div>
+
+  <div class="col d-flex btn-left-right">
+    <button class="btn btn-arrow" type="button">
+      <i class="fa-solid fa-chevron-right fa-2x"></i>
+    </button>
+  </div>
+</div>
