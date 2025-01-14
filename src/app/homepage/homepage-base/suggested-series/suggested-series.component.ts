@@ -16,25 +16,90 @@ import {TMDBDataService} from '../../../tmdbdata.service';
 export class SuggestedSeriesComponent {
   trendingSeriesList : any
   mostLovedSeriesList : any
-
+  displayedTrendingSeries: any
+  displayedMostLovedSeries: any
+  currentTrendingIndex: number = 0;
+  currentMostLovedIndex: number = 0;
+  visibleCount: number = 8;
   constructor(private tmdbDataService :TMDBDataService) {}
 
-  ngOnInit(): void {
-    this.setTrendingSeries()
-    this.setMostLovedSeries()
+  async ngOnInit() {
+    await this.setTrendingSeries();
+    await this.setMostLovedSeries();
+    this.updateSeries('trending');
+    this.updateSeries('mostLoved');
   }
 
-  // Method to set a list with 8 of the top trending tv series
-  async setTrendingSeries(){
-    this.trendingSeriesList= await this.tmdbDataService.getTrendingTvSeries();
-    this.trendingSeriesList = this.trendingSeriesList.slice(0,8)
-    console.log(this.trendingSeriesList)
+  // Fetches the trending movies and sets the list
+  async setTrendingSeries() {
+    this.trendingSeriesList = await this.tmdbDataService.getTrendingTvSeries();
+
+    if (this.trendingSeriesList.length < this.visibleCount) {
+      this.trendingSeriesList = [...this.trendingSeriesList, ...this.trendingSeriesList];
+    }
   }
 
-  // Method to set a list with 8 most of the loved tv series
+  // Fetches the most loved movies and sets the list
   async setMostLovedSeries(){
-    this.mostLovedSeriesList= await this.tmdbDataService.getMostLovedTvSeries();
-    this.mostLovedSeriesList = this.mostLovedSeriesList.slice(0,8)
-    console.log(this.mostLovedSeriesList)
+    this.mostLovedSeriesList = await this.tmdbDataService.getMostLovedTvSeries();
+
+    if (this.mostLovedSeriesList.length < this.visibleCount) {
+      this.mostLovedSeriesList = [...this.mostLovedSeriesList, ...this.mostLovedSeriesList];
+    }
+  }
+
+  // Updates the displayed movies based on the current start index
+  updateSeries(type: 'trending' | 'mostLoved') {
+    if (type === 'trending') {
+      const endTrendingIndex = this.currentTrendingIndex + this.visibleCount;
+      this.displayedTrendingSeries = this.trendingSeriesList.slice(
+        this.currentTrendingIndex,
+        endTrendingIndex
+      );
+
+      // Wraps around
+      if (endTrendingIndex > this.trendingSeriesList.length) {
+        this.displayedTrendingSeries.push(
+          ...this.trendingSeriesList.slice(0, endTrendingIndex - this.trendingSeriesList.length)
+        );
+      }
+    }
+    else if (type === 'mostLoved') {
+      const endMostLovedIndex = this.currentMostLovedIndex + this.visibleCount;
+      this.displayedMostLovedSeries = this.mostLovedSeriesList.slice(
+        this.currentMostLovedIndex,
+        endMostLovedIndex
+      );
+      if (endMostLovedIndex > this.mostLovedSeriesList.length) {
+        this.displayedMostLovedSeries.push(
+          ...this.trendingSeriesList.slice(0, endMostLovedIndex - this.mostLovedSeriesList.length)
+        );
+      }
+    }
+  }
+
+  // Scroll through content by updating the start index
+  scrollContent(type: 'trending' | 'mostLoved', direction: 'next' | 'previous') {
+    if (type === 'trending') {
+      if (direction === 'next') {
+        this.currentTrendingIndex =
+          (this.currentTrendingIndex + 1) % this.trendingSeriesList.length;
+      } else if (direction === 'previous') {
+        this.currentTrendingIndex =
+          (this.currentTrendingIndex - 1 + this.trendingSeriesList.length) %
+          this.trendingSeriesList.length;
+      }
+      this.updateSeries('trending');
+    } else if (type === 'mostLoved') {
+      if (direction === 'next') {
+        this.currentMostLovedIndex =
+          (this.currentMostLovedIndex + 1) % this.mostLovedSeriesList.length;
+      } else if (direction === 'previous') {
+        this.currentMostLovedIndex =
+          (this.currentMostLovedIndex - 1 + this.mostLovedSeriesList.length) %
+          this.mostLovedSeriesList.length;
+      }
+      this.updateSeries('mostLoved');
+    }
   }
 }
