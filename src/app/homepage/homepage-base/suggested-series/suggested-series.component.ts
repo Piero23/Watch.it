@@ -24,7 +24,7 @@ export class SuggestedSeriesComponent {
     this.setMostLovedSeries()
   }
 
-  // Method to set a list with 8 of the trending tv series
+  // Method to set a list with 8 of the top trending tv series
   async setTrendingSeries(){
     this.trendingSeriesList= await this.tmdbDataService.getTrendingTvSeries();
     this.trendingSeriesList = this.trendingSeriesList.slice(0,8)
