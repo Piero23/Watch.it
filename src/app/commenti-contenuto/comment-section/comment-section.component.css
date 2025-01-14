@@ -56,15 +56,6 @@ h3 {
   display: flex;
 }
 
-.star {
-  font-size: 16px;
-  color: #555;
-}
-
-.star.filled {
-  color: #ffa500;
-}
-
 .comment-text {
   font-size: 14px;
   color: #ccc;
@@ -74,13 +65,20 @@ h3 {
   white-space: normal;
 }
 
+.button-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
 .delete-btn {
   border: none;
   background-color: #ff4444;
   color: #f0f0f0;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   padding: 4px 8px;
   align-self: center;
   transition: background-color 0.3s ease;
@@ -88,4 +86,37 @@ h3 {
 
 .delete-btn:hover {
   background-color: #cc0000;
+  transform: scale(1.05);
+}
+
+.fa-solid {
+  border: none;
+  background-color: #007bff;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 6px 10px;
+  align-self: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.fa-solid:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.replies-btn {
+  display: flex;
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #555;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px 20px;
+}
+
+.replies-btn:hover {
+  text-decoration: underline;
 }

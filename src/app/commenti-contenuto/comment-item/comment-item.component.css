@@ -10,6 +10,33 @@
   color: #f0f0f0;
 }
 
+.cancel-btn {
+  padding: 6px 12px;
+  background-color: #ff4444;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #cc0000;
+}
+
+.replying-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2b2b2b;
+  padding: 8px 12px;
+  border-left: 4px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #f0f0f0;
+}
+
 .user-info {
   display: flex;
   align-items: center;

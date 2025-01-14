@@ -1,4 +1,13 @@
 <div class="comment-container">
-  <app-comment-item (commentPosted)="addComment($event)"></app-comment-item>
-  <app-comment-section [comments]="comments" [isModerator]="!isModerator" (deleteComment)="deleteComment($event)"></app-comment-section>
+  <app-comment-item
+    (commentPosted)="addComment($event)"
+    [replyingTo]="replyingTo"
+    (cancelReply)="cancelReply()"
+  ></app-comment-item>
+  <app-comment-section
+    [comments]="comments"
+    [isModerator]="isModerator"
+    (deleteComment)="deleteComment($event)"
+    (replyToComment)="onReplyToComment($event)"
+  ></app-comment-section>
 </div>

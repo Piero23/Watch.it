@@ -1,0 +1,21 @@
+<div class="popup-overlay" (click)="onClosePopup()"></div>
+<div class="popup-content">
+  <h3>Risposte</h3>
+  <button class="close-btn" (click)="onClosePopup()">&#10005;</button>
+  <div *ngIf="replies.length === 0" class="no-replies">
+    Nessuna risposta disponibile.
+  </div>
+  <div *ngFor="let reply of replies; let i = index" class="reply-item">
+    <img [src]="reply.profilePic" alt="User Profile" class="profile-pic" />
+    <div class="reply-content">
+      <div class="reply-header">
+        <span class="username">{{ reply.username }}</span>
+        <app-star-review [starRating]="reply.rating" [fixed]="true"></app-star-review>
+      </div>
+      <p class="reply-text">{{ reply.text }}</p>
+      <button *ngIf="isModerator" class="delete-btn" (click)="onDeleteReply(i)">
+        🗑️
+      </button>
+    </div>
+  </div>
+</div>
