@@ -8,10 +8,12 @@
       <div class="comment-content">
         <div class="comment-header">
           <span class="username">{{ comment.username }}</span>
+          <div class="stars">
+            <app-star-review [starRating]="comment.rating" [fixed]="true"></app-star-review>
+          </div>
           <button (click)="openRepliesPopup(comment.replies,i)" class="replies-btn">
             {{comments[i].replies.length}} risposte
           </button>
-          <app-star-review [starRating]="comment.rating" [fixed]="true"></app-star-review>
         </div>
         <p class="comment-text">{{ comment.text }}</p>
       </div>
