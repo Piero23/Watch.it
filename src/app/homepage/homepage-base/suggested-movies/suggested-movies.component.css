@@ -6,21 +6,32 @@
 
 .trending-row {
   margin-bottom: 80px;
-  background: #282828;
 }
 
-.piu-amati-row {
+.trending-row, .piu-amati-row {
   background: #282828;
+  height: 320px;
+  width: inherit;
+  justify-content: center;
+}
+
+.content-suggestion-col {
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+
 }
 
 .btn-left-right {
   justify-content: center;
-  align-content: center;
+  width: inherit;
+  height: inherit;
 }
 
 .btn-arrow {
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: fit-content;
+  align-self: center;
 }
 
 .fa-solid {
@@ -36,17 +47,22 @@
   color: white;
 }
 
-.content-suggestion-col {
+.content-art-col {
   padding: 10px;
-  align-items: center;
+  align-self: center;
   justify-content: center;
+  flex: none;
 }
 
-.content-suggestion-col:hover {
+.content-art-col:hover {
   transform: scale(1.1);
   transition: 0.2s;
 }
 
 .content-art {
   border-radius: 5px;
+  height: 280px;
+  width: auto;
+  object-fit: cover;
 }
+
