@@ -1,14 +1,19 @@
 package org.unical.webapp.backend.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.unical.webapp.backend.model.Commento;
 import org.unical.webapp.backend.model.Contenuto;
+import org.unical.webapp.backend.model.Utente;
 import org.unical.webapp.backend.service.ContenutoServiceInterface;
 import org.unical.webapp.backend.service.UtenteServiceInterface;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/contenuto")
@@ -51,5 +56,7 @@ public class ContenutoController {
     void updateSeries(@PathVariable String utente, @PathVariable int contenutoId, @PathVariable int season, @PathVariable int episode) {
         contenutoService.aggiornaVisualizzazione(utente, contenutoId, season, episode);
     }
+
+
 
 }

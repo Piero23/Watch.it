@@ -14,6 +14,10 @@ public interface UtenteDao {
   public void delete(Utente utente);
   public List<Contenuto> getContenutiByUtente(Utente utente);
 
-  public void updateProPic(Utente utente, Blob proPic);
-  public void updateBgImage(Utente utente, Blob bgImage);
+  public void updateProPic(Utente utente, byte[] proPic);
+  public void updateBgImage(Utente utente, byte[] bgImage);
+
+  boolean checkExisting(String username,String mail);
+
+  boolean login(String email, String password);
 }

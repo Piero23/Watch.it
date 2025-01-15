@@ -39,18 +39,28 @@ public class UtenteService implements UtenteServiceInterface {
     }
 
     @Override
-    public void newBgImage(Utente utente, Blob image) {
+    public void newBgImage(Utente utente, byte[] image) {
         utenteDao.updateBgImage(utente, image);
     }
 
     @Override
-    public void newProPic(Utente utente, Blob image) {
+    public void newProPic(Utente utente, byte[] image) {
         utenteDao.updateProPic(utente, image);
     }
 
     @Override
     public Collection<Contenuto> getContenutiByUtente(Utente utente) {
         return utenteDao.getContenutiByUtente(utente);
+    }
+
+    @Override
+    public boolean checkExistingUtente(String username,String mail) {
+        return utenteDao.checkExisting(username,mail);
+    }
+
+    @Override
+    public boolean login(String mail, String password) {
+        return utenteDao.login(mail,password);
     }
 
 

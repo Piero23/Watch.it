@@ -12,9 +12,11 @@ public interface UtenteServiceInterface {
     Utente getByUsername(String username);
     void newUtente(Utente utente);
     void deleteUtente(Utente utente);
-    void newBgImage(Utente utente, Blob image);
-    void newProPic(Utente utente, Blob image);
+    void newBgImage(Utente utente, byte[] image);
+    void newProPic(Utente utente, byte[] image);
 
     Collection<Contenuto> getContenutiByUtente(Utente utente);
 
+    boolean checkExistingUtente(String username,String mail);
+    boolean login(String mail, String password);
 }

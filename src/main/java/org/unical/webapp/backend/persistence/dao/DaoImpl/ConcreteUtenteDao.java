@@ -30,8 +30,8 @@ public class ConcreteUtenteDao implements UtenteDao {
         rs.getString("username"),
         rs.getString("email"),
         rs.getString("password"),
-        rs.getBlob("img_profilo"),
-        rs.getBlob("imgbackground"),
+        rs.getBytes("img_profilo"),
+        rs.getBytes("imgbackground"),
         rs.getBoolean("admin")
       );
 
@@ -54,8 +54,8 @@ public class ConcreteUtenteDao implements UtenteDao {
           rs.getString("username"),
           rs.getString("email"),
           rs.getString("password"),
-          rs.getBlob("img_profilo"),
-          rs.getBlob("imgbackground"),
+          rs.getBytes("img_profilo"),
+          rs.getBytes("imgbackground"),
           rs.getBoolean("admin")
         );
 
@@ -77,8 +77,8 @@ public class ConcreteUtenteDao implements UtenteDao {
       query.setString(1, utente.getUsername());
       query.setString(2, utente.getEmail());
       query.setString(3, utente.getPassword());
-      query.setBlob(4, utente.getImg_profilo());
-      query.setBlob(5, utente.getImgbackground());
+      query.setBytes(4, utente.getImg_profilo());
+      query.setBytes(5, utente.getImgbackground());
       query.setBoolean(6, utente.isAdmin());
       query.executeUpdate();
 
@@ -130,10 +130,10 @@ public class ConcreteUtenteDao implements UtenteDao {
   }
 
   @Override
-  public void updateProPic(Utente utente, Blob proPic) {
+  public void updateProPic(Utente utente, byte[] proPic) {
     try {
       PreparedStatement query = connection.prepareStatement("update utente set img_profilo=? where username=?");
-      query.setBlob(1, proPic);
+      query.setBytes(1, proPic);
       query.setString(2, utente.getUsername());
       query.executeUpdate();
     } catch (SQLException e) {
@@ -142,10 +142,10 @@ public class ConcreteUtenteDao implements UtenteDao {
   }
 
   @Override
-  public void updateBgImage(Utente utente, Blob bgImage) {
+  public void updateBgImage(Utente utente, byte[] bgImage) {
     try {
       PreparedStatement query = connection.prepareStatement("update utente set imgbackground=? where username=?");
-      query.setBlob(1, bgImage);
+      query.setBytes(1, bgImage);
       query.setString(2, utente.getUsername());
       query.executeUpdate();
     } catch (SQLException e) {
@@ -153,4 +153,40 @@ public class ConcreteUtenteDao implements UtenteDao {
     }
   }
 
+  @Override
+  public boolean checkExisting(String username,String mail) {
+    boolean exists = false;
+    try {
+      PreparedStatement query = connection.prepareStatement("select count(*) from utente where username=? OR email=?");
+      query.setString(1, username);
+      query.setString(2, mail);
+      query.executeQuery();
+      ResultSet rs = query.getResultSet();
+      rs.next();
+      if (rs.getInt(1) >= 1) {
+        exists = true;
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+    return exists;
+  }
+
+  @Override
+  public boolean login(String mail, String password) {
+    boolean login = false;
+    try {
+      PreparedStatement query = connection.prepareStatement("select * from utente where email=?");
+      query.setString(1, mail);
+      query.executeQuery();
+      ResultSet rs = query.getResultSet();
+      rs.next();
+      if (mail.equals(rs.getString("email")) && password.equals(rs.getString("password"))) {
+        login = true;
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+    return login;
+  }
 }
