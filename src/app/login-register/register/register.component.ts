@@ -15,6 +15,7 @@ import {NgIf} from "@angular/common";
 })
 export class RegisterComponent {
   isPasswordVisible: boolean = false;
+  username: string = '';
   email: string = '';
   password: string = '';
   errorMessage: string = '';

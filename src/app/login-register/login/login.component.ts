@@ -15,7 +15,7 @@ import {NgIf} from "@angular/common";
 })
 export class LoginComponent {
   isPasswordVisible: boolean = false;
-  email: string = '';
+  username: string = '';
   password: string = '';
   errorMessage: string = '';
 
@@ -29,7 +29,7 @@ export class LoginComponent {
     this.router.navigate(['/register']);
   }
 
-  messageForm(email: string, password: string) {
+  messaggioForm(email: string, password: string) {
     if (email === "admin@admin.com") {
       this.showError('La combinazione di utente e password non è corretta.');
     } else if (email === "" || password === "") {

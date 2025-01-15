@@ -19,7 +19,7 @@
 
     <form>
       <div class="input-group">
-        <input type="email" name="email" placeholder="Email" [(ngModel)]="email"/>
+        <input type="username" name="username" placeholder="Username" [(ngModel)]="username"/>
       </div>
       <div class="input-group">
         <input [type]="isPasswordVisible ? 'text' : 'password'" placeholder="Password" [(ngModel)]="password"/>
@@ -28,7 +28,7 @@
         </button>
       </div>
     </form>
-    <button class="left-btn" type="submit" (click)="messageForm(email,password)">Accedi</button>
+    <button class="left-btn" type="submit" (click)="messaggioForm(username,password)">Accedi</button>
   </div>
 
   <div class="right-section">
