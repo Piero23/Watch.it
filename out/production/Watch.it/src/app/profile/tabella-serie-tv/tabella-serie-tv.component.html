@@ -1,7 +1,7 @@
 <div class="status text-center" style="padding-top: 1%; padding-bottom: 2%">
-  <button class="col-1 selectionButtonRow2" (click)="getByStatus(0)">Da Vedere</button>
-  <button class="col-1 selectionButtonRow2" (click)="getByStatus(1)">In Visione</button>
-  <button class="col-1 selectionButtonRow2" (click)="getByStatus(2)">Visti</button>
+  <button class="col-1 selectionButtonRow2">Da Vedere</button>
+  <button class="col-1 selectionButtonRow2">In Visione</button>
+  <button class="col-1 selectionButtonRow2">Visti</button>
 </div>
 
 <app-serie-tv-status-selector class="popup" [rowIndex]="selectedRow" *ngIf="seriesEditor"></app-serie-tv-status-selector>
@@ -59,4 +59,6 @@
     </th>
   </tr>
   </tbody>
+
+  <button class="btn" (click)="addrow()" style="color: yellow; background-color: blue">Addrow</button>
 </table>

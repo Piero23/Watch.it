@@ -1,10 +1,9 @@
-import {Component,  OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {NgForOf, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {SerieTvStatusSelectorComponent} from './serie-tv-status-selector/serie-tv-status-selector.component';
 import {BannerEditorComponent} from '../banner-editor/banner-editor.component';
 import {TMDBDataService} from '../../tmdbdata.service';
-import {DatabaseService} from '../../database.service';
 
 @Component({
   selector: 'app-tabella-serie-tv',
@@ -20,7 +19,7 @@ import {DatabaseService} from '../../database.service';
   styleUrl: './tabella-serie-tv.component.css'
 })
 
-export class TabellaSerieTvComponent implements OnInit{
+export class TabellaSerieTvComponent {
 
   nameOrder=true;
   yearOrder=true;
@@ -29,12 +28,9 @@ export class TabellaSerieTvComponent implements OnInit{
   seriesEditor: boolean=false;
   selectedRow: number=0;
 
-  constructor(private tmdb: TMDBDataService, private database: DatabaseService) {
+  constructor(private tmdb: TMDBDataService) {
   }
 
-  async ngOnInit() {
-    await this.getByStatus(0)
-  }
 
   righe: {
     anno: number,
@@ -50,6 +46,57 @@ export class TabellaSerieTvComponent implements OnInit{
       numeroEpisodi: number,
     }[]
   }[] = []
+
+  async addrow() {
+
+    let riga: {
+      anno: number ,
+        rating: number,
+        nome: string,
+        immagine: string,
+        status: {
+          stagione: number,
+          episodio: number
+      }
+      stagioni: {
+        numeroStagione: number,
+        numeroEpisodi: number
+      }[]
+    } = {
+      anno: 0,
+      rating: 0,
+      nome: "",
+      immagine: "",
+      status: {
+        stagione: 1,
+        episodio: 1
+      },
+      stagioni: []
+    }
+
+    let series: any = await this.tmdb.getTvSeriesByID(93405);
+
+    riga.anno=series.first_air_date.slice(0,4);
+    riga.rating=Math.floor(series.vote_average/2);
+    riga.nome=series.name;
+    riga.immagine=series.poster_path
+      ? `https://image.tmdb.org/t/p/w500${series.poster_path}`
+      : 'URL immagine non disponibile';
+    for (let season=0; season<series.number_of_seasons; season++) {
+      let stagione: {
+        numeroStagione: number,
+        numeroEpisodi: number
+      } = {
+        numeroStagione: 0,
+        numeroEpisodi: 0
+      }
+      stagione.numeroStagione=season+1;
+      stagione.numeroEpisodi=series.seasons.at(season).episode_count;
+      riga.stagioni.push(stagione);
+    }
+
+    for (let i=0; i<10; i++) this.righe.push(riga);
+  }
 
   sortByName(){
     if (this.nameOrder){
@@ -109,64 +156,6 @@ export class TabellaSerieTvComponent implements OnInit{
 
   closePopup(){
     this.seriesEditor = false;
-  }
-
-  async getByStatus(status: number): Promise<void> {
-    //0==Da Vedere
-    //1==In Visione
-    //2==Visto
-
-    this.righe=[]
-
-    const queryRows: any = await this.database.getContenutoByUtente("giorgio");
-    for (let riga of queryRows) {
-      if (riga.status==status && riga.is_serie_is_film==1) {
-        let series: any = await this.tmdb.getTvSeriesByID(riga.id_contenuto);
-
-        const newRow: {
-          anno: number ,
-          rating: number,
-          nome: string,
-          immagine: string,
-          status: {
-            stagione: number,
-            episodio: number
-          }
-          stagioni: {
-            numeroStagione: number,
-            numeroEpisodi: number
-          }[]
-        } = {
-          anno: series.first_air_date.slice(0,4),
-          rating: 5,
-          nome: series.name,
-          immagine: series.poster_path
-            ? `https://image.tmdb.org/t/p/w500${series.poster_path}`
-            : 'assets/images/PosterImageNotFound.png',
-          status: {
-            stagione: riga.stagione,
-            episodio: riga.episodio
-          },
-          stagioni: []
-        }
-
-        for (let season=0; season<series.number_of_seasons; season++) {
-          let stagione: {
-            numeroStagione: number,
-            numeroEpisodi: number
-          } = {
-            numeroStagione: 0,
-            numeroEpisodi: 0
-          }
-          stagione.numeroStagione = season + 1;
-          stagione.numeroEpisodi = series.seasons.at(season).episode_count;
-          newRow.stagioni.push(stagione);
-        }
-
-
-        this.righe.push(newRow);
-      }
-    }
   }
 
 }

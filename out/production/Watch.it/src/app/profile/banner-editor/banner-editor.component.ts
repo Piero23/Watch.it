@@ -2,7 +2,6 @@ import {Component, Input} from '@angular/core';
 import { ImageCropperComponent, ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 
 import {ProfileComponent} from '../profile.component';
-import {DatabaseService} from '../../database.service';
 
 
 @Component({
@@ -23,8 +22,7 @@ export class BannerEditorComponent {
   maxHeight: number = 500;
 
   constructor(
-    private profile: ProfileComponent,
-    private database: DatabaseService
+    private profile: ProfileComponent
   ) {
   }
 
@@ -66,29 +64,17 @@ export class BannerEditorComponent {
     this.profile.closeBanner();
   }
 
-  async confirmSelection(){
+  confirmSelection(){
     switch(this.oggetto){
       case "Banner": {
         this.profile.setBanner(this.croppedImage);
-        await this.database.setBgImage("giorgio", this.base64ToBlob(this.croppedImage, "image/png"));
         break;
       }
       case "Foto Profilo": {
         this.profile.setProPic(this.croppedImage);
-        await this.database.setProPic("giorgio", this.base64ToBlob(this.croppedImage, "image/png"));
         break;
       }
     }
     this.profile.closeBanner();
-  }
-
-  base64ToBlob(base64: string, contentType: string = ''): Blob {
-    const byteCharacters = atob(base64);
-    const byteNumbers = new Array(byteCharacters.length);
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-    const byteArray = new Uint8Array(byteNumbers);
-    return new Blob([byteArray], {type: contentType});
   }
 }

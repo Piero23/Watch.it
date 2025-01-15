@@ -1,0 +1,35 @@
+:host{
+  display: flex;
+  width: clamp(250px,50dvw,9999px);
+  outline: none;
+  border: none;
+  overflow-x: hidden;
+  gap: 30px;
+}
+
+
+:host:hover{
+  background-color: #454242;
+  transition: 0.2s;
+}
+
+.copertina{
+  width: clamp(120px,20dvw,130px);
+  height: auto;
+}
+
+
+.text-truncated {
+  font-size: 15px;
+  line-height: 1.5;
+  max-height: 4.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  white-space: normal;
+}
+
+.check{
+  width: 30px;
+  height: 30px;
+}
