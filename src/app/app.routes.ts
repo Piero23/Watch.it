@@ -36,7 +36,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    component: HomepageBaseComponent,
+    component: HomepageComponent,
     pathMatch: 'full'
   },
 ];

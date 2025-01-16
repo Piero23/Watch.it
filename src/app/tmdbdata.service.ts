@@ -82,4 +82,30 @@ export class TMDBDataService {
     return this.data.results
   }
 
+  // Methods to obtain content which is trending this week
+  async getTrendingMovies(){
+    const data = await this.fetchContent(this.API_URL+"/trending/movie/week?language=it-IT")
+    // @ts-ignore
+    return data.results
+  }
+
+  async getTrendingTvSeries(){
+    const data = await this.fetchContent(this.API_URL+"/trending/tv/week?language=it-IT")
+    // @ts-ignore
+    return data.results
+  }
+
+  // Methods to obtain content with the highest rating of all time
+  async getMostLovedMovies(){
+    const data = await this.fetchContent(this.API_URL+"/movie/top_rated?language=it-IT")
+    // @ts-ignore
+    return data.results
+  }
+
+  async getMostLovedTvSeries(){
+    const data = await this.fetchContent(this.API_URL+"/tv/top_rated?language=it-IT")
+    // @ts-ignore
+    return data.results
+  }
+
 }

@@ -12,14 +12,13 @@ import {CommentItemComponent} from './commenti-contenuto/comment-item/comment-it
 import {CommentSectionComponent} from './commenti-contenuto/comment-section/comment-section.component';
 import { routes } from './app.routes';
 import {HomepageComponent} from './homepage/homepage.component';
-import {HomepageFiltersComponent} from './homepage/homepage-filters/homepage-filters.component';
 import {NgIf, NgOptimizedImage} from '@angular/common';
 import {DatabaseService} from './database.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule, ProfileComponent, RouterLink, LoginRegisterComponent, CommentItemComponent, CommentSectionComponent, RouterOutlet, HomepageComponent, HomepageFiltersComponent, NgOptimizedImage, NgIf],
+  imports: [BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule, ProfileComponent, RouterLink,LoginRegisterComponent, CommentItemComponent, CommentSectionComponent, RouterOutlet, HomepageComponent, NgOptimizedImage],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
