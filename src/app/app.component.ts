@@ -12,13 +12,16 @@ import {CommentItemComponent} from './commenti-contenuto/comment-item/comment-it
 import {CommentSectionComponent} from './commenti-contenuto/comment-section/comment-section.component';
 import { routes } from './app.routes';
 import {HomepageComponent} from './homepage/homepage.component';
-import {NgIf, NgOptimizedImage} from '@angular/common';
+import {NgOptimizedImage} from '@angular/common';
+import {NgIf} from '@angular/common';
 import {DatabaseService} from './database.service';
+import {LoginComponent} from './login-register/login/login.component';
+import { RegisterComponent} from './login-register/register/register.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule, ProfileComponent, RouterLink,LoginRegisterComponent, CommentItemComponent, CommentSectionComponent, RouterOutlet, HomepageComponent, NgOptimizedImage],
+  imports: [BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule, ProfileComponent, RouterLink,RegisterComponent,LoginComponent, CommentItemComponent, CommentSectionComponent, RouterOutlet, HomepageComponent, NgOptimizedImage],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
