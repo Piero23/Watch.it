@@ -1,19 +1,22 @@
 <h1 class="content-suggestion-title">I titoli del momento</h1>
 <div class="row trending-row">
-  <div class="col d-flex btn-left-right">
-    <button (click)="scrollContent('trending', 'previous')"class="btn btn-arrow" type="button">
+  <div class="col-auto d-flex btn-left-right">
+    <button (click)="scrollContent('trending', 'previous')" class="btn btn-arrow" type="button">
       <i class="fa-solid fa-chevron-left fa-2x"></i>
     </button>
   </div>
 
-  <div *ngFor="let tv of displayedTrendingSeries" class=" col d-flex content-suggestion-col">
-    <a [routerLink]="'tv/'+tv.id">
-      <img [src]="'https://image.tmdb.org/t/p/w500/'+tv.poster_path"
-           alt="{{ tv.title }}"
-           class="img-fluid content-art">
-    </a>
+  <div class="col d-flex content-suggestion-col">
+    <div *ngFor="let tv of displayedTrendingSeries" class="content-art-col">
+      <a [routerLink]="'tv/'+tv.id">
+        <img [src]="'https://image.tmdb.org/t/p/w500/'+tv.poster_path"
+             alt="{{ tv.title }}"
+             class="img-fluid content-art">
+      </a>
+    </div>
   </div>
-  <div class="col d-flex btn-left-right">
+
+  <div class="col-auto d-flex btn-left-right">
     <button (click)="scrollContent('trending', 'next')" class="btn btn-arrow" type="button">
       <i class="fa-solid fa-chevron-right fa-2x"></i>
     </button>
@@ -22,19 +25,21 @@
 
 <h1 class="content-suggestion-title">I titoli più amati di sempre</h1>
 <div class="row piu-amati-row">
-  <div class="col d-flex btn-left-right">
+  <div class="col-auto d-flex btn-left-right">
     <button (click)="scrollContent('mostLoved', 'previous')" class="btn btn-arrow" type="button">
       <i class="fa-solid fa-chevron-left fa-2x"></i>
     </button>
   </div>
 
-  <div *ngFor="let tv of displayedMostLovedSeries" class="col d-flex content-suggestion-col">
-    <a [routerLink]="'tv/'+tv.id">
-      <img [src]="'https://image.tmdb.org/t/p/w500/'+tv.poster_path" alt="{{ tv.title }}" class="img-fluid content-art">
-    </a>
+  <div class="col d-flex content-suggestion-col">
+    <div *ngFor="let tv of displayedMostLovedSeries" class="content-art-col">
+      <a [routerLink]="'tv/'+tv.id">
+        <img [src]="'https://image.tmdb.org/t/p/w500/'+tv.poster_path" alt="{{ tv.title }}" class="img-fluid content-art">
+      </a>
+    </div>
   </div>
 
-  <div class="col d-flex btn-left-right">
+  <div class="col-auto d-flex btn-left-right">
     <button (click)="scrollContent('mostLoved', 'next')" class="btn btn-arrow" type="button">
       <i class="fa-solid fa-chevron-right fa-2x"></i>
     </button>
