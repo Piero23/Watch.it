@@ -3,7 +3,7 @@ import {NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 import {TMDBDataService} from '../../tmdbdata.service';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {DatabaseService} from '../../database.service';
 
 @Component({
@@ -20,12 +20,18 @@ export class TabellaFilmComponent implements OnInit{
   yearOrder=true;
   ratingOrder=true;
 
+  username : string = ""
+
 
   righe: {id: number, anno: number, rating: number, nome: string, immagine: string}[]=[];
 
-  constructor(private tmdb: TMDBDataService, private database: DatabaseService) {}
+  constructor(private tmdb: TMDBDataService, private database: DatabaseService,private router : Router ) {}
 
   async ngOnInit() {
+    const data =await this.database.utenteBySession()
+    // @ts-ignore
+    this.username = data.username;
+
     await this.getByStatus(0)
   }
 
@@ -78,6 +84,10 @@ export class TabellaFilmComponent implements OnInit{
     }
   }
 
+  routeToFilm(id : number){
+    this.router.navigate(["film",id]);
+  }
+
   async getByStatus(status: number): Promise<void> {
     //0==Da Vedere
     //1==In Visione
@@ -85,9 +95,11 @@ export class TabellaFilmComponent implements OnInit{
 
     this.righe=[]
 
-    const queryRows: any = await this.database.getContenutoByUtente("giorgio");
+
+
+    const queryRows: any = await this.database.getContenutoByUtente(this.username);
     for (let riga of queryRows) {
-      if (riga.status==status && riga.is_serie_is_film==0) {
+      if (riga.status==status && riga.is_serie==0) {
         let movie: any = await this.tmdb.getMovieByID(riga.id_contenuto);
         const newRow: {id: number, anno: number, rating: number, nome: string, immagine: string} ={
           id: riga.id_contenuto,
@@ -101,5 +113,6 @@ export class TabellaFilmComponent implements OnInit{
         this.righe.push(newRow);
       }
     }
+
   }
 }

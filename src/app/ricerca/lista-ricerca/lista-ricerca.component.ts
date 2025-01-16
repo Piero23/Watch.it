@@ -3,6 +3,7 @@ import {CardRicercaComponent} from '../card-ricerca/card-ricerca.component';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {TMDBDataService} from '../../tmdbdata.service';
 import {NgForOf} from '@angular/common';
+import {DatabaseService} from '../../database.service';
 
 @Component({
   selector: 'app-lista-ricerca',
@@ -25,9 +26,10 @@ export class ListaRicercaComponent implements OnInit{
 
   route : ActivatedRoute = inject(ActivatedRoute)
   tMDBDataService: TMDBDataService = inject(TMDBDataService)
+  databaseService : DatabaseService = inject(DatabaseService)
 
   async find(ricerca : any){
-    this.movies= await this.tMDBDataService.searchEverything(ricerca)
+    this.movies = await this.tMDBDataService.searchEverything(ricerca);
     this.movies = this.movies.filter((movie: any) => movie.media_type !== "person");
   }
 
@@ -37,7 +39,6 @@ export class ListaRicercaComponent implements OnInit{
 
   ngOnInit(): void {
     this.isGenreResearch=false;
-
     this.route.queryParams.subscribe(params => {
       this.ricerca = params['searchQuery'];
       this.GenreResearchID = params['genreId'];

@@ -26,6 +26,7 @@ export class SerieTvStatusSelectorComponent {
   listaStagioni: number[] = [];
   listaEpisodi: number[][] = [];
 
+
   selectedEpisodes: number[] = this.listaEpisodi[0]
 
   constructor(private tabella: TabellaSerieTvComponent) {

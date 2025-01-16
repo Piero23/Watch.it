@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {DatabaseService} from '../database.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,8 @@ export class LoginRegisterComponent {
   errorMessage: string = '';
   successMessage: string = '';
 
+  database : DatabaseService = inject(DatabaseService);
+
   toggleView() {
     this.isLogin = !this.isLogin;
   }
@@ -25,20 +28,8 @@ export class LoginRegisterComponent {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  messageForm(email: string, password: string) {
-    if (this.isLogin) {
-      if (email === "admin@admin.com" && password === "1234") {
-        this.showError('La combinazione di utente e password non è corretta.');
-      } else if (email === "" || password === "") {
-        this.showError('Completa tutti i campi e riprova.');
-      }
-    } else {
-      if (email === "admin@admin.com" && password === "1234") {
-        this.showError('Esiste già un account associato a questa mail.');
-      } else {
-        this.showSuccess('Account creato con successo!');
-      }
-    }
+  async messageForm(email: string, password: string) {
+    console.log(await this.database.logIn("ads", "adsa"))
   }
 
   showError(message: string) {

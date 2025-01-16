@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {NgIf, NgOptimizedImage, NgStyle} from '@angular/common';
 import {TabellaFilmComponent} from './tabella-film/tabella-film.component';
 import {TabellaSerieTvComponent} from './tabella-serie-tv/tabella-serie-tv.component';
 import {BannerEditorComponent} from './banner-editor/banner-editor.component';
+import {DatabaseService} from '../database.service';
 
 @Component({
   selector: 'app-profile',
@@ -19,15 +20,18 @@ import {BannerEditorComponent} from './banner-editor/banner-editor.component';
   styleUrl: './profile.component.css'
 })
 
-export class ProfileComponent {
+export class ProfileComponent implements OnInit{
   showFilm: boolean = true;
   bannerEditor: boolean=false;
 
   aspectRatio: number=0;
   oggettoDaModificare: string = "";
 
+  username : string = "  Ciaoo";
   propic: string="assets/images/Avatar.png";
   banner: string="assets/images/Immagine.png";
+
+  database : DatabaseService = inject(DatabaseService);
 
   activateButton(index: number){
     switch (index){
@@ -75,5 +79,25 @@ export class ProfileComponent {
   setBanner(banner: string){
     this.banner=banner;
   }
+
+  async ngOnInit() {
+    const data =await this.database.utenteBySession()
+
+    // @ts-ignore
+    this.username = data.username;
+
+    const utente = await this.database.getUtente(this.username);
+
+    console.log(utente);
+    // @ts-ignore
+    if(utente.img_profilo){
+      //Array DI Byte
+    }
+    // @ts-ignore
+    if(utente.imgbackground){
+      //Array DI Byte
+    }
+  }
+
 }
 

@@ -8,12 +8,14 @@ import {TMDBDataService} from '../../tmdbdata.service';
 import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 import {NgForOf} from '@angular/common';
 import {generate} from 'rxjs';
+import {DatabaseService} from '../../database.service';
+import {FormsModule} from '@angular/forms';
 
 
 @Component({
   selector: 'app-banner-info-content',
   standalone: true,
-  imports: [StelleFilmComponent, PreviewCommenti, NgForOf],
+  imports: [StelleFilmComponent, PreviewCommenti, NgForOf, FormsModule],
   templateUrl: './banner-info-content.component.html',
   styleUrl: './banner-info-content.component.css',
   host: {"[style.background-image]": "getBgImage()", class: "d-flex py-4"}
@@ -32,8 +34,12 @@ export class BannerInfoContentComponent {
   movie : any
   inLista : boolean = false;
   rating : any
+  selezione : number = 0;
+  utente: string = ""
+
 
   route : ActivatedRoute = inject(ActivatedRoute)
+  database: DatabaseService = inject(DatabaseService);
 
   getBgImage() {
     return `url("${this._bgImage}")`;
@@ -47,12 +53,27 @@ export class BannerInfoContentComponent {
     this.id = this.route.snapshot.params['id'];
     this.isSerie = this.route.snapshot.params['contenuto'];
 
-
-
     this.movie = this.isSerie == "tv" ? await this.tmdbDataService.getTvSeriesByID(this.id) : await this.tmdbDataService.getMovieByID(this.id)
 
-    console.log(this.movie)
+    const utente = await this.database.utenteBySession()
+    if(utente){
+      // @ts-ignore
+      this.utente = utente.username
+      // @ts-ignore
+      const datas = await this.database.getContenutoByUtente(this.utente)
 
+      const bol = this.isSerie == "tv";
+      // @ts-ignore
+      for (let data of datas) {
+        if (data.is_serie == bol && data.id_contenuto == this.id){
+          this.inLista = true
+          this.selezione = data.status
+          break;
+        }
+      }
+    }
+
+    console.log(this.movie)
     this.titolo = this.isSerie == "tv" ? this.movie.name : this.movie.title
     this.rating = this.movie.vote_average.toFixed(0)/2;
     this.genres = this.movie.genres || []
@@ -62,16 +83,20 @@ export class BannerInfoContentComponent {
     this._bgImage = this.movie.poster_path ? `https://image.tmdb.org/t/p/w1280${this.movie.backdrop_path}` : 'assets/images/PosterImageNotFound.png';
   }
 
+  async updateStatus(status: number){
+    console.log(await this.database.aggiornaStatus(this.utente,this.isSerie,this.id,status))
+  }
+
 
   addToLista() {
     this.inLista = true;
+    this.updateStatus(0)
   }
 
-  rimuoviLista() {
+  async rimuoviLista() {
     this.inLista = false;
+    console.log(await this.database.deleteContenuto_Utente(this.utente,this.isSerie,this.id))
   }
-
-  protected readonly generate = generate;
 
   searchGenre(id: any) {
     this.routing.navigate([`results/`], { queryParams: { genreId: id } });

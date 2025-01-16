@@ -1,6 +1,6 @@
 
 import {ProfileComponent} from './profile/profile.component';
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {Router, RouterOutlet,RouterLink} from '@angular/router';
 import {BannerInfoContentComponent} from './visualizzaContenuto/banner-info-content/banner-info-content.component';
 import {SchermataContenutiComponent} from './visualizzaContenuto/schermata-contenuti/schermata-contenuti.component';
@@ -13,22 +13,49 @@ import {CommentSectionComponent} from './commenti-contenuto/comment-section/comm
 import { routes } from './app.routes';
 import {HomepageComponent} from './homepage/homepage.component';
 import {HomepageFiltersComponent} from './homepage/homepage-filters/homepage-filters.component';
-import {NgOptimizedImage} from '@angular/common';
+import {NgIf, NgOptimizedImage} from '@angular/common';
+import {DatabaseService} from './database.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule, ProfileComponent, RouterLink,LoginRegisterComponent, CommentItemComponent, CommentSectionComponent, RouterOutlet, HomepageComponent, HomepageFiltersComponent, NgOptimizedImage],
+  imports: [BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule, ProfileComponent, RouterLink, LoginRegisterComponent, CommentItemComponent, CommentSectionComponent, RouterOutlet, HomepageComponent, HomepageFiltersComponent, NgOptimizedImage, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'WatchedIt';
   searchQuery : any
+  logged : boolean = false;
+  username: string = ""
 
   router : Router = inject(Router)
+  database : DatabaseService = inject(DatabaseService)
 
   onSearch() {
     this.router.navigate(['results'], { queryParams: { searchQuery: this.searchQuery } });
+  }
+
+  async ngOnInit() {
+    const data = await this.database.utenteBySession();
+
+    // @ts-ignore
+    if (data.status === 200) {
+      this.logged  = true;
+      //this.router.navigate(['/']);
+
+      // @ts-ignore
+      this.username = data.username
+    }else
+      this.username = "Login"
+    console.log(this.logged)
+
+  }
+
+  routerLog(){
+    if(this.logged )
+      this.router.navigate(['profile']);
+    else
+      this.router.navigate(['login']);
   }
 }

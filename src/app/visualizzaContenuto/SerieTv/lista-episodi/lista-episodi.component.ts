@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
+import {DatabaseService} from '../../../database.service';
 
 @Component({
   selector: 'app-lista-episodi',
@@ -29,6 +30,7 @@ export class ListaEpisodiComponent implements OnInit{
 
 
   private tmdbDataService: TMDBDataService = inject(TMDBDataService);
+  private database : DatabaseService = inject(DatabaseService);
 
 
   async getSeasons(){
@@ -57,7 +59,6 @@ export class ListaEpisodiComponent implements OnInit{
         };
       });
 
-
       return this.episodes;
     }catch(error){
       this.hasSpecial = 1
@@ -70,12 +71,30 @@ export class ListaEpisodiComponent implements OnInit{
     for (let i = 0; i <= index; i++) {
       this.episodes[i].visto = true;
     }
-
     console.log(this.episodes);
   }
 
   async ngOnInit()  {
     this.getSeasons()
     this.getEpisodesForSelectedSeason(this.selectedSeasonNum)
+
+
+    let utente = await this.database.utenteBySession()
+
+    if(utente){
+      // @ts-ignore
+      utente = utente.username
+      // @ts-ignore
+      const datas = await this.database.getContenutoByUtente(this.utente)
+
+      // @ts-ignore
+      for (let data of datas) {
+        if (data.is_serie == true && data.id_contenuto == this.id){
+          data
+          break;
+        }
+      }
+    }
+
   }
 }

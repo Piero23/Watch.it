@@ -60,11 +60,11 @@ export class TMDBDataService {
   }
 
   async getTvSeriesByID(id:number){
-    return await this.fetchContent(this.API_URL + "/tv/+" + id + "?language=it-IT")
+    return await this.fetchContent(this.API_URL + "/tv/" + id + "?language=it-IT")
   }
 
   async getTvSeriesSeason(id:string, season:number){
-    return await this.fetchContent(this.API_URL + "/tv/+" + id + "/season/" + season + "?language=it-IT")
+    return await this.fetchContent(this.API_URL + "/tv/" + id + "/season/" + season + "?language=it-IT")
   }
 
   async searchEverything(search : string){

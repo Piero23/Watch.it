@@ -21,7 +21,6 @@ export class SchermataContenutiComponent {
 
   isSerie:boolean = false;
 
-
   constructor() {
     if(this.route.snapshot.params['contenuto'] == "tv"){
       this.isSerie = true

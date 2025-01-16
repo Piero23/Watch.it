@@ -1,7 +1,7 @@
 <div class="status text-center" style="padding-top: 1%; padding-bottom: 2%">
-  <button class="col-1 selectionButtonRow2" (click)="getByStatus(0)">Da Vedere</button>
-  <button class="col-1 selectionButtonRow2" (click)="getByStatus(1)">In Visione</button>
-  <button class="col-1 selectionButtonRow2" (click)="getByStatus(2)">Visti</button>
+  <button class="col-1 selectionButtonRow2" (click)="activateButton(0)" name="daVedere" style="background: #4CB2FD; color: black;">Da Vedere</button>
+  <button class="col-1 selectionButtonRow2" (click)="activateButton(1)" name="inVisione">In Visione</button>
+  <button class="col-1 selectionButtonRow2" (click)="activateButton(2)" name="visto">Visti</button>
 </div>
 
 <app-serie-tv-status-selector class="popup" [rowIndex]="selectedRow" *ngIf="seriesEditor"></app-serie-tv-status-selector>
@@ -28,7 +28,7 @@
       <img [src]="riga.immagine" style="width: 40%; background: none;">
     </th>
     <th>
-      {{riga.nome}}
+      <a href="tv/{{riga.id}}" >{{riga.nome}}</a>
     </th>
     <th>
     {{riga.anno}}
@@ -37,7 +37,7 @@
       <button type="button" class="btn btn-primary" (click)="openPopup(i)">S{{riga.status.stagione}} E{{riga.status.episodio}} <i class="fa-solid fa-pen-to-square"></i></button>
     </th>
     <th>
-      <div class="rating">
+      <div class="rating" (click)="setRating(riga.id,riga.rating)">
         <input value="5" name="rating+{{i}}" id="star5+{{i}}" type="radio" [value]="5" [(ngModel)]="riga.rating">
         <label for="star5+{{i}}"></label>
         <input value="4" name="rating+{{i}}" id="star4+{{i}}" type="radio" [value]="4" [(ngModel)]="riga.rating">

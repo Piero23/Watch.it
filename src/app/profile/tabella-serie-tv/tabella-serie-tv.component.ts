@@ -25,6 +25,7 @@ export class TabellaSerieTvComponent implements OnInit{
   nameOrder=true;
   yearOrder=true;
   ratingOrder=true;
+  username : string = ""
 
   seriesEditor: boolean=false;
   selectedRow: number=0;
@@ -33,10 +34,16 @@ export class TabellaSerieTvComponent implements OnInit{
   }
 
   async ngOnInit() {
+    const data =await this.database.utenteBySession()
+    console.log(data);
+    // @ts-ignore
+    this.username = data.username;
+
     await this.getByStatus(0)
   }
 
   righe: {
+    id: number,
     anno: number,
     rating: number,
     nome: string,
@@ -105,10 +112,16 @@ export class TabellaSerieTvComponent implements OnInit{
     this.seriesEditor = false;
     // @ts-ignore
     this.righe.at(this.selectedRow).status=status;
+    // @ts-ignore
+    this.database.aggiornaStagione(this.username,this.righe.at(this.selectedRow).id,status.stagione,status.episodio);
   }
 
   closePopup(){
     this.seriesEditor = false;
+  }
+
+  async setRating(id:number,voto:number){
+    await this.database.changeRating(this.username,"tv",id,voto);
   }
 
   async getByStatus(status: number): Promise<void> {
@@ -118,12 +131,13 @@ export class TabellaSerieTvComponent implements OnInit{
 
     this.righe=[]
 
-    const queryRows: any = await this.database.getContenutoByUtente("giorgio");
+    const queryRows: any = await this.database.getContenutoByUtente(this.username);
+    console.log(queryRows)
     for (let riga of queryRows) {
-      if (riga.status==status && riga.is_serie_is_film==1) {
+      if (riga.status==status && riga.is_serie==1) {
         let series: any = await this.tmdb.getTvSeriesByID(riga.id_contenuto);
-
         const newRow: {
+          id : number,
           anno: number ,
           rating: number,
           nome: string,
@@ -137,8 +151,9 @@ export class TabellaSerieTvComponent implements OnInit{
             numeroEpisodi: number
           }[]
         } = {
+          id : series.id,
           anno: series.first_air_date.slice(0,4),
-          rating: 5,
+          rating: riga.rating,
           nome: series.name,
           immagine: series.poster_path
             ? `https://image.tmdb.org/t/p/w500${series.poster_path}`
@@ -168,5 +183,38 @@ export class TabellaSerieTvComponent implements OnInit{
       }
     }
   }
+
+  activateButton(index: number){
+    switch (index){
+      case 1: {
+        //In Visione
+        document.getElementsByName("inVisione").item(0).setAttribute("style", "background: #4CB2FD; color: black;");
+        document.getElementsByName("daVedere").item(0).setAttribute("style", "background: #282828; color: lightgray;");
+        document.getElementsByName("visto").item(0).setAttribute("style", "background: #282828; color: lightgray;");
+        this.getByStatus(1)
+        break;
+      }
+      case 2: {
+        //Visto
+
+        document.getElementsByName("visto").item(0).setAttribute("style", "background: #4CB2FD; color: black;");
+        document.getElementsByName("daVedere").item(0).setAttribute("style", "background: #282828; color: lightgray;");
+        document.getElementsByName("inVisione").item(0).setAttribute("style", "background: #282828; color: lightgray;");
+        this.getByStatus(2)
+        break;
+      }
+      case 0: {
+        //Da Vedere
+
+        document.getElementsByName("daVedere").item(0).setAttribute("style", "background: #4CB2FD; color: black;");
+        document.getElementsByName("inVisione").item(0).setAttribute("style", "background: #282828; color: lightgray;");
+        document.getElementsByName("visto").item(0).setAttribute("style", "background: #282828; color: lightgray;");
+        this.getByStatus(0)
+        break;
+      }
+    }
+  }
+
+
 
 }
