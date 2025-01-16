@@ -63,5 +63,10 @@ public class UtenteService implements UtenteServiceInterface {
         return utenteDao.login(mail,password);
     }
 
+    @Override
+    public Utente findByEmail(String email){
+        return utenteDao.findByEmail(email);
+    }
+
 
 }

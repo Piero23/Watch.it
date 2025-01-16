@@ -20,4 +20,5 @@ public interface UtenteDao {
   boolean checkExisting(String username,String mail);
 
   boolean login(String email, String password);
+  public Utente findByEmail(String email);
 }

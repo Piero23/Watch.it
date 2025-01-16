@@ -11,8 +11,9 @@ public interface ContenutoDao {
   public List<Contenuto> findAll();
   public List<Contenuto> findByUtente(String utente);
   public void save(int idContenuto, boolean tipo);
-  public void delete(Contenuto contenuto);
+  public void delete(int id, boolean isSerie, String username);
   public void updateStatus(String utente, int idContenuto, boolean tipo, int status);
   public void updateSeasonEpisode(String utente, int idContenuto, int stagione, int episodio);
+  public void editRating(String utente, boolean type, int idContenuto, int rating);
 
 }

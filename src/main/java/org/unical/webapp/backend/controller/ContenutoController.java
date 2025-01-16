@@ -27,7 +27,7 @@ public class ContenutoController {
 
     @RequestMapping(value="/getCommenti/{type}/{id}", method= RequestMethod.GET)
     ResponseEntity<Collection<Commento>> getCommenti(@PathVariable String type, @PathVariable int id) {
-        if (type.equals("movie")) {
+        if (type.equals("film")) {
             return ResponseEntity.ok(
                     contenutoService.getCommenti(contenutoService.getById(id, false))
             );
@@ -44,7 +44,7 @@ public class ContenutoController {
 
     @RequestMapping(value="/updateStatus/{utente}/{type}/{contenutoId}/{status}", method=RequestMethod.GET)
     void updateStatus(@PathVariable String utente, @PathVariable int contenutoId, @PathVariable String type, @PathVariable int status) {
-        if (type.equals("movie")) {
+        if (type.equals("film")) {
             contenutoService.aggiornaStatusContenuto(utente, contenutoId, false, status);
         }
         else if (type.equals("tv")) {
@@ -58,5 +58,26 @@ public class ContenutoController {
     }
 
 
+    @RequestMapping(value="/deleteContent/{utente}/{tipo}/{id}", method=RequestMethod.GET)
+    void deleteContent(@PathVariable String utente, @PathVariable String tipo, @PathVariable int id) {
+        if (tipo.equals("movie")) {
+            contenutoService.deleteContenuto(id, false, utente);
+        }
+
+        else if (tipo.equals("tv")) {
+            contenutoService.deleteContenuto(id, true, utente);
+        }
+    }
+
+    @RequestMapping(value = "/editRating/{utente}/{tipo}/{id}/{rating}", method=RequestMethod.GET)
+    void editRating(@PathVariable String utente, @PathVariable String tipo, @PathVariable int id, @PathVariable int rating) {
+        if (tipo.equals("film")) {
+            contenutoService.modificaVoto(utente, false, id, rating);
+
+        }
+        else if (tipo.equals("tv")) {
+            contenutoService.modificaVoto(utente, true, id, rating);
+        }
+    }
 
 }

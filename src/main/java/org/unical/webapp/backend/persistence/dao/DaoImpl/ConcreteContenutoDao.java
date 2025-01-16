@@ -103,14 +103,15 @@ public class ConcreteContenutoDao implements ContenutoDao {
   }
 
   @Override
-  public void delete(Contenuto contenuto) {
+  public void delete(int id, boolean isSerie, String username) {
     try {
       PreparedStatement query = connection.prepareStatement(
-              "delete from contenuto where id_contenuto = ? and is_serie=?"
+              "DELETE FROM contenuto_utente USING contenuto  WHERE contenuto_utente.id_contenuto = contenuto.id AND contenuto_utente.id_api= ? AND contenuto.is_serie = ? AND contenuto_utente.utente = ?"
       );
 
-      query.setInt(1, contenuto.getId_contenuto());
-      query.setBoolean(2, contenuto.isIs_serie());
+      query.setInt(1, id);
+      query.setBoolean(2, isSerie);
+      query.setString(3, username);
       query.executeUpdate();
 
     } catch (SQLException e) {
@@ -209,6 +210,21 @@ public class ConcreteContenutoDao implements ContenutoDao {
       query.executeUpdate();
       connection.commit();
     } catch (Exception e){}
+  }
 
+  @Override
+  public void editRating(String utente, boolean type, int idContenuto, int rating) {
+    try {
+
+      PreparedStatement query = connection.prepareStatement("update contenuto_utente   set valutazione=? from contenuto where (contenuto_utente.id_contenuto=contenuto.id AND id_api = ? and is_serie=? and utente = ?)");
+      query.setInt(1, rating);
+      query.setInt(2, idContenuto);
+      query.setBoolean(3, type);
+      query.setString(4, utente);
+      query.executeUpdate();
+
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
   }
 }

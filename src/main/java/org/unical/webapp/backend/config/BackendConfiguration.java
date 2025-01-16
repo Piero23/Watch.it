@@ -26,6 +26,7 @@ public class BackendConfiguration {
 
                 registry.addMapping("/contenuto/**")
                         .allowedOrigins("http://localhost:4200") // Dominio Angular
+                        .allowCredentials(true)
                         .allowedMethods("GET", "POST", "PUT", "DELETE");
             }
         };

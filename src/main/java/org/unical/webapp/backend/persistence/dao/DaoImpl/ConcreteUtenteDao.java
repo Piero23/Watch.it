@@ -111,7 +111,7 @@ public class ConcreteUtenteDao implements UtenteDao {
       ResultSet rs = query.executeQuery();
       while (rs.next()){
         Contenuto contenuto = new ContenutoProxy(
-          rs.getInt("id_contenuto"),
+          rs.getInt("id_api"),
           rs.getBoolean("is_serie"),
           rs.getString("utente"),
           rs.getInt("num_stagione"),
@@ -188,5 +188,30 @@ public class ConcreteUtenteDao implements UtenteDao {
       throw new RuntimeException(e);
     }
     return login;
+  }
+
+  @Override
+  public Utente findByEmail(String email) {
+    try{
+      PreparedStatement query = connection.prepareStatement("select * from utente where email=?");
+      query.setString(1, email);
+      ResultSet rs = query.executeQuery();
+      if (!rs.isBeforeFirst()) return null; //chiedere al professore se serve
+      rs.next();
+      Utente utente = new Utente(
+              rs.getString("username"),
+              rs.getString("email"),
+              rs.getString("password"),
+              rs.getBytes("img_profilo"),
+              rs.getBytes("imgbackground"),
+              rs.getBoolean("admin")
+      );
+
+      return utente;
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw new RuntimeException(e);
+    }
   }
 }

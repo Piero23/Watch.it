@@ -14,4 +14,6 @@ public interface ContenutoServiceInterface {
 
     void aggiornaStatusContenuto(String utente, int contenutoID, boolean isSerie, int status);
     void aggiornaVisualizzazione(String utente, int contenutoID, int stagione, int episodio);
+    void deleteContenuto(int id, boolean isSerie, String username);
+    void modificaVoto(String utente, boolean type, int idContenuto, int rating);
 }

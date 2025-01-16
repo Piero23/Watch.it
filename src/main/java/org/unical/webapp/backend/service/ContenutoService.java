@@ -44,4 +44,14 @@ public class ContenutoService implements ContenutoServiceInterface {
     public void aggiornaVisualizzazione(String utente, int contenutoID, int stagione, int episodio) {
         contenutoDao.updateSeasonEpisode(utente, contenutoID, stagione, episodio);
     }
+
+    @Override
+    public void deleteContenuto(int id, boolean isSerie, String username){
+        contenutoDao.delete(id, isSerie, username);
+    }
+
+    @Override
+    public void modificaVoto(String utente, boolean type, int idContenuto, int rating){
+        contenutoDao.editRating(utente, type, idContenuto, rating);
+    }
 }

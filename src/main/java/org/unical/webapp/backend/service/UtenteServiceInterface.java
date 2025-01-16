@@ -19,4 +19,5 @@ public interface UtenteServiceInterface {
 
     boolean checkExistingUtente(String username,String mail);
     boolean login(String mail, String password);
+    public Utente findByEmail(String email);
 }
