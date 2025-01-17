@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {CommentItemComponent} from '../comment-item/comment-item.component';
 import {CommentSectionComponent} from '../comment-section/comment-section.component';
 import {DatabaseService} from '../../database.service';
@@ -13,7 +13,7 @@ import {DatabaseService} from '../../database.service';
   templateUrl: './schermata-commenti.component.html',
   styleUrl: './schermata-commenti.component.css'
 })
-export class SchermataCommentiComponent {
+export class SchermataCommentiComponent implements OnInit {
   title = 'WatchedIt';
   comments: {
     id: number;
@@ -39,6 +39,7 @@ export class SchermataCommentiComponent {
   }
 
   async deleteComment(index: number) {
+
     await this.database.deleteComment(this.comments[index].id);
     this.comments.splice(index, 1);
   }
@@ -49,5 +50,19 @@ export class SchermataCommentiComponent {
 
   cancelReply() {
     this.replyingTo = null;
+  }
+
+  async  ngOnInit() {
+    const data = await this.database.utenteBySession()
+
+    console.log(data)
+    // @ts-ignore
+    if(data.status == 200){
+      // @ts-ignore
+      const user = await this.database.getUtente(data.username)
+      // @ts-ignore
+      this.isModerator = user.admin
+      console.log("Moderatore",this.isModerator)
+    }
   }
 }

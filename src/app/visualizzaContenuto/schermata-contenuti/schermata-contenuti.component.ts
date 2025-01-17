@@ -3,13 +3,15 @@ import {BannerInfoContentComponent} from '../banner-info-content/banner-info-con
 import {ListaEpisodiComponent} from '../SerieTv/lista-episodi/lista-episodi.component';
 import {ActivatedRoute} from '@angular/router';
 import {Title} from '@angular/platform-browser';
+import {ConsigliatiFilmComponent} from '../consigliati-film/consigliati-film.component';
 
 @Component({
   selector: 'app-schermata-contenuti',
   standalone: true,
   imports: [
     BannerInfoContentComponent,
-    ListaEpisodiComponent
+    ListaEpisodiComponent,
+    ConsigliatiFilmComponent
   ],
   templateUrl: './schermata-contenuti.component.html',
   styleUrl: './schermata-contenuti.component.css'

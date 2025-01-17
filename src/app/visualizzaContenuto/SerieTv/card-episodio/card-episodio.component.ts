@@ -26,6 +26,7 @@ export class CardEpisodioComponent implements OnInit {
   image: any;
   votoColor : string = "#ff0000"
   vero: boolean = false;
+  Rifiniture: boolean = false;
 
 
 

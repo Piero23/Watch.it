@@ -1,11 +1,14 @@
 import {Component, HostListener, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DatabaseService} from '../../database.service';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-preview-commenti',
   standalone: true,
-  imports: [],
+  imports: [
+    NgIf
+  ],
   templateUrl: './preview-commenti.html',
   styleUrl: './preview-commenti.css'
 })
@@ -25,30 +28,36 @@ export class PreviewCommenti implements OnInit {
   }
 
   async ngOnInit() {
+    this.route.params.subscribe(async params => {
 
 
-    const data = await this.database.getCommentiFromContenuto(this.route.snapshot.params["contenuto"], this.route.snapshot.params["id"]);
+      const data = await this.database.getCommentiFromContenuto(this.route.snapshot.params["contenuto"], this.route.snapshot.params["id"]);
 
-    // @ts-ignore
-    if (data.length > 0) {
-      if (data) {
-        // @ts-ignore
-        this.firstComment = data[0].contenuto;
-        // @ts-ignore
-        this.username = data[0].username_utente;
-      }
-      console.log(this.firstComment);
-    }
-
-    const utente = await this.database.getUtente(this.username);
-
-    // @ts-ignore
-    if(utente.img_profilo){
+      let utente: any
       // @ts-ignore
-      const imgBuffer = utente.img_profilo;
-      this.proPic = `data:image/png;base64,${imgBuffer}`;
-    }else
-      this.proPic ="assets/images/Avatar.png"
+      if (data.length > 0) {
+        if (data) {
+          // @ts-ignore
+          this.firstComment = data[0].contenuto;
+          // @ts-ignore
+          this.username = data[0].username_utente;
+        }
+        console.log(this.firstComment);
+        utente = await this.database.getUtente(this.username);
+      }else
+        this.firstComment = "Ancora nessun commento sii il primo a commentare";
+
+      // @ts-ignore
+      if(utente.img_profilo != null){
+        // @ts-ignore
+        const imgBuffer = utente.img_profilo;
+        this.proPic = `data:image/png;base64,${imgBuffer}`;
+      }else {
+        this.proPic = "assets/images/Avatar.png"
+      }
+    })
+
+
 
   }
 }

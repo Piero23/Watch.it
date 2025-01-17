@@ -2,7 +2,7 @@
 <img src="{{image}}" class="rounded-4 copertina "  style=" overflow: hidden" alt="cardImage">
 </div>
 
-<div class="col-7 mt-4">
+<div class="col-8 mt-4">
   <div class="d-flex justify-content-between" style="width: 50%">
     <h3>{{titolo}}</h3>
   </div>
@@ -20,6 +20,6 @@
 </div>
 
 
-<div class=" align-items-center justify-content-center d-flex" style="width: 30%">
+<div class=" align-items-center justify-content-center d-flex" style="width: 30%" *ngIf="Rifiniture">
   <input type="checkbox" class="form-check-input rounded-circle check"  [(ngModel)]="infoEpisodio.visto" (change)="onCheckboxChange()"/>
 </div>

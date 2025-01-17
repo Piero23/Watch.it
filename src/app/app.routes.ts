@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {SchermataContenutiComponent} from './visualizzaContenuto/schermata-contenuti/schermata-contenuti.component';
 import {ListaRicercaComponent} from './ricerca/lista-ricerca/lista-ricerca.component';
 import {ProfileComponent} from './profile/profile.component';
@@ -45,4 +45,3 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
 ];
-
