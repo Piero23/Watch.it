@@ -53,8 +53,7 @@
     </th>
     <th>
       <b><select
-        class=" form-select form-select-sm rounded-1" style="font-size: 18px; width: 110px; color: black;
-          background-color: #1BD75F"
+        class="btn btn-primary" style="font-size: 18px; color: white;"
         [(ngModel)]="riga.viewingStatus"
         (ngModelChange)="updateStatus(riga.id, riga.viewingStatus)">
         <option class="text-white" style="background-color: #282828" [value]="0"><b>Da Vedere</b></option>
@@ -64,7 +63,7 @@
       </b>
     </th>
     <th>
-      <button type="button" class="btn btn-danger" (click)="deleteRow(riga.id)">Cancella</button>
+      <button type="button" class="btn btn-danger" (click)="deleteRow(riga.id)"><i class="fa-solid fa-trash" style="color: white"></i></button>
     </th>
   </tr>
   </tbody>
