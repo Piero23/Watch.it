@@ -5,6 +5,7 @@ import {TabellaSerieTvComponent} from './tabella-serie-tv/tabella-serie-tv.compo
 import {BannerEditorComponent} from './banner-editor/banner-editor.component';
 import {DatabaseService} from '../database.service';
 
+
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -27,9 +28,9 @@ export class ProfileComponent implements OnInit{
   aspectRatio: number=0;
   oggettoDaModificare: string = "";
 
-  username : string = "  Ciaoo";
-  propic: string="assets/images/Avatar.png";
-  banner: string="assets/images/Immagine.png";
+  username : string = "";
+  propic: any="";
+  banner: any ="";
 
   database : DatabaseService = inject(DatabaseService);
 
@@ -68,8 +69,40 @@ export class ProfileComponent implements OnInit{
     this.oggettoDaModificare="Banner";
   }
 
-  closeBanner(){
+  convertBlobToBase64(blobUrl: string): Promise<string> {
+    return fetch(blobUrl)
+      .then((response) => response.blob()) // Ottieni il Blob
+      .then((blob) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result as string); // Base64
+          reader.onerror = reject;
+          reader.readAsDataURL(blob); // Leggi il Blob come Base64
+        });
+      });
+  }
+
+  async closeBanner(image : any, type : string){
     this.bannerEditor=false;
+
+
+    switch(type){
+      case "Banner": {
+        this.convertBlobToBase64(image).then(async (base64Image) => {
+          const base64Data = base64Image.split(',')[1];
+          await this.database.setBgImage(this.username, base64Data)
+        })
+        break;
+      }
+      case "Foto Profilo": {
+        this.convertBlobToBase64(image).then(async (base64Image) => {
+          const base64Data = base64Image.split(',')[1];
+          await this.database.setProPic(this.username, base64Data)
+
+        })
+        break;
+      }
+    }
   }
 
   setProPic(propic: string){
@@ -82,21 +115,32 @@ export class ProfileComponent implements OnInit{
 
   async ngOnInit() {
     const data =await this.database.utenteBySession()
-
     // @ts-ignore
     this.username = data.username;
 
     const utente = await this.database.getUtente(this.username);
 
-    console.log(utente);
     // @ts-ignore
     if(utente.img_profilo){
-      //Array DI Byte
-    }
+      // @ts-ignore
+      const imgBuffer = utente.img_profilo;
+      this.propic = `data:image/png;base64,${imgBuffer}`;
+    }else
+      this.propic ="assets/images/Avatar.png"
+
     // @ts-ignore
-    if(utente.imgbackground){
-      //Array DI Byte
-    }
+    if (utente.imgbackground) {
+      // @ts-ignore
+      const imgBuffer = utente.imgbackground;
+      this.banner = `data:image/png;base64,${imgBuffer}`;
+    }else
+      this.banner ="assets/images/Immagine.png"
+
+
+  }
+
+  denyAll() {
+    this.bannerEditor=false;
   }
 
 }

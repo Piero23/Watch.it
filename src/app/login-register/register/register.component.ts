@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { Router } from '@angular/router';
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
+import {DatabaseService} from '../../database.service';
 
 @Component({
   selector: 'app-register',
@@ -21,6 +22,9 @@ export class RegisterComponent {
   errorMessage: string = '';
   successMessage: string = '';
 
+
+  database : DatabaseService = inject(DatabaseService);
+
   constructor(private router: Router) {}
 
   showPassword() {
@@ -31,12 +35,15 @@ export class RegisterComponent {
     this.router.navigate(['/login']);
   }
 
-  messageForm(email: string, password: string) {
-    if (email === "admin@admin.com") {
-      this.showError('Esiste già un account associato a questa mail.');
-    } else {
-      this.showSuccess('Account creato con successo!');
+  async messageForm(username : string,email: string, password: string) {
+    const data = await this.database.register(username,email,password);
+    // @ts-ignore
+    if(data.status === 200){
+      this.showSuccess("Account registrato con successo")
+      this.router.navigate(['/']);
     }
+    else
+      this.showError("Username o Mail già prensente nel sistema")
   }
 
   showError(message: string) {

@@ -22,6 +22,7 @@ export class BannerEditorComponent {
   @Input() oggetto!: string;
   maxHeight: number = 500;
 
+
   constructor(
     private profile: ProfileComponent,
     private database: DatabaseService
@@ -63,32 +64,21 @@ export class BannerEditorComponent {
   }
 
   closePopup() {
-    this.profile.closeBanner();
+    this.profile.denyAll();
   }
 
-  async confirmSelection(){
+  confirmSelection(){
     switch(this.oggetto){
       case "Banner": {
         this.profile.setBanner(this.croppedImage);
-        await this.database.setBgImage("giorgio", this.base64ToBlob(this.croppedImage, "image/png"));
         break;
       }
       case "Foto Profilo": {
         this.profile.setProPic(this.croppedImage);
-        await this.database.setProPic("giorgio", this.base64ToBlob(this.croppedImage, "image/png"));
         break;
       }
     }
-    this.profile.closeBanner();
+    this.profile.closeBanner(this.croppedImage,this.oggetto);
   }
 
-  base64ToBlob(base64: string, contentType: string = ''): Blob {
-    const byteCharacters = atob(base64);
-    const byteNumbers = new Array(byteCharacters.length);
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-    const byteArray = new Uint8Array(byteNumbers);
-    return new Blob([byteArray], {type: contentType});
-  }
 }

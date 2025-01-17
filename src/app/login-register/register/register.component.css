@@ -200,7 +200,7 @@ form {
 
 .error-message {
   position: absolute;
-  top: 20px;
+  top: 100px;
   left: 33%;
   transform: translateX(-50%);
   width: 90%;
@@ -208,7 +208,7 @@ form {
   padding: 15px;
   font-size: 18px;
   color: #fff;
-  background-color: rgba(255, 0, 0, 0.9);
+  background-color: rgba(221, 3, 3, 0.9);
   border: 1px solid #aa0000;
   border-radius: 10px;
   text-align: center;
@@ -218,7 +218,7 @@ form {
 
 .success-message {
   position: absolute;
-  top: 20px;
+  top: 100px;
   left: 33%;
   transform: translateX(-50%);
   width: 90%;

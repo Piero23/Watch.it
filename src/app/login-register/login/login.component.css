@@ -198,9 +198,9 @@ form {
 
 .error-message {
   position: absolute;
-  top: 20px;
+  top: 100px;
   left: 33%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(-50%);
   width: 90%;
   max-width: 600px;
   padding: 15px;
@@ -216,7 +216,7 @@ form {
 
 .success-message {
   position: absolute;
-  top: 20px;
+  top: 100px;
   left: 33%;
   transform: translateX(-50%);
   width: 90%;

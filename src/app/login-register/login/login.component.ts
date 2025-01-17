@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { Router } from '@angular/router';
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
+import {DatabaseService} from '../../database.service';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent {
   errorMessage: string = '';
 
   constructor(private router: Router) {}
+  database : DatabaseService = inject(DatabaseService)
 
   showPassword() {
     this.isPasswordVisible = !this.isPasswordVisible;
@@ -29,12 +31,14 @@ export class LoginComponent {
     this.router.navigate(['/register']);
   }
 
-  messaggioForm(email: string, password: string) {
-    if (email === "admin@admin.com") {
-      this.showError('La combinazione di utente e password non è corretta.');
-    } else if (email === "" || password === "") {
-      this.showError('Completa tutti i campi e riprova.');
+  async messaggioForm(email: string, password: string) {
+    const data = await this.database.logIn(email,password);
+    // @ts-ignore
+    if(data.status === 200){
+      this.router.navigate(['/']);
     }
+    else
+      this.showError("Username o Mail già prensente nel sistema")
   }
 
   showError(message: string) {

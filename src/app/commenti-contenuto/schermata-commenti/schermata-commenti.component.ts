@@ -15,32 +15,18 @@ import {CommentSectionComponent} from '../comment-section/comment-section.compon
 export class SchermataCommentiComponent {
   title = 'WatchedIt';
   comments: {
+    id: number;
     text: string;
     rating: number;
     username: string;
     profilePic: string;
-    replies: { text: string; rating: number; username: string; profilePic: string }[];
-  }[] = [
-    {
-      text: 'questo film fa cagare',
-      rating: 1,
-      username: 'utente1',
-      profilePic: 'assets/images/img.png',
-      replies: [{text: 'ciao', rating: 2, username: 'giuseppe', profilePic: 'assets/images/img.png'}],
-    },
-    {
-      text: 'bel film.',
-      rating: 4,
-      username: 'utente2',
-      profilePic: 'assets/images/utente2.jpg',
-      replies: [],
-    },
-  ];
+    replies: {id: number ,text: string; rating: number; username: string; profilePic: string }[];
+  }[] = [];
 
   isModerator = true;
-  replyingTo: { index: number; username: string; text: string } | null = null;
+  replyingTo: { id:number ,index: number; username: string; text: string } | null = null;
 
-  addComment(newComment: { text: string; rating: number; username: string; profilePic: string }) {
+  addComment(newComment: {id: number ,text: string; rating: number; username: string; profilePic: string }) {
     if (this.replyingTo) {
       this.comments[this.replyingTo.index].replies.push({ ...newComment });
       this.replyingTo = null;
@@ -53,7 +39,7 @@ export class SchermataCommentiComponent {
     this.comments.splice(index, 1);
   }
 
-  onReplyToComment(event: { index: number; username: string; text: string }) {
+  onReplyToComment(event: { id: number,index: number; username: string; text: string }) {
     this.replyingTo = event;
   }
 

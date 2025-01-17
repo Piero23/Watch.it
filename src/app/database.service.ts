@@ -19,11 +19,11 @@ export class DatabaseService {
     return await this.http.get('http://localhost:8080/utente/getUtente/'+utente).toPromise();
   }
 
-  async setProPic(utente: string, image: Blob){
+  async setProPic(utente: string,image : any){
     await this.http.post('http://localhost:8080/utente/setProPic/'+utente, image).toPromise();
   }
 
-  async setBgImage(utente: string, image: Blob){
+  async setBgImage(utente: string, image: any){
     await this.http.post('http://localhost:8080/utente/setBgImage/'+utente, image).toPromise();
   }
 
@@ -50,8 +50,20 @@ export class DatabaseService {
     await this.http.get('http://localhost:8080/commento/setAnswer/'+questionId+'/'+answerId).toPromise();
   }
 
-  async saveNewComment(comment_id: number, content_id: number, content_type: boolean, body: string, rating: number, user: string, answers_to: number){
-    await this.http.get('http://localhost:8080/commento//newComment/'+comment_id+'/'+content_id+'/'+content_type+'/'+body+'/'+rating+'/'+user+'/'+answers_to).toPromise();
+  async saveNewComment( content_id: number, content_type: string, text: string, rating: number, user: string, answers_to: any){
+    const body = {
+      content_id : content_id,
+      content_type : content_type,
+      text: text,
+      rating : rating,
+      user : user,
+      answers_to : answers_to
+    }
+
+    await this.http.post('http://localhost:8080/commento/newComment',body,{
+      headers : {'Content-Type': 'application/json'},
+      withCredentials:true
+    }).toPromise();
   }
 
   // Delete Comment

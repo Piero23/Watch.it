@@ -1,6 +1,6 @@
 <div class="comment-item">
   <div *ngIf="replyingTo" class="replying-info">
-    Stai rispondendo a {{ replyingTo.username }} : "{{replyingTo.text}}"
+    Stai rispondendo a {{ replyingTo.id }} : "{{replyingTo.text}}"
     <button class="cancel-btn" (click)="cancelReply.emit()">Annulla</button>
   </div>
   <div class="user-info">
