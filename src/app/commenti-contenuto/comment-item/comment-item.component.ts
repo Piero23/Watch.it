@@ -42,9 +42,12 @@ export class CommentItemComponent implements OnInit{
       profilePic: this.userProfilePic,
     });
 
+    let resp = null
+    if(this.replyingTo){
+      resp = this.replyingTo.id
+    }
 
-    // @ts-ignore
-    this.database.saveNewComment(this.route.snapshot.params["id"],this.route.snapshot.params["contenuto"],this.commentText,this.starRating,this.username,this.replyingTo.id)
+    this.database.saveNewComment(this.route.snapshot.params["id"],this.route.snapshot.params["contenuto"],this.commentText,this.starRating,this.username,resp)
 
     this.commentText = '';
     this.starRating = 0;
