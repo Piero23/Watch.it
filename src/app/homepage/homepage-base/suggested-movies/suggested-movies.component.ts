@@ -30,7 +30,6 @@ export class SuggestedMoviesComponent implements OnInit {
     this.updateMovies('mostLoved');
   }
 
-  // Fetches the trending movies and sets the list
   async setTrendingMovies() {
     this.trendingMoviesList = await this.tmdbDataService.getTrendingMovies();
 
@@ -39,7 +38,6 @@ export class SuggestedMoviesComponent implements OnInit {
     }
   }
 
-  // Fetches the most loved movies and sets the list
   async setMostLovedMovies(){
     this.mostLovedMoviesList = await this.tmdbDataService.getMostLovedMovies();
 
@@ -48,7 +46,6 @@ export class SuggestedMoviesComponent implements OnInit {
     }
   }
 
-  // Updates the displayed movies based on the current start index
   updateMovies(type: 'trending' | 'mostLoved') {
     if (type === 'trending') {
       const endTrendingIndex = this.currentTrendingIndex + this.visibleCount;
@@ -57,7 +54,6 @@ export class SuggestedMoviesComponent implements OnInit {
         endTrendingIndex
       );
 
-      // Wraps around
       if (endTrendingIndex > this.trendingMoviesList.length) {
         this.displayedTrendingMovies.push(
           ...this.trendingMoviesList.slice(0, endTrendingIndex - this.trendingMoviesList.length)
@@ -78,7 +74,6 @@ export class SuggestedMoviesComponent implements OnInit {
     }
   }
 
-  // Scroll through content by updating the start index
   scrollContent(type: 'trending' | 'mostLoved', direction: 'next' | 'previous') {
     if (type === 'trending') {
       if (direction === 'next') {

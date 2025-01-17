@@ -1,8 +1,6 @@
 import {Component, Input} from '@angular/core';
 import { ImageCropperComponent, ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
-
 import {ProfileComponent} from '../profile.component';
-import {DatabaseService} from '../../database.service';
 
 
 @Component({
@@ -26,7 +24,6 @@ export class BannerEditorComponent {
 
   constructor(
     private profile: ProfileComponent,
-    private database: DatabaseService
   ) {
   }
 
@@ -39,8 +36,8 @@ export class BannerEditorComponent {
     if (event.objectUrl != null) {
       this.croppedImage = event.objectUrl;
     }
-    // event.blob can be used to upload the cropped image
   }
+
   imageLoaded(image: LoadedImage) {
     const originalHeight = image.original.size.height;
     const originalWidth = image.original.size.width;
@@ -48,10 +45,8 @@ export class BannerEditorComponent {
     if (originalHeight > this.maxHeight) {
       const scale = this.maxHeight / originalHeight;
 
-      // Calcola le nuove dimensioni
       const newWidth = originalWidth * scale;
 
-      // Applica lo stile dinamico al cropper (se necessario)
       const cropperElement = document.querySelector('image-cropper') as HTMLElement;
       if (cropperElement) {
         cropperElement.style.height = `${this.maxHeight}px`;
@@ -60,10 +55,8 @@ export class BannerEditorComponent {
     }
   }
   cropperReady() {
-    // cropper ready
   }
   loadImageFailed() {
-    // show message
   }
 
   closePopup() {

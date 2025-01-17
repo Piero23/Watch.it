@@ -30,7 +30,6 @@ export class SuggestedSeriesComponent {
     this.updateSeries('mostLoved');
   }
 
-  // Fetches the trending movies and sets the list
   async setTrendingSeries() {
     this.trendingSeriesList = await this.tmdbDataService.getTrendingTvSeries();
 
@@ -39,7 +38,6 @@ export class SuggestedSeriesComponent {
     }
   }
 
-  // Fetches the most loved movies and sets the list
   async setMostLovedSeries(){
     this.mostLovedSeriesList = await this.tmdbDataService.getMostLovedTvSeries();
 
@@ -48,7 +46,6 @@ export class SuggestedSeriesComponent {
     }
   }
 
-  // Updates the displayed movies based on the current start index
   updateSeries(type: 'trending' | 'mostLoved') {
     if (type === 'trending') {
       const endTrendingIndex = this.currentTrendingIndex + this.visibleCount;
@@ -57,7 +54,6 @@ export class SuggestedSeriesComponent {
         endTrendingIndex
       );
 
-      // Wraps around
       if (endTrendingIndex > this.trendingSeriesList.length) {
         this.displayedTrendingSeries.push(
           ...this.trendingSeriesList.slice(0, endTrendingIndex - this.trendingSeriesList.length)
@@ -78,7 +74,6 @@ export class SuggestedSeriesComponent {
     }
   }
 
-  // Scroll through content by updating the start index
   scrollContent(type: 'trending' | 'mostLoved', direction: 'next' | 'previous') {
     if (type === 'trending') {
       if (direction === 'next') {

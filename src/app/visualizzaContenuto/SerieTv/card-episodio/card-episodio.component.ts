@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgIf, NgStyle} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
@@ -26,7 +26,7 @@ export class CardEpisodioComponent implements OnInit {
   serie:number = 1
   image: any;
   votoColor : string = "#ff0000"
-  vero: boolean = false;
+
   Rifiniture: boolean = false;
 
 

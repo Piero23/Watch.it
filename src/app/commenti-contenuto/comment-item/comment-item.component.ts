@@ -1,8 +1,7 @@
-import {Component, Output, Input, EventEmitter, inject, OnInit} from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { CommentSectionComponent } from '../comment-section/comment-section.component';
-import { StarReviewComponent } from '../star-review/star-review.component';
+import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {StarReviewComponent} from '../star-review/star-review.component';
 import {DatabaseService} from '../../database.service';
 import {ActivatedRoute} from '@angular/router';
 

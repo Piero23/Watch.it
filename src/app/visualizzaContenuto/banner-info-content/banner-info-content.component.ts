@@ -1,13 +1,9 @@
-import {Component, HostBinding, inject, Input} from '@angular/core';
-import {literal} from '@angular/compiler';
+import {Component, inject} from '@angular/core';
 import {StelleFilmComponent} from '../stelle-film/stelle-film.component';
 import {PreviewCommenti} from '../preview-commenti/preview-commenti';
-import {ListaEpisodiComponent} from '../SerieTv/lista-episodi/lista-episodi.component';
-import {ActivatedRoute, Route, Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {TMDBDataService} from '../../tmdbdata.service';
-import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 import {NgForOf} from '@angular/common';
-import {generate} from 'rxjs';
 import {DatabaseService} from '../../database.service';
 import {FormsModule} from '@angular/forms';
 
@@ -52,7 +48,7 @@ export class BannerInfoContentComponent {
   }
 
   async setMovie() {
-    this.route.params.subscribe(async params => {
+    this.route.params.subscribe(async () => {
       this.id = this.route.snapshot.params['id'];
       this.isSerie = this.route.snapshot.params['contenuto'];
 

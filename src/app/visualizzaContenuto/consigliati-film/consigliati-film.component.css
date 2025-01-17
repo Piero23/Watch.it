@@ -1,18 +1,5 @@
-.content-suggestion-title {
-  font-size: 22px;
-  color: white;
-  padding-top: 16px;
-}
-
 .trending-row {
   margin-bottom: 80px;
-}
-
-.trending-row, .piu-amati-row {
-  background: #282828;
-  height: 320px;
-  width: inherit;
-  justify-content: center;
 }
 
 .content-suggestion-col {
@@ -26,12 +13,6 @@
   justify-content: center;
   width: inherit;
   height: inherit;
-}
-
-.btn-arrow {
-  width: 100%;
-  height: fit-content;
-  align-self: center;
 }
 
 .fa-solid {

@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <div class="status text-center" style="padding-top: 1%; padding-bottom: 2%">
   <button class="col-1 selectionButtonRow2" (click)="activateButton(0)" name="daVedere" style="background: #4CB2FD; color: black">Da Vedere</button>
   <button class="col-1 selectionButtonRow2" (click)="activateButton(2)" name="visto">Visti</button>
@@ -22,6 +23,7 @@
   <tbody class="align-middle">
   <tr  *ngFor="let riga of righe; let i=index;">
     <th>
+      <!--suppress HtmlRequiredAltAttribute -->
       <img [src]="riga.immagine" style="width: 40%; background: none;">
     </th>
     <th>
