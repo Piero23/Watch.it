@@ -23,7 +23,7 @@ export class TabellaFilmComponent implements OnInit{
   username : string = ""
 
 
-  righe: {id: number, anno: number, rating: number, nome: string, immagine: string}[]=[];
+  righe: {id: number, anno: number, rating: number, nome: string, immagine: string, viewingStatus: number}[]=[];
 
   constructor(private tmdb: TMDBDataService, private database: DatabaseService,private router : Router ) {}
 
@@ -101,14 +101,15 @@ export class TabellaFilmComponent implements OnInit{
     for (let riga of queryRows) {
       if (riga.status==status && riga.is_serie==0) {
         let movie: any = await this.tmdb.getMovieByID(riga.id_contenuto);
-        const newRow: {id: number, anno: number, rating: number, nome: string, immagine: string} ={
+        const newRow: {id: number, anno: number, rating: number, nome: string, immagine: string, viewingStatus: number} ={
           id: riga.id_contenuto,
           anno: movie.release_date.slice(0,4),
           rating: riga.rating,
           nome: movie.title,
           immagine: movie.poster_path
             ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-            : 'assets/images/PosterImageNotFound.png'
+            : 'assets/images/PosterImageNotFound.png',
+          viewingStatus: riga.status
         }
         this.righe.push(newRow);
       }
@@ -126,7 +127,6 @@ export class TabellaFilmComponent implements OnInit{
 
         document.getElementsByName("visto").item(0).setAttribute("style", "background: #4CB2FD; color: black;");
         document.getElementsByName("daVedere").item(0).setAttribute("style", "background: #282828; color: lightgray;");
-        document.getElementsByName("inVisione").item(0).setAttribute("style", "background: #282828; color: lightgray;");
         this.getByStatus(2)
         break;
       }
@@ -134,11 +134,20 @@ export class TabellaFilmComponent implements OnInit{
         //Da Vedere
 
         document.getElementsByName("daVedere").item(0).setAttribute("style", "background: #4CB2FD; color: black;");
-        document.getElementsByName("inVisione").item(0).setAttribute("style", "background: #282828; color: lightgray;");
         document.getElementsByName("visto").item(0).setAttribute("style", "background: #282828; color: lightgray;");
         this.getByStatus(0)
         break;
       }
     }
+  }
+
+  async deleteRow(id: number) {
+    this.righe = this.righe.filter(riga => riga.id !== id);
+    await this.database.deleteContenuto_Utente(this.username, "film", id);
+  }
+
+  async updateStatus(id: number, status: number) {
+    this.righe = this.righe.filter(riga => riga.id !== id);
+    await this.database.aggiornaStatus(this.username,"film",id, status)
   }
 }

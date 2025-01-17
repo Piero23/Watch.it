@@ -16,6 +16,7 @@
       <button class="btn" style="background-color: transparent; color: lightgrey;" (click)="sortByRating()"><b>Voto</b></button>
     </th>
     <th class="col-2"></th>
+    <th class="col-2"></th>
   </thead>
 
   <tbody class="align-middle">
@@ -44,11 +45,18 @@
       </div>
     </th>
     <th>
-      <button type="button" class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" aria-expanded="false">Da Vedere</button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item">In Visione</a></li>
-        <li><a class="dropdown-item">Visto</a></li>
-      </ul>
+      <b><select
+        class=" form-select form-select-sm rounded-1" style="font-size: 18px; width: 110px; color: black;
+          background-color: #1BD75F"
+        [(ngModel)]="riga.viewingStatus"
+        (ngModelChange)="updateStatus(riga.id, riga.viewingStatus)">
+        <option class="text-white" style="background-color: #282828" [value]="0"><b>Da Vedere</b></option>
+        <option class="text-white" style="background-color: #282828" [value]="2"><b>Visto</b></option>
+      </select>
+      </b>
+    </th>
+    <th>
+      <button type="button" class="btn btn-danger" (click)="deleteRow(riga.id)">Cancella</button>
     </th>
   </tr>
   </tbody>
