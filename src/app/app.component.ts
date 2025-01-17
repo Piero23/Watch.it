@@ -29,9 +29,21 @@ export class AppComponent implements OnInit {
   searchQuery : any
   logged : boolean = false;
   username: string = ""
+  dropdownOpen = false;
 
   router : Router = inject(Router)
   database : DatabaseService = inject(DatabaseService)
+
+  toggleDropdown(): void {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  logout(): void {
+    // Perform logout logic here
+    console.log('User logged out');
+    this.database.logOut();
+    this.router.navigate(['/login']);
+  }
 
   onSearch() {
     this.router.navigate(['results'], { queryParams: { searchQuery: this.searchQuery } });
