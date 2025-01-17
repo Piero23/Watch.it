@@ -190,7 +190,9 @@ public class ConcreteUtenteDao implements UtenteDao {
       query.setString(1, mail);
       query.executeQuery();
       ResultSet rs = query.getResultSet();
+      if(!rs.isBeforeFirst()) return false;
       rs.next();
+
       if (mail.equals(rs.getString("email")) && password.equals(rs.getString("password"))) {
         login = true;
       }

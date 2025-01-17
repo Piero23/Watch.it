@@ -20,7 +20,6 @@ public class Utente {
     this.img_profilo = img_profilo;
     this.imgbackground = imgbackground;
     this.admin = admin;
-
   }
 
   public Utente() {}

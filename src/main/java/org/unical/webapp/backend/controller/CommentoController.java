@@ -35,7 +35,7 @@ public class CommentoController {
 
     @RequestMapping(value="/newComment", method= RequestMethod.POST)
     void newComment(HttpServletRequest request, HttpServletResponse response, @RequestBody Map<String,String> payload) {
-
+        
         int content_id= Integer.parseInt(payload.get("content_id"));
         boolean content_type= !Objects.equals(payload.get("content_type"), "film");
         String body= payload.get("text");

@@ -137,11 +137,12 @@ public class ConcreteContenutoDao implements ContenutoDao {
 
     try {
       PreparedStatement query = connection.prepareStatement(
-              "select * from contenuto_utente join contenuto on contenuto_utente.id_contenuto=contenuto.id where id_api = ? and is_serie=?"
+              "select * from contenuto_utente join contenuto on contenuto_utente.id_contenuto=contenuto.id where id_api = ? and is_serie=? and utente = ?"
       );
 
       query.setInt(1, idContenuto);
       query.setBoolean(2, tipo);
+      query.setString(3, utente);
       ResultSet rs = query.executeQuery();
 
       if (!rs.isBeforeFirst()) {
