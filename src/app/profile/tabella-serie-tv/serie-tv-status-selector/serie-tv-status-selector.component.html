@@ -1,0 +1,30 @@
+<div class="base d-flex">
+  <img [src]="image" style="margin: 1%; border-radius: 15px 0 0 15px;">
+
+  <div class="d-flex flex-column text-center" style="width: 100%; align-items: center">
+    <h2 style="margin-top: 1%; margin-bottom: 2%; font-size: 1.5vw; color: white;">Nome del film</h2>
+
+    <div class="d-flex">
+      <div style="width: 100%">
+        <label for="selectSeason" style="color: white; font-size: 0.8vw">Seleziona Stagione:</label>
+        <select class="selector" id="selectSeason" [(ngModel)]="currentStatus.stagione" (change)="onStagioneChange(currentStatus.stagione)">
+          <option *ngFor="let stagione of listaStagioni" value="{{stagione}}" [selected]="stagione===currentStatus.stagione" >Stagione {{stagione}}</option>
+        </select>
+      </div>
+
+      <div style="width: 100%">
+        <label for="selectEpisode" style="color: white; font-size: 0.8vw">Seleziona Episodio:</label>
+        <select class="selector" id="selectEpisode" [(ngModel)]="currentStatus.episodio">
+          <option *ngFor="let episodio of selectedEpisodes" value="{{episodio}}" [selected]="episodio===currentStatus.episodio" (click)="currentStatus.episodio=episodio">Episodio {{episodio}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mt-auto d-flex justify-content-center" style="margin-bottom: 3%">
+      <button class="confirm col-2" (click)="confirmSelection()">Conferma</button>
+      <button class="deny col-2" (click)="closePopup()">Annulla</button>
+    </div>
+
+  </div>
+
+</div>

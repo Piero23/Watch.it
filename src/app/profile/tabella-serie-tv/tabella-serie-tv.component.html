@@ -1,0 +1,62 @@
+<div class="status text-center" style="padding-top: 1%; padding-bottom: 2%">
+  <button class="col-1 selectionButtonRow2" (click)="activateButton(0)" name="daVedere" style="background: #4CB2FD; color: black;">Da Vedere</button>
+  <button class="col-1 selectionButtonRow2" (click)="activateButton(1)" name="inVisione">In Visione</button>
+  <button class="col-1 selectionButtonRow2" (click)="activateButton(2)" name="visto">Visti</button>
+</div>
+
+<app-serie-tv-status-selector class="popup" [rowIndex]="selectedRow" *ngIf="seriesEditor"></app-serie-tv-status-selector>
+
+<table class="table table-striped text-center" style="color: lightgray;">
+  <thead class="align-middle">
+  <th class="col-2">Preview</th>
+  <th class="col-auto">
+    <button class="btn" style="background-color: transparent; color: lightgrey;" (click)="sortByName()"><b>Titolo</b></button>
+  </th>
+  <th class="col-auto">
+    <button class="btn" style="background-color: transparent; color: lightgrey;" (click)="sortByYear()"><b>Anno</b></button>
+  </th>
+  <th class="col-2"></th>
+  <th class="col-auto">
+    <button class="btn" style="background-color: transparent; color: lightgrey;" (click)="sortByRating()"><b>Voto</b></button>
+  </th>
+  <th class="col-2"></th>
+  </thead>
+
+  <tbody class="align-middle">
+  <tr  *ngFor="let riga of righe; let i=index;">
+    <th>
+      <img [src]="riga.immagine" style="width: 40%; background: none;">
+    </th>
+    <th>
+      <a href="tv/{{riga.id}}" >{{riga.nome}}</a>
+    </th>
+    <th>
+    {{riga.anno}}
+    </th>
+    <th>
+      <button type="button" class="btn btn-primary" (click)="openPopup(i)">S{{riga.status.stagione}} E{{riga.status.episodio}} <i class="fa-solid fa-pen-to-square"></i></button>
+    </th>
+    <th>
+      <div class="rating">
+        <input value="5" name="rating+{{i}}" id="star5+{{i}}" type="radio" [value]="5" [(ngModel)]="riga.rating" (ngModelChange)="setRating(riga.id,riga.rating)">
+        <label for="star5+{{i}}"></label>
+        <input value="4" name="rating+{{i}}" id="star4+{{i}}" type="radio" [value]="4" [(ngModel)]="riga.rating" (ngModelChange)="setRating(riga.id,riga.rating)">
+        <label for="star4+{{i}}"></label>
+        <input value="3" name="rating+{{i}}" id="star3+{{i}}" type="radio" [value]="3" [(ngModel)]="riga.rating" (ngModelChange)="setRating(riga.id,riga.rating)">
+        <label for="star3+{{i}}"></label>
+        <input value="2" name="rating+{{i}}" id="star2+{{i}}" type="radio" [value]="2" [(ngModel)]="riga.rating" (ngModelChange)="setRating(riga.id,riga.rating)">
+        <label for="star2+{{i}}"></label>
+        <input value="1" name="rating+{{i}}" id="star1+{{i}}" type="radio" [value]="1" [(ngModel)]="riga.rating" (ngModelChange)="setRating(riga.id,riga.rating)">
+        <label for="star1+{{i}}"></label>
+      </div>
+    </th>
+    <th>
+      <button type="button" class="btn dropdown-toggle btn-primary" data-bs-toggle="dropdown" aria-expanded="false">Da Vedere</button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item">In Visione</a></li>
+        <li><a class="dropdown-item">Visto</a></li>
+      </ul>
+    </th>
+  </tr>
+  </tbody>
+</table>

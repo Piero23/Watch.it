@@ -1,0 +1,22 @@
+.star-rating .fa-star {
+  transition: color 0.2s ease-in-out;
+}
+.star-rating .fa-star:hover {
+  color: orange;
+}
+
+.fa-star:before{
+  font-size: 10px !important;
+}
+.fas.icon-outline {
+  text-shadow:
+    -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px  1px 0 black,
+    1px  1px 0 black;
+}
+
+.far {
+  fill: black !important;
+  color: black !important;
+}

@@ -1,0 +1,34 @@
+<div class="comment-section">
+    <h3>{{ comments.length }} commenti</h3>
+    <div *ngIf="comments.length === 0" class="no-comments">
+      Nessun commento presente. Sii il primo a commentare!
+    </div>
+    <div *ngFor="let comment of comments; let i = index" class="comment-item">
+      <img [src]="comment.profilePic" alt="User Profile" class="profile-pic" />
+      <div class="comment-content">
+        <div class="comment-header">
+          <span class="username">{{ comment.username }}</span>
+          <div class="stars">
+            <app-star-review [starRating]="comment.rating" [fixed]="true"></app-star-review>
+          </div>
+          <button (click)="openRepliesPopup(comment.replies,i)" class="replies-btn">
+            {{comments[i].replies.length}} risposte
+          </button>
+        </div>
+        <p class="comment-text">{{ comment.text }}</p>
+      </div>
+      <div class="button-choice">
+        <button *ngIf="isModerator" class="delete-btn" (click)="onDeleteComment(i)">
+          🗑️
+        </button>
+        <button class="fa-solid fa-reply" (click)="onReplyToComment(i, comment.username, comment.text)"></button>
+      </div>
+  </div>
+  <app-reply
+    *ngIf="showRepliesPopup"
+    [replies]="activeReplies"
+    [isModerator]="isModerator"
+    (deleteReply)="handleDeleteReply($event)"
+    (closePopup)="showRepliesPopup = false"
+  ></app-reply>
+</div>

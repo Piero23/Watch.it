@@ -1,0 +1,47 @@
+.per-te-row {
+  margin-bottom: 80px;
+}
+
+.content-suggestion-title {
+  font-size: 22px;
+  color: white;
+  padding-top: 16px;
+}
+
+.row {
+  background: #282828;
+}
+.content-suggestion-col {
+  padding: 10px;
+}
+
+.content-suggestion-col:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+.content-art {
+  border-radius: 5px;
+}
+
+.col.btn-left-right {
+  justify-content: center;
+}
+
+.btn {
+  width: auto;
+  height: auto;
+}
+
+.fa-solid {
+  color: grey;
+  transform: scale(1.5);
+}
+.fa-solid:hover {
+  transition: 0.2s;
+  transform: scale(2);
+}
+
+.btn:active {
+  color: white;
+}

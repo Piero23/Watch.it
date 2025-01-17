@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <h2 class=" my-4 justify-content-center align-items-center d-flex text-white">Episodi</h2>
+</div>
+<div>
+  <select style="margin-left:5dvw; width: clamp(130px,7dvw,200px);font-size: 18px; background-color: #454242; border: none;outline: none" class="text-white form-select form-select-sm"  [(ngModel)]="selectedSeasonNum" (ngModelChange)="onSeasonChange($event)">
+    <option *ngFor="let season of seasons; let i  = index" [value]="i+hasSpecial">{{season.name}}</option>
+  </select>
+</div>
+
+<div class=" my-4 justify-content-center align-items-center d-flex flex-column text-white " style="gap: 20px">
+  <app-card-episodio *ngFor="let episode of episodes; let i = index" [infoEpisodio]="episode"  (checked)="onEpisodeChecked(i)"></app-card-episodio>
+  @if (episodes.length == 0) {
+    <h3> Sembra che non ci siano episodi di questa stagione</h3>
+  }
+</div>
