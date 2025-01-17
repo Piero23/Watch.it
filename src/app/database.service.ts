@@ -67,7 +67,15 @@ export class DatabaseService {
   }
 
   // Delete Comment
-  async deleteComment(id: number){}
+  async deleteComment(id: number){
+    const body={
+      comment_id: id
+    }
+    await this.http.post('http://localhost:8080/commento/deleteComment', body, {
+      headers : {'Content-Type': 'application/json'},
+      withCredentials:true
+    }).toPromise();
+  }
 
 
 

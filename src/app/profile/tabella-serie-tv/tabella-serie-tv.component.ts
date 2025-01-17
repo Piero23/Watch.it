@@ -51,7 +51,8 @@ export class TabellaSerieTvComponent implements OnInit{
     status: {
       stagione: number,
       episodio: number
-    }
+    },
+    viewingStatus: number,
     stagioni: {
       numeroStagione: number,
       numeroEpisodi: number,
@@ -145,7 +146,8 @@ export class TabellaSerieTvComponent implements OnInit{
           status: {
             stagione: number,
             episodio: number
-          }
+          },
+          viewingStatus: number,
           stagioni: {
             numeroStagione: number,
             numeroEpisodi: number
@@ -162,6 +164,7 @@ export class TabellaSerieTvComponent implements OnInit{
             stagione: riga.stagione,
             episodio: riga.episodio
           },
+          viewingStatus: riga.status,
           stagioni: []
         }
 
@@ -215,6 +218,13 @@ export class TabellaSerieTvComponent implements OnInit{
     }
   }
 
+  async deleteRow(id: number) {
+    this.righe = this.righe.filter(riga => riga.id !== id);
+    await this.database.deleteContenuto_Utente(this.username, "tv", id);
+  }
 
-
+  async updateStatus(id: number, status: number) {
+    this.righe = this.righe.filter(riga => riga.id !== id);
+    await this.database.aggiornaStatus(this.username,"tv",id, status)
+  }
 }

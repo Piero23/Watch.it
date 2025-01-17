@@ -40,7 +40,8 @@ export class CommentSectionComponent implements OnInit{
     this.showRepliesPopup = true;
   }
 
-  handleDeleteReply(index: number): void {
+  async handleDeleteReply(index: number): Promise<void> {
+    await this.database.deleteComment(this.comments[this.activeCommentIndex].replies[index].id)
     this.comments[this.activeCommentIndex].replies.splice(index, 1);
   }
 
