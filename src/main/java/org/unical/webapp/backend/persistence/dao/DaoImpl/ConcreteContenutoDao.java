@@ -30,6 +30,14 @@ public class ConcreteContenutoDao implements ContenutoDao {
       query.setInt(1, id);
       query.setBoolean(2, type);
       ResultSet rs = query.executeQuery();
+      if (!rs.isBeforeFirst()) {
+        save(id,type);
+        query = connection.prepareStatement("select * from contenuto where id_contenuto = ? and is_serie=?");
+        query.setInt(1, id);
+        query.setBoolean(2, type);
+        rs = query.executeQuery();
+      }
+
       rs.next();
       Contenuto contenuto = new ContenutoProxy();
       contenuto.setId_contenuto(rs.getInt("id_contenuto"));

@@ -11,9 +11,6 @@ public class BackendConfiguration {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**")
-                        .allowedOrigins("http://localhost:4200") // Dominio Angular
-                        .allowedMethods("GET", "POST", "PUT", "DELETE");
 
                 registry.addMapping("/utente/**")
                         .allowedOrigins("http://localhost:4200") // Dominio Angular
@@ -22,6 +19,7 @@ public class BackendConfiguration {
 
                 registry.addMapping("/commento/**")
                         .allowedOrigins("http://localhost:4200") // Dominio Angular
+                        .allowCredentials(true)
                         .allowedMethods("GET", "POST", "PUT", "DELETE");
 
                 registry.addMapping("/contenuto/**")

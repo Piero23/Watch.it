@@ -41,7 +41,7 @@ public class UtenteController {
     }
 
     @RequestMapping(value = "/setProPic/{utente}", method = RequestMethod.POST)
-    void setPropic(@RequestBody String utente, @RequestBody byte[] propic) {
+    void setPropic(@PathVariable String utente, @RequestBody byte[] propic) {
         utenteService.newProPic(utenteService.getByUsername(utente), propic);
     }
 

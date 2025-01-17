@@ -9,11 +9,11 @@ public class Utente {
   protected String username;
   protected String email;
   protected String password;
-  protected byte[] img_profilo;
-  protected byte[] imgbackground;
+  protected String img_profilo;
+  protected String imgbackground;
   protected boolean admin = false;
 
-  public Utente(String username, String email, String password, byte[] img_profilo, byte[] imgbackground, boolean admin) {
+  public Utente(String username, String email, String password, String img_profilo, String imgbackground, boolean admin) {
     this.username = username;
     this.email = email;
     this.password = password;
@@ -49,19 +49,19 @@ public class Utente {
     this.password = password;
   }
 
-  public byte[] getImg_profilo() {
+  public String getImg_profilo() {
     return img_profilo;
   }
 
-  public void setImg_profilo(byte[] img_profilo) {
+  public void setImg_profilo(String img_profilo) {
     this.img_profilo = img_profilo;
   }
 
-  public byte[] getImgbackground() {
+  public String getImgbackground() {
     return imgbackground;
   }
 
-  public void setImgbackground(byte[] imgbackground) {
+  public void setImgbackground(String imgbackground) {
     this.imgbackground = imgbackground;
   }
 

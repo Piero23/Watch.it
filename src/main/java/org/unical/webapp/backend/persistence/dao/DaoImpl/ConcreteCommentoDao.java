@@ -81,7 +81,10 @@ public class ConcreteCommentoDao implements CommentoDao {
       query.setString(3, commento.getContenuto());
       query.setInt(4, commento.getVoto());
       query.setString(5, commento.getUsername_utente());
-      query.setInt(6, commento.getCommento_risposto());
+      if(commento.getCommento_risposto() == null){
+        query.setNull(6,java.sql.Types.INTEGER);
+      }else
+        query.setInt(6, commento.getCommento_risposto());
       query.executeUpdate();
 
     } catch (SQLException e) {
@@ -108,7 +111,7 @@ public class ConcreteCommentoDao implements CommentoDao {
   public List<Commento> findByContent(int contentId, boolean type) {
     List<Commento> commenti = new ArrayList<Commento>();
     try {
-      PreparedStatement query = connection.prepareStatement("select * from commenti where id_contenuto_api=? and is_serie=? and commento_risposto= null");
+      PreparedStatement query = connection.prepareStatement("select * from commenti where id_contenuto_api=? and is_serie=? and commento_risposto is NULL");
       query.setInt(1, contentId);
       query.setBoolean(2, type);
       ResultSet rs = query.executeQuery();

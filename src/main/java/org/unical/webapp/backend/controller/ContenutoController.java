@@ -2,6 +2,8 @@ package org.unical.webapp.backend.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ import java.util.Map;
 @RequestMapping("/contenuto")
 public class ContenutoController {
 
+    private static final Logger log = LoggerFactory.getLogger(ContenutoController.class);
     private final ContenutoServiceInterface contenutoService;
 
     public ContenutoController(ContenutoServiceInterface contenutoService) {
@@ -27,6 +30,7 @@ public class ContenutoController {
 
     @RequestMapping(value="/getCommenti/{type}/{id}", method= RequestMethod.GET)
     ResponseEntity<Collection<Commento>> getCommenti(@PathVariable String type, @PathVariable int id) {
+
         if (type.equals("film")) {
             return ResponseEntity.ok(
                     contenutoService.getCommenti(contenutoService.getById(id, false))
@@ -79,5 +83,4 @@ public class ContenutoController {
             contenutoService.modificaVoto(utente, true, id, rating);
         }
     }
-
 }

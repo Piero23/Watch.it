@@ -10,12 +10,11 @@ public class Commento {
   protected String contenuto;
   protected int voto;
   protected String username_utente;
-  protected int commento_risposto;
+  protected Integer commento_risposto = null;
 
   protected List<Commento> risposte;
 
-  public Commento(int id_commento, int id_contenuto_api, boolean is_serie, String contenuto, int voto, String username_utente, int commento_risposto, List<Commento> risposte) {
-    this.id_commento = id_commento;
+  public Commento( int id_contenuto_api, boolean is_serie, String contenuto, int voto, String username_utente, int commento_risposto, List<Commento> risposte) {
     this.id_contenuto_api = id_contenuto_api;
     this.is_serie = is_serie;
     this.contenuto = contenuto;
@@ -67,7 +66,7 @@ public class Commento {
     this.username_utente = username_utente;
   }
 
-  public int getCommento_risposto() {
+  public Integer getCommento_risposto() {
     return commento_risposto;
   }
 

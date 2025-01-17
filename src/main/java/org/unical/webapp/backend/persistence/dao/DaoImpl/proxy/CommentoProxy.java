@@ -7,8 +7,8 @@ import java.util.List;
 
 public class CommentoProxy extends Commento {
 
-    public CommentoProxy(int id_commento, int id_contenuto_api, boolean is_serie, String contenuto, int voto, String username_utente, int commento_risposto, List<Commento> risposte) {
-        super(id_commento, id_contenuto_api, is_serie, contenuto, voto, username_utente, commento_risposto, risposte);
+    public CommentoProxy(int id_contenuto_api, boolean is_serie, String contenuto, int voto, String username_utente, int commento_risposto, List<Commento> risposte) {
+        super( id_contenuto_api, is_serie, contenuto, voto, username_utente, commento_risposto, risposte);
     }
 
     public CommentoProxy() {

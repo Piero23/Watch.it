@@ -1,5 +1,7 @@
 package org.unical.webapp.backend.persistence.dao.DaoImpl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.unical.webapp.backend.model.Contenuto;
 import org.unical.webapp.backend.model.Utente;
@@ -7,13 +9,16 @@ import org.unical.webapp.backend.persistence.DBManager;
 import org.unical.webapp.backend.persistence.dao.DaoImpl.proxy.ContenutoProxy;
 import org.unical.webapp.backend.persistence.dao.UtenteDao;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Component
 public class ConcreteUtenteDao implements UtenteDao {
 
+  private static final Logger log = LoggerFactory.getLogger(ConcreteUtenteDao.class);
   Connection connection;
 
   public ConcreteUtenteDao() {this.connection = DBManager.getInstance().getConnection();;}
@@ -26,15 +31,21 @@ public class ConcreteUtenteDao implements UtenteDao {
       ResultSet rs = query.executeQuery();
       if (!rs.isBeforeFirst()) return null; //chiedere al professore se serve
       rs.next();
-      Utente utente = new Utente(
-        rs.getString("username"),
-        rs.getString("email"),
-        rs.getString("password"),
-        rs.getBytes("img_profilo"),
-        rs.getBytes("imgbackground"),
-        rs.getBoolean("admin")
-      );
 
+      Utente utente = new Utente();
+      utente.setUsername(rs.getString("username"));
+      utente.setPassword(rs.getString("password"));
+      utente.setEmail(rs.getString("email"));
+      if(rs.getBytes("img_profilo") != null){
+        utente.setImg_profilo(new String(rs.getBytes("img_profilo"),StandardCharsets. UTF_8));
+      }else
+        utente.setImg_profilo(null);
+      if(rs.getBytes("imgbackground") != null){
+        utente.setImgbackground(new String(rs.getBytes("imgbackground"),StandardCharsets. UTF_8));
+      }else
+        utente.setImgbackground(null);
+
+      utente.setAdmin(rs.getBoolean("admin"));
       return utente;
 
     } catch (SQLException e) {
@@ -54,8 +65,8 @@ public class ConcreteUtenteDao implements UtenteDao {
           rs.getString("username"),
           rs.getString("email"),
           rs.getString("password"),
-          rs.getBytes("img_profilo"),
-          rs.getBytes("imgbackground"),
+          rs.getString("img_profilo"),
+          rs.getString("imgbackground"),
           rs.getBoolean("admin")
         );
 
@@ -71,15 +82,14 @@ public class ConcreteUtenteDao implements UtenteDao {
   public void save(Utente utente) {
     try{
       PreparedStatement query = connection.prepareStatement(
-        "insert into utente (username, email, password, img_profilo, imgbackground, admin) values (?,?,?,?,?,?)"
+        "insert into utente (username, email, password, admin) values (?,?,?,?)"
       );
 
       query.setString(1, utente.getUsername());
       query.setString(2, utente.getEmail());
       query.setString(3, utente.getPassword());
-      query.setBytes(4, utente.getImg_profilo());
-      query.setBytes(5, utente.getImgbackground());
-      query.setBoolean(6, utente.isAdmin());
+
+      query.setBoolean(4, utente.isAdmin());
       query.executeUpdate();
 
     } catch (SQLException e) {
@@ -202,8 +212,8 @@ public class ConcreteUtenteDao implements UtenteDao {
               rs.getString("username"),
               rs.getString("email"),
               rs.getString("password"),
-              rs.getBytes("img_profilo"),
-              rs.getBytes("imgbackground"),
+              rs.getString("img_profilo"),
+              rs.getString("imgbackground"),
               rs.getBoolean("admin")
       );
 
