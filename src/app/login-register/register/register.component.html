@@ -23,11 +23,11 @@
 
     <form>
       <div class="input-group">
-        <input type="email" name="email" placeholder="Email" [(ngModel)]="email"/>
-        <input type="username" name="username" placeholder="Username" [(ngModel)]="username"/>
+        <input type="email" name="email" placeholder="Email" class="rounded-4" [(ngModel)]="email"/>
+        <input type="username" name="username" placeholder="Username" class="rounded-4" [(ngModel)]="username"/>
       </div>
       <div class="input-group">
-        <input [type]="isPasswordVisible ? 'text' : 'password'" placeholder="Password" [(ngModel)]="password"/>
+        <input [type]="isPasswordVisible ? 'text' : 'password'" placeholder="Password" class="rounded-4" [(ngModel)]="password"/>
         <button type="button" class="toggle-password" (click)="showPassword()">
           👁
         </button>
