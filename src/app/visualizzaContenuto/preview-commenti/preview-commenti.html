@@ -4,6 +4,7 @@
 </div>
 
 <div class="col-10 text-white d-flex flex-column justify-content-center ">
-  <p   *ngIf="firstComment != 'Ancora nessun commento sii il primo a commentare'"  style="margin-left: 10px;font-size: 18px; ; margin-bottom: 0">{{ username }} </p>
+  <p   *ngIf="firstComment != 'Ancora nessun commento sii il primo a commentare'"  style="margin-left: 10px;font-size: 18px; margin-bottom: 0"
+       [ngStyle]="" > {{ username }} </p>
   <p class="text-truncated" style="font-size: 15px; margin-left: 10px;"> {{firstComment}} </p>
 </div>

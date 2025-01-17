@@ -67,7 +67,7 @@ export class TabellaFilmComponent implements OnInit {
   }
 
   sortByRating() {
-    console.log(this.righe);
+
     this.nameOrder = true;
     this.yearOrder = true;
 

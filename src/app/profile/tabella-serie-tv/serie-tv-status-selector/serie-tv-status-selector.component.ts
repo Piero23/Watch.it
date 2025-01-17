@@ -15,7 +15,7 @@ import {FormsModule} from '@angular/forms';
   styleUrl: './serie-tv-status-selector.component.css'
 })
 export class SerieTvStatusSelectorComponent {
-  @Input() rowIndex!: number;
+  rowIndex!: number;
   image!: string;
 
   currentStatus: {stagione: number, episodio: number};
@@ -27,6 +27,7 @@ export class SerieTvStatusSelectorComponent {
   selectedEpisodes: number[] = this.listaEpisodi[0]
 
   constructor(private tabella: TabellaSerieTvComponent) {
+    this.rowIndex = tabella.selectedRow
     // @ts-ignore
     this.image=tabella.righe.at(this.rowIndex).immagine;
 
@@ -50,8 +51,7 @@ export class SerieTvStatusSelectorComponent {
     }
 
     this.selectedEpisodes = this.listaEpisodi[this.currentStatus.stagione - 1];
-    console.log(this.listaStagioni)
-    console.log(this.listaEpisodi)
+
   }
 
   onStagioneChange(stagione: number) {

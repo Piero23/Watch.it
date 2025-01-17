@@ -36,6 +36,14 @@ export class RegisterComponent {
   }
 
   async messageForm(username : string,email: string, password: string) {
+
+    if (!username || !email || !password) {
+      alert("Tutti i campi sono obbligatori")
+      return;
+    }
+
+
+
     const data = await this.database.register(username,email,password);
     // @ts-ignore
     if(data.status === 200){
@@ -59,6 +67,6 @@ export class RegisterComponent {
     this.successMessage = message;
     setTimeout(() => {
       this.successMessage = '';
-    }, 5000);
+    }, 2000);
   }
 }

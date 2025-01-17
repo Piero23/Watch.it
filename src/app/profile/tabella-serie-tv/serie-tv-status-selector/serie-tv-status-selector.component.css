@@ -1,5 +1,6 @@
 .base{
-  width: 30%;
+  min-width: 400px;
+  width: 50%;
   aspect-ratio: 2/1;
   background-color: #131514;
   position: fixed;
@@ -15,8 +16,8 @@
   margin: 1%;
   background: #1BD75F;
   color: white;
-  font-size: 0.8vw;
-  width: 70%
+  font-size: 16px;
+  width: 100px
 }
 
 .confirm:active{}
@@ -27,8 +28,8 @@
   margin: 1%;
   background: #282828;
   color: white;
-  font-size: 0.8vw;
-  width: 70%;
+  font-size: 16px;
+  width: 100px
 }
 
 .deny:active{}

@@ -99,6 +99,8 @@ export class ProfileComponent implements OnInit{
         break;
       }
     }
+
+    window.location.reload()
   }
 
   setProPic(propic: string){

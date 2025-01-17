@@ -67,11 +67,13 @@ export class DatabaseService {
 
 
   async register(username: string, mail: string, password: string) {
+
     const body = {
       username: username,
       mail: mail,
       password: password,
     }
+
     return await this.http.post('http://localhost:8080/utente/register', body, {
       headers: {'Content-Type': 'application/json'},
       withCredentials: true

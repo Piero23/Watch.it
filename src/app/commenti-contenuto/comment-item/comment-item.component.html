@@ -1,19 +1,44 @@
-<div class="comment-item">
-  <div *ngIf="replyingTo" class="replying-info">
-    Stai rispondendo a {{ replyingTo.username}} : "{{replyingTo.text}}"
-    <button class="cancel-btn" (click)="cancelReply.emit()">Annulla</button>
+<div class="comment-item container-fluid p-3 mb-4 text-light">
+  <div *ngIf="replyingTo" class="replying-info row align-items-center mb-3">
+    <div class="col-12 col-md">
+      Stai rispondendo a <span class="fw-bold">{{ replyingTo.username }}</span>: "{{ replyingTo.text }}"
+    </div>
+    <div class="col-12 col-md-auto mt-2 mt-md-0 text-md-end">
+      <button class="btn btn-danger btn-sm" (click)="cancelReply.emit()">Annulla</button>
+    </div>
   </div>
-  <div class="user-info">
-    <img [src]="userProfilePic" alt="User Profile" class="profile-pic" />
-    <span class="username">{{ username }}</span>
+
+  <div class="user-info row align-items-center mb-3">
+    <div class="col-auto">
+      <img [src]="userProfilePic" alt="User Profile" class="profile-pic rounded-circle border border-2 border-dark" />
+    </div>
+    <div class="col">
+      <span class="fw-bold">{{ username }}</span>
+    </div>
   </div>
-  <textarea placeholder="Scrivi un commento..." [(ngModel)]="commentText" class="comment-box"></textarea>
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
+
+  <textarea
+    placeholder="Scrivi un commento..."
+    [(ngModel)]="commentText"
+    class="form-control text-dark mb-3 border-0 rounded"
+  ></textarea>
+
+  <p *ngIf="errorMessage" class="text-danger"> {{errorMessage}}</p>
+
+  <div class="row mb-3" *ngIf="!replyingTo">
+    <div class="col">
+      <app-star-review [starRating]="starRating" (ratingChange)="updateStarRating($event)"></app-star-review>
+    </div>
   </div>
-  <app-star-review [starRating]="starRating" (ratingChange)="updateStarRating($event)"></app-star-review>
-  <div class="actions">
-    <button (click)="postComment()" [disabled]="!commentText.trim() || starRating === 0">Pubblica</button>
+
+  <div class="d-flex justify-content-end">
+    <button
+      (click)="postComment()"
+      [disabled]="  (!commentText.trim() || (starRating == 0 && !replyingTo)) || (replyingTo && !commentText.trim() )"
+      class="btn btn-primary"
+      type="button"
+    >
+      Pubblica
+    </button>
   </div>
 </div>
-

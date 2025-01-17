@@ -25,8 +25,14 @@ export class ConsigliatiFilmComponent implements OnInit{
       const id = params['id'];
       this.consigliati = await this.tmdbdata.getSimilarMovies(id);
       this.consigliati = this.consigliati.slice(0,9)
+
     });
   }
 
 
+  async prova(id : number) {
+     await this.router.navigate([`film/${id}`]);
+
+     window.location.reload()
+  }
 }

@@ -1,12 +1,14 @@
 <div class="comment-container ">
-  <app-comment-item
+  <app-comment-item *ngIf="isLoggedIn"
     (commentPosted)="addComment($event)"
     [replyingTo]="replyingTo"
     (cancelReply)="cancelReply()"
-  ></app-comment-item>
+    class="mt-3"
+  ></app-comment-item >
   <app-comment-section
     [comments]="comments"
     [isModerator]="isModerator"
+    [isLoggedIn] = "isLoggedIn"
     (deleteComment)="deleteComment($event)"
     (replyToComment)="onReplyToComment($event)"
   ></app-comment-section>

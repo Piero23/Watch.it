@@ -29,7 +29,7 @@ export class HomepageComponent implements OnInit{
   async setPopularMovies(){
     this.listaPopualrMovies= await this.tmdbDataService.getPopularMovies();
     this.listaPopualrMovies = this.listaPopualrMovies.slice(0,8)
-    console.log(this.listaPopualrMovies)
+
   }
 
 }

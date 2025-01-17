@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
 
   logout(): void {
     this.database.logOut();
-    this.router.navigate(['/login']).then(() => {
+    this.router.navigate(['/']).then(() => {
       window.location.reload();
     });
   }

@@ -23,6 +23,7 @@ export class CommentSectionComponent implements OnInit{
     replies: {id : number,text: string; rating: number; username: string; profilePic: string }[];
   }[] = [];
 
+  @Input() isLoggedIn: boolean = false;
   @Input() isModerator: boolean = false;
   @Output() deleteComment = new EventEmitter<number>();
   @Output() replyToComment = new EventEmitter<{ id: number,index: number; username: string; text: string }>();
@@ -58,7 +59,7 @@ export class CommentSectionComponent implements OnInit{
     const id = this.route.snapshot.params['id'];
     const content = this.route.snapshot.params['contenuto'];
     const datas = await this.database.getCommentiFromContenuto(content,id)
-    console.log(datas)
+
 
     // @ts-ignore
     for (let data of datas) {

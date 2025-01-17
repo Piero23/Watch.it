@@ -1,29 +1,36 @@
-<div class="comment-section">
-    <h3>{{ comments.length }} commenti</h3>
-    <div *ngIf="comments.length === 0" class="no-comments">
-      Nessun commento presente. Sii il primo a commentare!
+<div class="comment-section container-fluid p-4 text-light rounded">
+  <h3 class="mb-3">{{ comments.length }} commenti</h3>
+  <div *ngIf="comments.length === 0" class="no-comments text-center text-white">
+    Nessun commento presente. Sii il primo a commentare!
+  </div>
+  <div *ngFor="let comment of comments; let i = index" class="comment-item row align-items-start mb-2">
+    <div class="col-auto  justify-content-center align-items-center ">
+      <img [src]="comment.profilePic" alt="User Profile" class="profile-pic"/>
     </div>
-    <div *ngFor="let comment of comments; let i = index" class="comment-item">
-      <img [src]="comment.profilePic" alt="User Profile" class="profile-pic" />
+
+    <div class="col">
       <div class="comment-content">
-        <div class="comment-header">
-          <span class="username">{{ comment.username }}</span>
+        <div class="comment-header d-flex align-items-center">
+          <span class="username text-white fw-bold me-2">{{ comment.username }}</span>
           <div class="stars">
             <app-star-review [starRating]="comment.rating" [fixed]="true"></app-star-review>
           </div>
-          <button (click)="openRepliesPopup(comment.replies,i)" class="replies-btn">
-            {{comments[i].replies.length}} risposte
+          <button (click)="openRepliesPopup(comment.replies,i)"
+                  class="ms-auto p-0 text-secondary border-0 bg-transparent">
+            {{ comments[i].replies.length }} risposte
           </button>
         </div>
-        <p class="comment-text">{{ comment.text }}</p>
+        <p class="comment-text text-white mb-0">{{ comment.text }}</p>
       </div>
+    </div>
 
-      <div class="button-choice">
-        <button *ngIf="isModerator" class="delete-btn" (click)="onDeleteComment(i)">
-          🗑️
-        </button>
-        <button class="fa-solid fa-reply" (click)="onReplyToComment(i, comment.username, comment.text)"></button>
-      </div>
+    <div class="col-auto d-flex flex-column align-items-center">
+      <button *ngIf="isModerator" class="btn btn-danger btn-sm mb-2" (click)="onDeleteComment(i)">
+        🗑️
+      </button>
+      <button class="fa-solid fa-reply btn btn-primary btn-sm mb-2" *ngIf="isLoggedIn"
+              (click)="onReplyToComment(i, comment.username, comment.text)"></button>
+    </div>
   </div>
   <app-reply
     *ngIf="showRepliesPopup"

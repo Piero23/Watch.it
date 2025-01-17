@@ -10,7 +10,6 @@
     <div class="reply-content">
       <div class="reply-header">
         <span class="username">{{ reply.username }}</span>
-        <app-star-review [starRating]="reply.rating" [fixed]="true"></app-star-review>
       </div>
       <p class="reply-text">{{ reply.text }}</p>
       <button *ngIf="isModerator" class="delete-btn" (click)="onDeleteReply(i)">

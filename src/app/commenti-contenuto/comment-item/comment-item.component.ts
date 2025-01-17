@@ -90,6 +90,7 @@ export class CommentItemComponent implements OnInit{
     }
     this.errorMessage = null;
 
+
     this.commentPosted.emit({
       id: -1,
       text: this.commentText,

@@ -69,7 +69,7 @@ export class ListaEpisodiComponent implements OnInit{
     for (let i = 0; i <= index; i++) {
       this.episodes[i].visto = true;
     }
-    console.log(this.episodes);
+
   }
 
   async ngOnInit()  {

@@ -52,8 +52,7 @@ export class SerieTvStatusSelectorComponent {
     }
 
     this.selectedEpisodes = this.listaEpisodi[this.currentStatus.stagione - 1];
-    console.log(this.listaStagioni)
-    console.log(this.listaEpisodi)
+
   }
 
   onStagioneChange(stagione: number) {

@@ -33,7 +33,7 @@ export class TabellaSerieTvComponent implements OnInit{
 
   async ngOnInit() {
     const data =await this.database.utenteBySession()
-    console.log(data);
+
     // @ts-ignore
     this.username = data.username;
 
@@ -127,7 +127,7 @@ export class TabellaSerieTvComponent implements OnInit{
     this.righe=[]
 
     const queryRows: any = await this.database.getContenutoByUtente(this.username);
-    console.log(queryRows)
+
     for (let riga of queryRows) {
       if (riga.status==status && riga.is_serie==1) {
         let series: any = await this.tmdb.getTvSeriesByID(riga.id_contenuto);

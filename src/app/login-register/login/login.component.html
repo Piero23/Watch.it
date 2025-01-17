@@ -1,39 +1,32 @@
-<div class="container">
-  <div class="error-message" *ngIf="errorMessage">
-    {{ errorMessage }}
-  </div>
-
-  <div class="left-section">
-    <h1>Accedi al tuo account</h1>
-    <p>Accedi utilizzando i social network</p>
-
-    <div class="social-buttons">
-      <button class="facebook">f</button>
-      <button class="google">G+</button>
-      <button class="linkedin">in</button>
-    </div>
-
-    <div class="divider">
-      <span>------------------------------------------------- OPPURE -------------------------------------------------</span>
-    </div>
-
-    <form>
-      <div class="input-group">
-        <input type="username" name="username" placeholder="Username" class="rounded-4" maxlength="24" [(ngModel)]="username"/>
+<div class="container-fluid d-flex flex-column flex-md-row align-items-stretch vh-100">
+  <div class="left-section col-12 col-md-8 d-flex flex-column justify-content-center align-items-center text-center p-5">
+    <div class="alert-error">
+      <div *ngIf="errorMessage" class="alert alert-danger w-100 text-center" style="max-width: 400px;">
+        {{ errorMessage }}
       </div>
-      <div class="input-group">
-        <input [type]="isPasswordVisible ? 'text' : 'password'" placeholder="Password" class="rounded-4" maxlength="255" [(ngModel)]="password"/>
-        <button type="button" class="toggle-password" (click)="showPassword()">
-          👁
+    </div>
+
+    <h1 class="text-white display-2 mb-5 fw-bold">Accedi al tuo account</h1>
+
+    <form class="w-100" style="max-width: 400px;">
+      <div class="mb-3">
+        <input type="text" name="username" class="form-control form-control-lg rounded-pill" placeholder="Mail" maxlength="24" required [(ngModel)]="username" />
+      </div>
+      <div class="mb-4 position-relative">
+        <input [type]="isPasswordVisible ? 'text' : 'password'" name="password" class="form-control form-control-lg rounded-pill" placeholder="Password" maxlength="255" required [(ngModel)]="password" />
+        <button type="button" class="btn btn-link position-absolute top-50 end-0 translate-middle-y pe-3" (click)="showPassword()">
+          <i class="fa-solid fa-eye"></i>
         </button>
       </div>
+      <button class="btn btn-success btn-lg rounded-pill w-100 mt-2" type="submit" (click)="messaggioForm(username, password)">Accedi</button>
     </form>
-    <button class="left-btn" type="submit" (click)="messaggioForm(username,password)">Accedi</button>
   </div>
 
-  <div class="right-section">
-    <h2>Non hai ancora un account?</h2>
-    <p>Registrati ora e scopri tutti i vantaggi!</p>
-    <button class="right-btn" (click)="switchToRegister()">Registrati</button>
+  <div class="right-section col-12 col-md-4 d-flex flex-column justify-content-center align-items-center text-center p-5">
+    <h2 class="text-white display-5 mb-3 fw-bold">Non hai un account?</h2>
+    <p class="text-white mb-4 fs-5">Registrati ora e scopri tutti i vantaggi esclusivi!</p>
+    <button class="text-black btn btn-light btn-lg rounded-pill px-5 fw-bold" (click)="switchToRegister()">Registrati</button>
   </div>
 </div>
+
+

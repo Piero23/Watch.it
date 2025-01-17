@@ -32,7 +32,14 @@ export class LoginComponent {
   }
 
   async messaggioForm(email: string, password: string) {
+
+    if ( !email || !password) {
+      alert("Tutti i campi sono obbligatori")
+      return;
+    }
+
     const data = await this.database.logIn(email,password);
+
     // @ts-ignore
     if(data.status === 200){
       await this.router.navigate(['/']);
@@ -40,13 +47,13 @@ export class LoginComponent {
       window.location.reload();
     }
     else
-      this.showError("Username o Mail già prensente nel sistema")
+      this.showError("Username o Mail errata")
   }
 
   showError(message: string) {
     this.errorMessage = message;
     setTimeout(() => {
       this.errorMessage = '';
-    }, 5000);
+    }, 2000);
   }
 }

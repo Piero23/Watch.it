@@ -52,16 +52,23 @@ export class BannerInfoContentComponent {
       this.id = this.route.snapshot.params['id'];
       this.isSerie = this.route.snapshot.params['contenuto'];
 
+
+      console.log(this.id);
+
       this.movie = this.isSerie == "tv" ? await this.tmdbDataService.getTvSeriesByID(this.id) : await this.tmdbDataService.getMovieByID(this.id)
       const utente = await this.database.utenteBySession()
+
       // @ts-ignore
       if (utente.status == 200) {
         this.isLogged = true;
+
         // @ts-ignore
         this.utente = utente.username
 
         // @ts-ignore
         const datas = await this.database.getContenutoByUtente(this.utente)
+
+        console.log(datas)
 
         const bol = this.isSerie == "tv";
         // @ts-ignore
@@ -72,6 +79,8 @@ export class BannerInfoContentComponent {
             break;
           }
         }
+
+
       }
 
       this.titolo = this.isSerie == "tv" ? this.movie.name : this.movie.title
@@ -85,7 +94,11 @@ export class BannerInfoContentComponent {
   }
 
   async updateStatus(status: number){
-    console.log(await this.database.aggiornaStatus(this.utente,this.isSerie,this.id,status))
+    console.log(this.utente)
+    console.log(this.isSerie)
+    console.log(this.id)
+    console.log(status)
+    await this.database.aggiornaStatus(this.utente,this.isSerie,this.id,status)
   }
 
 
@@ -96,7 +109,7 @@ export class BannerInfoContentComponent {
 
   async rimuoviLista() {
     this.inLista = false;
-    console.log(await this.database.deleteContenuto_Utente(this.utente,this.isSerie,this.id))
+    await this.database.deleteContenuto_Utente(this.utente,this.isSerie,this.id)
   }
 
   searchGenre(id: any) {
