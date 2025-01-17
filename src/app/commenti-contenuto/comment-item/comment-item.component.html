@@ -8,8 +8,12 @@
     <span class="username">{{ username }}</span>
   </div>
   <textarea placeholder="Scrivi un commento..." [(ngModel)]="commentText" class="comment-box"></textarea>
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
   <app-star-review [starRating]="starRating" (ratingChange)="updateStarRating($event)"></app-star-review>
   <div class="actions">
     <button (click)="postComment()" [disabled]="!commentText.trim() || starRating === 0">Pubblica</button>
   </div>
 </div>
+

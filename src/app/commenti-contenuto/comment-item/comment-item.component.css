@@ -94,3 +94,9 @@ button:disabled {
   background-color: #555;
   cursor: not-allowed;
 }
+
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}

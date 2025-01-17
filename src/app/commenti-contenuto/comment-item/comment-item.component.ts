@@ -26,13 +26,48 @@ export class CommentItemComponent implements OnInit{
   userProfilePic = 'assets/images/banner.png';
   commentText = '';
   starRating = 0;
+  errorMessage: string | null = null;
+
+  bannedWords: string[] = ["allupato", "ammucchiata", "anale", "arrapato", "arrusa", "arruso", "assatanato",
+    "bagascia", "bagassa", "bagnarsi", "baldracca", "balle", "battere", "battona",
+    "belino", "biga", "bocchinara", "bocchino", "bofilo", "boiata", "bordello",
+    "brinca", "bucaiolo", "budiùlo", "busone", "cacca", "caciocappella", "cadavere",
+    "cagare", "cagata", "cagna", "casci", "cazzata", "cazzimma", "cazzo", "cesso",
+    "cazzone", "checca", "chiappa", "chiavare", "chiavata", "ciospo", "ciucciami il cazzo",
+    "coglione", "coglioni", "cornuto", "cozza", "culattina", "culattone", "culo",
+    "ditalino", "fava", "femminuccia", "fica", "figa", "figlio di buona donna",
+    "figlio di puttana", "figone", "finocchio", "fottere", "fottersi", "fracicone",
+    "fregna", "frocio", "froscio", "goldone", "guardone", "imbecille", "incazzarsi",
+    "incoglionirsi", "ingoio", "leccaculo", "lecchino", "lofare", "loffa", "loffare",
+    "mannaggia", "merda", "merdata", "merdoso", "mignotta", "minchia", "minchione",
+    "mona", "monta", "montare", "mussa", "nave scuola", "nerchia", "padulo", "palle",
+    "palloso", "patacca", "patonza", "pecorina", "pesce", "picio", "pincare", "pippa",
+    "pinnolone", "pipì", "pippone", "pirla", "pisciare", "piscio", "pisello", "pistolotto",
+    "pomiciare", "pompa", "pompino", "porca", "porca madonna", "porca miseria",
+    "porca puttana", "porco", "porco due", "porco zio", "potta", "puppami", "puttana",
+    "quaglia", "recchione", "regina", "rincoglionire", "rizzarsi", "rompiballe",
+    "rompipalle", "ruffiano", "sbattere", "sbattersi", "sborra", "sborrata", "sborrone",
+    "sbrodolata", "scopare", "scopata", "scorreggiare", "sega", "slinguare", "slinguata",
+    "smandrappata", "soccia", "socmel", "sorca", "spagnola", "spompinare", "sticchio",
+    "stronza", "stronzata", "stronzo", "succhiami", "succhione", "sveltina", "sverginare",
+    "tarzanello", "terrone", "testa di cazzo", "tette", "tirare", "topa", "troia",
+    "trombare", "vacca", "vaffanculo", "vangare", "zinne", "zio cantante", "zoccola"]
 
   updateStarRating(rating: number) {
     this.starRating = rating;
   }
 
+  private containsProfanity(text: string): boolean {
+    const regex = new RegExp(this.bannedWords.join('|'), 'i');
+    return regex.test(text);
+  }
 
   postComment() {
+    if (this.containsProfanity(this.commentText)) {
+      this.errorMessage = 'Il commento contiene parole vietate. Modificalo e riprova.';
+      return;
+    }
+    this.errorMessage = null;
 
     this.commentPosted.emit({
       id: -1,
