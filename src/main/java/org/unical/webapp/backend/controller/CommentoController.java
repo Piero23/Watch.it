@@ -36,8 +36,6 @@ public class CommentoController {
     @RequestMapping(value="/newComment", method= RequestMethod.POST)
     void newComment(HttpServletRequest request, HttpServletResponse response, @RequestBody Map<String,String> payload) {
 
-        System.out.println(payload);
-
         int content_id= Integer.parseInt(payload.get("content_id"));
         boolean content_type= !Objects.equals(payload.get("content_type"), "film");
         String body= payload.get("text");
@@ -61,5 +59,13 @@ public class CommentoController {
 
         commentoService.saveCommento(c);
 
+    }
+
+    @RequestMapping(value="/deleteComment", method= RequestMethod.POST)
+    void deleteComment(@RequestBody Map<String,String> payload) {
+
+        int comment_id= Integer.parseInt(payload.get("comment_id"));
+
+        commentoService.deleteComment(comment_id);
     }
 }

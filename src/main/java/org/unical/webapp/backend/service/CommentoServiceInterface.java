@@ -8,4 +8,6 @@ public interface CommentoServiceInterface {
     void setAnswer(Commento question, Commento answer);
 
     void saveCommento(Commento commento);
+
+    void deleteComment(int commento);
 }

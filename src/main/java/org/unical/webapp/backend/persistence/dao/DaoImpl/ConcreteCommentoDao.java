@@ -93,13 +93,13 @@ public class ConcreteCommentoDao implements CommentoDao {
   }
 
   @Override
-  public void delete(Commento commento) {
+  public void delete(int commento) {
     try{
       PreparedStatement query = connection.prepareStatement(
-        "delete from commento where id_commento=?"
+        "delete from commenti where id_commento=?"
       );
 
-      query.setInt(1, commento.getId_commento());
+      query.setInt(1, commento);
       query.executeUpdate();
 
     } catch (SQLException e) {

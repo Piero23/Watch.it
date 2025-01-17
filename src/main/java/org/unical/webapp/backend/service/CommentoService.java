@@ -28,5 +28,10 @@ public class CommentoService implements CommentoServiceInterface{
         commentoDao.save(commento);
     }
 
+    @Override
+    public void deleteComment(int commento) {
+        commentoDao.delete(commento);
+    }
+
 
 }

@@ -64,7 +64,7 @@ public class ContenutoController {
 
     @RequestMapping(value="/deleteContent/{utente}/{tipo}/{id}", method=RequestMethod.GET)
     void deleteContent(@PathVariable String utente, @PathVariable String tipo, @PathVariable int id) {
-        if (tipo.equals("movie")) {
+        if (tipo.equals("film")) {
             contenutoService.deleteContenuto(id, false, utente);
         }
 
