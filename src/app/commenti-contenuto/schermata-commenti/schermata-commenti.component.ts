@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {CommentItemComponent} from '../comment-item/comment-item.component';
 import {CommentSectionComponent} from '../comment-section/comment-section.component';
+import {DatabaseService} from '../../database.service';
 
 @Component({
   selector: 'app-schermata-commenti',
@@ -26,6 +27,8 @@ export class SchermataCommentiComponent {
   isModerator = true;
   replyingTo: { id:number ,index: number; username: string; text: string } | null = null;
 
+  database: DatabaseService= inject(DatabaseService);
+
   addComment(newComment: {id: number ,text: string; rating: number; username: string; profilePic: string }) {
     if (this.replyingTo) {
       this.comments[this.replyingTo.index].replies.push({ ...newComment });
@@ -35,7 +38,8 @@ export class SchermataCommentiComponent {
     }
   }
 
-  deleteComment(index: number) {
+  async deleteComment(index: number) {
+    await this.database.deleteComment(this.comments[index].id);
     this.comments.splice(index, 1);
   }
 
