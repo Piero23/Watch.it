@@ -35,7 +35,10 @@ export class LoginComponent {
     const data = await this.database.logIn(email,password);
     // @ts-ignore
     if(data.status === 200){
-      this.router.navigate(['/']);
+      await this.router.navigate(['/']);
+
+      // Aggiorna la pagina in automatico --Francesco
+      window.location.reload();
     }
     else
       this.showError("Username o Mail già prensente nel sistema")
