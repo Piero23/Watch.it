@@ -111,7 +111,7 @@ public class ConcreteCommentoDao implements CommentoDao {
   public List<Commento> findByContent(int contentId, boolean type) {
     List<Commento> commenti = new ArrayList<Commento>();
     try {
-      PreparedStatement query = connection.prepareStatement("select * from commenti where id_contenuto_api=? and is_serie=? and commento_risposto is NULL");
+      PreparedStatement query = connection.prepareStatement("select * from commenti where id_contenuto_api=? and is_serie=? and (commento_risposto is NULL or commento_risposto = -1)");
       query.setInt(1, contentId);
       query.setBoolean(2, type);
       ResultSet rs = query.executeQuery();
