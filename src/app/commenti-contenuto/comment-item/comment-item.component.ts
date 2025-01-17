@@ -52,6 +52,8 @@ export class CommentItemComponent implements OnInit{
     this.commentText = '';
     this.starRating = 0;
 
+    window.location.reload()
+
   }
 
   async ngOnInit(){

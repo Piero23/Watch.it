@@ -41,7 +41,6 @@ export class CommentSectionComponent implements OnInit{
   }
 
   async handleDeleteReply(index: number): Promise<void> {
-    console.log(this.comments[this.activeCommentIndex].replies[index].id)
     await this.database.deleteComment(this.comments[this.activeCommentIndex].replies[index].id)
     this.comments[this.activeCommentIndex].replies.splice(index, 1);
   }
