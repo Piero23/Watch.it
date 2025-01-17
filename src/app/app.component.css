@@ -22,3 +22,36 @@
   font-family: 'Comic Sans MS';
   font-weight: bold;
 }
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  margin-top: 10px;
+  background-color: #282828;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 150px;
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-item {
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #555;
+  color: white;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}

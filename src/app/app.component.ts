@@ -1,7 +1,7 @@
 
 import {ProfileComponent} from './profile/profile.component';
 import {Component, inject, OnInit} from '@angular/core';
-import {Router, RouterOutlet, RouterLink, ActivatedRoute, NavigationEnd} from '@angular/router';
+import {Router, RouterOutlet,RouterLink} from '@angular/router';
 import {BannerInfoContentComponent} from './visualizzaContenuto/banner-info-content/banner-info-content.component';
 import {SchermataContenutiComponent} from './visualizzaContenuto/schermata-contenuti/schermata-contenuti.component';
 import {ListaEpisodiComponent} from './visualizzaContenuto/SerieTv/lista-episodi/lista-episodi.component';
@@ -11,16 +11,16 @@ import {CommentItemComponent} from './commenti-contenuto/comment-item/comment-it
 import {CommentSectionComponent} from './commenti-contenuto/comment-section/comment-section.component';
 import { routes } from './app.routes';
 import {HomepageComponent} from './homepage/homepage.component';
-import {NgIf, NgOptimizedImage} from '@angular/common';
+import {NgOptimizedImage} from '@angular/common';
+import {NgIf} from '@angular/common';
 import {DatabaseService} from './database.service';
 import {LoginComponent} from './login-register/login/login.component';
 import { RegisterComponent} from './login-register/register/register.component';
-import {filter} from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule, ProfileComponent, RouterLink, RegisterComponent, LoginComponent, CommentItemComponent, CommentSectionComponent, RouterOutlet, HomepageComponent, NgOptimizedImage, NgIf],
+  imports: [BannerInfoContentComponent, SchermataContenutiComponent, ListaEpisodiComponent, ListaRicercaComponent, FormsModule, ProfileComponent, RouterLink,RegisterComponent,LoginComponent, CommentItemComponent, CommentSectionComponent, RouterOutlet, HomepageComponent, NgOptimizedImage],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -29,27 +29,27 @@ export class AppComponent implements OnInit {
   searchQuery : any
   logged : boolean = false;
   username: string = ""
-  notInLogIn: boolean = true;
+  dropdownOpen = false;
 
   router : Router = inject(Router)
-  route : ActivatedRoute = inject(ActivatedRoute)
   database : DatabaseService = inject(DatabaseService)
 
+  toggleDropdown(): void {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  logout(): void {
+    // Perform logout logic here
+    console.log('User logged out');
+    this.database.logOut();
+    this.router.navigate(['/login']);
+  }
 
   onSearch() {
     this.router.navigate(['results'], { queryParams: { searchQuery: this.searchQuery } });
   }
 
   async ngOnInit() {
-
-    // Imposta notInLogIn in base al routing corrente
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event: any) => {
-        const currentUrl = event.urlAfterRedirects;
-        this.notInLogIn = !['/login', '/register'].includes(currentUrl);
-      });
-
     const data = await this.database.utenteBySession();
 
     // @ts-ignore
