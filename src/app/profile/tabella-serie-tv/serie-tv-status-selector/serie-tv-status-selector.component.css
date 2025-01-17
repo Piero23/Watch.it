@@ -1,0 +1,42 @@
+.base{
+  width: 30%;
+  aspect-ratio: 2/1;
+  background-color: #131514;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+}
+
+.confirm{
+  border: transparent solid 1px;
+  border-radius: 5px;
+  margin: 1%;
+  background: #1BD75F;
+  color: white;
+  font-size: 0.8vw;
+  width: 70%
+}
+
+.confirm:active{}
+
+.deny{
+  border: transparent solid 1px;
+  border-radius: 5px;
+  margin: 1%;
+  background: #282828;
+  color: white;
+  font-size: 0.8vw;
+  width: 70%;
+}
+
+.deny:active{}
+
+.selector{
+  width: 80%;
+  border-radius: 15px;
+}
+
+
+
