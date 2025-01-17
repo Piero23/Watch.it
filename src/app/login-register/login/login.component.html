@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="error-message" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <div class="left-section">
+    <h1>Accedi al tuo account</h1>
+    <p>Accedi utilizzando i social network</p>
+
+    <div class="social-buttons">
+      <button class="facebook">f</button>
+      <button class="google">G+</button>
+      <button class="linkedin">in</button>
+    </div>
+
+    <div class="divider">
+      <span>------------------------------------------------- OPPURE -------------------------------------------------</span>
+    </div>
+
+    <form>
+      <div class="input-group">
+        <input type="username" name="username" placeholder="Username" [(ngModel)]="username"/>
+      </div>
+      <div class="input-group">
+        <input [type]="isPasswordVisible ? 'text' : 'password'" placeholder="Password" [(ngModel)]="password"/>
+        <button type="button" class="toggle-password" (click)="showPassword()">
+          👁
+        </button>
+      </div>
+    </form>
+    <button class="left-btn" type="submit" (click)="messaggioForm(username,password)">Accedi</button>
+  </div>
+
+  <div class="right-section">
+    <h2>Non hai ancora un account?</h2>
+    <p>Registrati ora e scopri tutti i vantaggi!</p>
+    <button class="right-btn" (click)="switchToRegister()">Registrati</button>
+  </div>
+</div>

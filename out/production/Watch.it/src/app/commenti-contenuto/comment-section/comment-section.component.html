@@ -1,0 +1,24 @@
+<div class="comment-section">
+  <h3>{{comments.length}} commenti</h3>
+  <div *ngIf="comments.length === 0" class="no-comments">
+    Nessun commento presente. Sii il primo a commentare!
+  </div>
+  <div *ngFor="let comment of comments; let i = index" class="comment-item">
+    <img [src]="comment.profilePic" alt="User Profile" class="profile-pic" />
+    <div class="comment-content">
+      <div class="comment-header">
+        <span class="username">{{ comment.username }}</span>
+        <div class="stars">
+          <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [class.filled]="star <= comment.rating">
+            &#9733;
+          </span>
+        </div>
+      </div>
+      <p class="comment-text">{{ comment.text }}</p>
+    </div>
+    <button *ngIf="isModerator" class="delete-btn" (click)="onDeleteComment(i)">
+      🗑️
+    </button>
+  </div>
+</div>
+
