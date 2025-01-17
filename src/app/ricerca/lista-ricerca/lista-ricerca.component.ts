@@ -1,16 +1,14 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {CardRicercaComponent} from '../card-ricerca/card-ricerca.component';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {TMDBDataService} from '../../tmdbdata.service';
 import {NgForOf} from '@angular/common';
-import {DatabaseService} from '../../database.service';
 
 @Component({
   selector: 'app-lista-ricerca',
   standalone: true,
   imports: [
     CardRicercaComponent,
-    RouterLink,
     NgForOf,
   ],
   templateUrl: './lista-ricerca.component.html',
@@ -26,7 +24,7 @@ export class ListaRicercaComponent implements OnInit{
 
   route : ActivatedRoute = inject(ActivatedRoute)
   tMDBDataService: TMDBDataService = inject(TMDBDataService)
-  databaseService : DatabaseService = inject(DatabaseService)
+
 
   async find(ricerca : any){
     this.movies = await this.tMDBDataService.searchEverything(ricerca);

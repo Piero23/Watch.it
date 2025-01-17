@@ -1,109 +1,102 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-
 import {TMDBDataService} from '../../tmdbdata.service';
-import {Router, RouterLink} from '@angular/router';
 import {DatabaseService} from '../../database.service';
 
 @Component({
   selector: 'app-tabella-film',
   standalone: true,
-  imports: [NgForOf, FormsModule, RouterLink],
+  imports: [NgForOf, FormsModule],
   providers: [TMDBDataService],
   templateUrl: './tabella-film.component.html',
   styleUrls: ['./tabella-film.component.css']
 })
-export class TabellaFilmComponent implements OnInit{
+export class TabellaFilmComponent implements OnInit {
 
-  nameOrder=true;
-  yearOrder=true;
-  ratingOrder=true;
+  nameOrder = true;
+  yearOrder = true;
+  ratingOrder = true;
 
-  username : string = ""
+  username: string = ""
 
 
-  righe: {id: number, anno: number, rating: number, nome: string, immagine: string, viewingStatus: number}[]=[];
+  righe: { id: number, anno: number, rating: number, nome: string, immagine: string, viewingStatus: number }[] = [];
 
-  constructor(private tmdb: TMDBDataService, private database: DatabaseService,private router : Router ) {}
+  constructor(private tmdb: TMDBDataService, private database: DatabaseService) {
+  }
 
   async ngOnInit() {
-    const data =await this.database.utenteBySession()
+    const data = await this.database.utenteBySession()
     // @ts-ignore
     this.username = data.username;
 
     await this.getByStatus(0)
   }
 
-  sortByName(){
-    this.yearOrder=true;
-    this.ratingOrder=true;
+  sortByName() {
+    this.yearOrder = true;
+    this.ratingOrder = true;
 
-    if (this.nameOrder){
-      this.righe.sort(function cmp(a, b){
-        if (a.nome>b.nome) return 1;
+    if (this.nameOrder) {
+      this.righe.sort(function cmp(a, b) {
+        if (a.nome > b.nome) return 1;
         else return -1;
       })
-      this.nameOrder=!this.nameOrder;
-    }
-    else{
-      this.righe.sort(function cmp(a, b){
-        if (a.nome<b.nome) return 1;
+      this.nameOrder = !this.nameOrder;
+    } else {
+      this.righe.sort(function cmp(a, b) {
+        if (a.nome < b.nome) return 1;
         else return -1;
       })
-      this.nameOrder=!this.nameOrder;
+      this.nameOrder = !this.nameOrder;
     }
   }
 
   sortByYear() {
-    this.nameOrder=true;
-    this.ratingOrder=true;
+    this.nameOrder = true;
+    this.ratingOrder = true;
 
-    if (this.yearOrder){
+    if (this.yearOrder) {
       this.righe.sort((a, b) => b.anno - a.anno)
-      this.yearOrder=!this.yearOrder;
-    }
-    else{
+      this.yearOrder = !this.yearOrder;
+    } else {
       this.righe.sort((a, b) => a.anno - b.anno)
-      this.yearOrder=!this.yearOrder;
+      this.yearOrder = !this.yearOrder;
     }
   }
 
   sortByRating() {
     console.log(this.righe);
-    this.nameOrder=true;
-    this.yearOrder=true;
+    this.nameOrder = true;
+    this.yearOrder = true;
 
-    if (this.ratingOrder){
+    if (this.ratingOrder) {
       this.righe.sort((a, b) => b.rating - a.rating);
-      this.ratingOrder=!this.ratingOrder;
-    }
-    else{
+      this.ratingOrder = !this.ratingOrder;
+    } else {
       this.righe.sort((a, b) => a.rating - b.rating);
-      this.ratingOrder=!this.ratingOrder;
+      this.ratingOrder = !this.ratingOrder;
     }
-  }
-
-  routeToFilm(id : number){
-    this.router.navigate(["film",id]);
   }
 
   async getByStatus(status: number): Promise<void> {
-    //0==Da Vedere
-    //1==In Visione
-    //2==Visto
-
-    this.righe=[]
-
-
+    this.righe = []
 
     const queryRows: any = await this.database.getContenutoByUtente(this.username);
     for (let riga of queryRows) {
-      if (riga.status==status && riga.is_serie==0) {
+      if (riga.status == status && riga.is_serie == 0) {
         let movie: any = await this.tmdb.getMovieByID(riga.id_contenuto);
-        const newRow: {id: number, anno: number, rating: number, nome: string, immagine: string, viewingStatus: number} ={
+        const newRow: {
+          id: number,
+          anno: number,
+          rating: number,
+          nome: string,
+          immagine: string,
+          viewingStatus: number
+        } = {
           id: riga.id_contenuto,
-          anno: movie.release_date.slice(0,4),
+          anno: movie.release_date.slice(0, 4),
           rating: riga.rating,
           nome: movie.title,
           immagine: movie.poster_path
@@ -116,23 +109,19 @@ export class TabellaFilmComponent implements OnInit{
     }
   }
 
-  async setRating(id:number,voto:number){
-    await this.database.changeRating(this.username,"film",id,voto);
+  async setRating(id: number, voto: number) {
+    await this.database.changeRating(this.username, "film", id, voto);
   }
 
-  activateButton(index: number){
-    switch (index){
+  activateButton(index: number) {
+    switch (index) {
       case 2: {
-        //Visto
-
         document.getElementsByName("visto").item(0).setAttribute("style", "background: #4CB2FD; color: black;");
         document.getElementsByName("daVedere").item(0).setAttribute("style", "background: #282828; color: lightgray;");
         this.getByStatus(2)
         break;
       }
       case 0: {
-        //Da Vedere
-
         document.getElementsByName("daVedere").item(0).setAttribute("style", "background: #4CB2FD; color: black;");
         document.getElementsByName("visto").item(0).setAttribute("style", "background: #282828; color: lightgray;");
         this.getByStatus(0)
@@ -148,6 +137,6 @@ export class TabellaFilmComponent implements OnInit{
 
   async updateStatus(id: number, status: number) {
     this.righe = this.righe.filter(riga => riga.id !== id);
-    await this.database.aggiornaStatus(this.username,"film",id, status)
+    await this.database.aggiornaStatus(this.username, "film", id, status)
   }
 }

@@ -11,5 +11,5 @@ import {ListaRicercaComponent} from '../lista-ricerca/lista-ricerca.component';
   styleUrl: './schermata-ricerca.component.css'
 })
 export class SchermataRicercaComponent {
-  isSerie: boolean = true;
+
 }

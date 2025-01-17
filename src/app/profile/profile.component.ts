@@ -1,16 +1,14 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {NgIf, NgOptimizedImage, NgStyle} from '@angular/common';
+import {NgIf, NgStyle} from '@angular/common';
 import {TabellaFilmComponent} from './tabella-film/tabella-film.component';
 import {TabellaSerieTvComponent} from './tabella-serie-tv/tabella-serie-tv.component';
 import {BannerEditorComponent} from './banner-editor/banner-editor.component';
 import {DatabaseService} from '../database.service';
 
-
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [
-    NgOptimizedImage,
     TabellaFilmComponent,
     TabellaSerieTvComponent,
     NgIf,
@@ -37,7 +35,6 @@ export class ProfileComponent implements OnInit{
   activateButton(index: number){
     switch (index){
       case 0: {
-        //Film
         this.showFilm = true;
 
         document.getElementsByName("film").item(0).setAttribute("style", "background: #1BD75F; color: black;");
@@ -46,7 +43,6 @@ export class ProfileComponent implements OnInit{
         break;
       }
       case 1: {
-        //Serie TV
         this.showFilm = false;
 
         document.getElementsByName("serie").item(0).setAttribute("style", "background: #1BD75F; color: black;");
@@ -71,13 +67,13 @@ export class ProfileComponent implements OnInit{
 
   convertBlobToBase64(blobUrl: string): Promise<string> {
     return fetch(blobUrl)
-      .then((response) => response.blob()) // Ottieni il Blob
+      .then((response) => response.blob())
       .then((blob) => {
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
-          reader.onloadend = () => resolve(reader.result as string); // Base64
+          reader.onloadend = () => resolve(reader.result as string);
           reader.onerror = reject;
-          reader.readAsDataURL(blob); // Leggi il Blob come Base64
+          reader.readAsDataURL(blob);
         });
       });
   }

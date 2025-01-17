@@ -4,7 +4,6 @@ import {TMDBDataService} from '../../../tmdbdata.service';
 import {ActivatedRoute} from '@angular/router';
 import {NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 import {DatabaseService} from '../../../database.service';
 
 @Component({
@@ -50,7 +49,6 @@ export class ListaEpisodiComponent implements OnInit{
     try {
       this.episodes = await this.tmdbDataService.getTvSeriesSeason(this.id, season)
       this.episodes = this.episodes.episodes;
-      //this.episodes = this.episodes.filter((episode: any) => episode.still_path );
 
       this.episodes = this.episodes.map((episode: any) => {
         return {
@@ -63,7 +61,7 @@ export class ListaEpisodiComponent implements OnInit{
     }catch(error){
       this.hasSpecial = 1
       this.selectedSeasonNum = 1
-      this.getEpisodesForSelectedSeason(this.selectedSeasonNum)
+      await this.getEpisodesForSelectedSeason(this.selectedSeasonNum)
     }
   }
 
@@ -75,16 +73,15 @@ export class ListaEpisodiComponent implements OnInit{
   }
 
   async ngOnInit()  {
-    this.getSeasons()
-    this.getEpisodesForSelectedSeason(this.selectedSeasonNum)
+    await this.getSeasons()
+    await this.getEpisodesForSelectedSeason(this.selectedSeasonNum)
 
 
     let utente = await this.database.utenteBySession()
 
     if(utente){
       // @ts-ignore
-      utente = utente.username
-      // @ts-ignore
+            // @ts-ignore
       const datas = await this.database.getContenutoByUtente(this.utente)
 
       // @ts-ignore

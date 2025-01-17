@@ -14,7 +14,6 @@ import {NgIf} from '@angular/common';
 })
 export class PreviewCommenti implements OnInit {
 
-
   router : Router = inject(Router)
   route : ActivatedRoute = inject(ActivatedRoute);
   database: DatabaseService = inject(DatabaseService)
@@ -28,8 +27,7 @@ export class PreviewCommenti implements OnInit {
   }
 
   async ngOnInit() {
-    this.route.params.subscribe(async params => {
-
+    this.route.params.subscribe(async () => {
 
       const data = await this.database.getCommentiFromContenuto(this.route.snapshot.params["contenuto"], this.route.snapshot.params["id"]);
 
@@ -56,10 +54,5 @@ export class PreviewCommenti implements OnInit {
         this.proPic = "assets/images/Avatar.png"
       }
     })
-
-
-
   }
 }
-
-//<i class="fa-solid fa-circle-user text-white" style="font-size: clamp(30px,4dvw,50px)"></i>

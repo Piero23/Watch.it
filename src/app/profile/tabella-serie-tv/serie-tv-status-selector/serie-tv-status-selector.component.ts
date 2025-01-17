@@ -1,6 +1,5 @@
-import {Component, Input, input} from '@angular/core';
-import {ImageCropperComponent} from 'ngx-image-cropper';
-import {NgForOf, NgIf} from '@angular/common';
+import {Component, Input} from '@angular/core';
+import {NgForOf} from '@angular/common';
 
 import {TabellaSerieTvComponent} from '../tabella-serie-tv.component';
 import {FormsModule} from '@angular/forms';
@@ -9,9 +8,7 @@ import {FormsModule} from '@angular/forms';
   selector: 'app-serie-tv-status-selector',
   standalone: true,
   imports: [
-    ImageCropperComponent,
     NgForOf,
-    NgIf,
     FormsModule
   ],
   templateUrl: './serie-tv-status-selector.component.html',
@@ -60,7 +57,7 @@ export class SerieTvStatusSelectorComponent {
   onStagioneChange(stagione: number) {
     this.currentStatus.stagione = stagione;
     this.selectedEpisodes = this.listaEpisodi[this.currentStatus.stagione - 1];
-    this.currentStatus.episodio = 1; // Reset dell'episodio
+    this.currentStatus.episodio = 1;
   }
 
 

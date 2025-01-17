@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {DatabaseService} from '../../database.service';
@@ -37,7 +37,6 @@ export class LoginComponent {
     if(data.status === 200){
       await this.router.navigate(['/']);
 
-      // Aggiorna la pagina in automatico --Francesco
       window.location.reload();
     }
     else

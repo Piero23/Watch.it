@@ -214,24 +214,6 @@ form {
   animation: fade-out 5s forwards;
 }
 
-.success-message {
-  position: absolute;
-  top: 100px;
-  left: 33%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 600px;
-  padding: 15px;
-  font-size: 18px;
-  color: #fff;
-  background-color: rgba(27, 215, 95, 0.9);
-  border: 1px solid #1BD75F;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  animation: fade-out 5s forwards;
-}
-
 @keyframes fade-out {
   0% {
     opacity: 1;

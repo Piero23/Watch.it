@@ -2,7 +2,6 @@ import {Component,  OnInit} from '@angular/core';
 import {NgForOf, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {SerieTvStatusSelectorComponent} from './serie-tv-status-selector/serie-tv-status-selector.component';
-import {BannerEditorComponent} from '../banner-editor/banner-editor.component';
 import {TMDBDataService} from '../../tmdbdata.service';
 import {DatabaseService} from '../../database.service';
 
@@ -14,7 +13,6 @@ import {DatabaseService} from '../../database.service';
     NgIf,
     FormsModule,
     SerieTvStatusSelectorComponent,
-    BannerEditorComponent
   ],
   templateUrl: './tabella-serie-tv.component.html',
   styleUrl: './tabella-serie-tv.component.css'
@@ -126,10 +124,6 @@ export class TabellaSerieTvComponent implements OnInit{
   }
 
   async getByStatus(status: number): Promise<void> {
-    //0==Da Vedere
-    //1==In Visione
-    //2==Visto
-
     this.righe=[]
 
     const queryRows: any = await this.database.getContenutoByUtente(this.username);
@@ -190,7 +184,6 @@ export class TabellaSerieTvComponent implements OnInit{
   activateButton(index: number){
     switch (index){
       case 1: {
-        //In Visione
         document.getElementsByName("inVisione").item(0).setAttribute("style", "background: #4CB2FD; color: black;");
         document.getElementsByName("daVedere").item(0).setAttribute("style", "background: #282828; color: lightgray;");
         document.getElementsByName("visto").item(0).setAttribute("style", "background: #282828; color: lightgray;");
@@ -198,8 +191,6 @@ export class TabellaSerieTvComponent implements OnInit{
         break;
       }
       case 2: {
-        //Visto
-
         document.getElementsByName("visto").item(0).setAttribute("style", "background: #4CB2FD; color: black;");
         document.getElementsByName("daVedere").item(0).setAttribute("style", "background: #282828; color: lightgray;");
         document.getElementsByName("inVisione").item(0).setAttribute("style", "background: #282828; color: lightgray;");
@@ -207,8 +198,6 @@ export class TabellaSerieTvComponent implements OnInit{
         break;
       }
       case 0: {
-        //Da Vedere
-
         document.getElementsByName("daVedere").item(0).setAttribute("style", "background: #4CB2FD; color: black;");
         document.getElementsByName("inVisione").item(0).setAttribute("style", "background: #282828; color: lightgray;");
         document.getElementsByName("visto").item(0).setAttribute("style", "background: #282828; color: lightgray;");

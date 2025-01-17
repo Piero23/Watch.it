@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, input, OnInit, Output} from '@angular/core';
-import {NgStyle} from '@angular/common';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {NgIf, NgStyle} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -7,7 +7,8 @@ import {FormsModule} from '@angular/forms';
   standalone: true,
   imports: [
     NgStyle,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   templateUrl: './card-episodio.component.html',
   styleUrl: './card-episodio.component.css',
@@ -25,7 +26,7 @@ export class CardEpisodioComponent implements OnInit {
   serie:number = 1
   image: any;
   votoColor : string = "#ff0000"
-  vero: boolean = false;
+
   Rifiniture: boolean = false;
 
 

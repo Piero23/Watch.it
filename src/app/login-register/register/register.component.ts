@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {DatabaseService} from '../../database.service';
@@ -40,7 +40,7 @@ export class RegisterComponent {
     // @ts-ignore
     if(data.status === 200){
       this.showSuccess("Account registrato con successo")
-      this.router.navigate(['/']);
+      await this.router.navigate(['/']);
     }
     else
       this.showError("Username o Mail già prensente nel sistema")
