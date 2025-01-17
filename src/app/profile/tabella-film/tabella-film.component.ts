@@ -84,8 +84,8 @@ export class TabellaFilmComponent implements OnInit{
     }
   }
 
-  routeToFilm(id : number){
-    this.router.navigate(["film",id]);
+  async setRating(id:number,voto:number){
+    await this.database.changeRating(this.username,"film",id,voto);
   }
 
   async getByStatus(status: number): Promise<void> {
@@ -104,7 +104,7 @@ export class TabellaFilmComponent implements OnInit{
         const newRow: {id: number, anno: number, rating: number, nome: string, immagine: string} ={
           id: riga.id_contenuto,
           anno: movie.release_date.slice(0,4),
-          rating: 5,
+          rating: riga.rating,
           nome: movie.title,
           immagine: movie.poster_path
             ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
@@ -114,5 +114,28 @@ export class TabellaFilmComponent implements OnInit{
       }
     }
 
+  }
+
+  activateButton(index: number) {
+    switch (index) {
+      case 2: {
+        //Visto
+
+        document.getElementsByName("visto").item(0).setAttribute("style", "background: #4CB2FD; color: black;");
+        document.getElementsByName("daVedere").item(0).setAttribute("style", "background: #282828; color: lightgray;");
+        document.getElementsByName("inVisione").item(0).setAttribute("style", "background: #282828; color: lightgray;");
+        this.getByStatus(2)
+        break;
+      }
+      case 0: {
+        //Da Vedere
+
+        document.getElementsByName("daVedere").item(0).setAttribute("style", "background: #4CB2FD; color: black;");
+        document.getElementsByName("inVisione").item(0).setAttribute("style", "background: #282828; color: lightgray;");
+        document.getElementsByName("visto").item(0).setAttribute("style", "background: #282828; color: lightgray;");
+        this.getByStatus(0)
+        break;
+      }
+    }
   }
 }
