@@ -16,6 +16,7 @@ import {DatabaseService} from './database.service';
 import {LoginComponent} from './login-register/login/login.component';
 import { RegisterComponent} from './login-register/register/register.component';
 import {filter} from 'rxjs';
+import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,7 @@ export class AppComponent implements OnInit {
   username: string = ""
   dropdownOpen = false;
   notInLogIn : boolean = false;
+  profilePic : any
 
   router : Router = inject(Router)
   database : DatabaseService = inject(DatabaseService)
@@ -39,11 +41,20 @@ export class AppComponent implements OnInit {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
+
+  clickOpening(){
+    if(this.logged)
+      this.toggleDropdown();
+    else
+      this.router.navigate(['login']);
+
+  }
+
   logout(): void {
-    // Perform logout logic here
+
     this.database.logOut();
     this.router.navigate(['/login']).then(() => {
-      window.location.reload();  // This will refresh the page
+      window.location.reload();
     });
   }
 
@@ -69,16 +80,20 @@ export class AppComponent implements OnInit {
 
       // @ts-ignore
       this.username = data.username
-    }else
+
+
+      const utente =await this.database.getUtente(this.username);
+
+      // @ts-ignore
+      if(utente.img_profilo)
+        { // @ts-ignore
+          this.profilePic = `data:image/png;base64,${utente.img_profilo}`;
+        }
+      else
+        this.profilePic = "assets/images/Avatar.png"
+    }else {
       this.username = "Login"
-    console.log(this.logged)
-
-  }
-
-  routerLog(){
-    if(this.logged )
-      this.router.navigate(['profile']);
-    else
-      this.router.navigate(['login']);
+      this.profilePic = "assets/images/Avatar.png"
+    }
   }
 }

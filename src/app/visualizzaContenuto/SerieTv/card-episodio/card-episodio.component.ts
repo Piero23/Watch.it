@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, input, OnInit, Output} from '@angular/core';
-import {NgStyle} from '@angular/common';
+import {NgIf, NgStyle} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -7,7 +7,8 @@ import {FormsModule} from '@angular/forms';
   standalone: true,
   imports: [
     NgStyle,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   templateUrl: './card-episodio.component.html',
   styleUrl: './card-episodio.component.css',

@@ -33,6 +33,7 @@ export class RegisterComponent {
 
   switchToLogin() {
     this.router.navigate(['/login']);
+
   }
 
   async messageForm(username : string,email: string, password: string) {
@@ -40,7 +41,9 @@ export class RegisterComponent {
     // @ts-ignore
     if(data.status === 200){
       this.showSuccess("Account registrato con successo")
-      this.router.navigate(['/']);
+      await this.router.navigate(['/']);
+
+      window.location.reload();
     }
     else
       this.showError("Username o Mail già prensente nel sistema")

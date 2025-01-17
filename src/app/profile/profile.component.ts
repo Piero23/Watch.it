@@ -134,7 +134,7 @@ export class ProfileComponent implements OnInit{
       const imgBuffer = utente.imgbackground;
       this.banner = `data:image/png;base64,${imgBuffer}`;
     }else
-      this.banner ="assets/images/Immagine.png"
+      this.banner ="assets/images/immagine.png"
 
 
   }

@@ -10,18 +10,19 @@
         </div>
       </form>
 
-      <div class="col-auto dropdown" style="margin-right: 15px" (click)="toggleDropdown()">
+      <div class="col-auto dropdown" style="margin-right: 15px" (click)="clickOpening()">
+
         <button class="button text-center dropdown-toggle" style="background: transparent; border-color: transparent">
           <span class="align-middle" style="margin-right: 8px; color: white">{{ username }}</span>
           <span class="align-middle">
-          <i class="fa-solid fa-circle-user" style="color: white; font-size: xx-large"></i>
+          <img [src] = "profilePic" class="profile-pic"/>
         </span>
+
         </button>
-        <!-- Dropdown Menu -->
-        <ul class="dropdown-menu" [class.show]="dropdownOpen">
-          <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
-          <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
-        </ul>
+          <ul class="dropdown-menu" [class.show]="dropdownOpen">
+            <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+            <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+          </ul>
       </div>
     </nav>
 </header>

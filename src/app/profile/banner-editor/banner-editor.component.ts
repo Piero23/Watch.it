@@ -21,6 +21,7 @@ export class BannerEditorComponent {
   @Input() aspectRatio!: number;
   @Input() oggetto!: string;
   maxHeight: number = 500;
+  maxWidth: number = 800;
 
 
   constructor(
@@ -30,7 +31,9 @@ export class BannerEditorComponent {
   }
 
   fileChangeEvent(event: Event): void {
-    this.imageChangedEvent = event;
+    if (event && event.target) {
+      this.imageChangedEvent = event;
+    }
   }
   imageCropped(event: ImageCroppedEvent) {
     if (event.objectUrl != null) {
